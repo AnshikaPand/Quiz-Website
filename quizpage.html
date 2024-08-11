@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Boxicon -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <section class="QuizPage">
+        <div class="Navbar">
+            <img src="https://techpaathshala.com/assets/images/home/techpathshala_mobile_logo.svg" alt="techpaathshala">
+            <hr>
+        </div>
+        <div class="Count-of-Number">
+            <h1 id="question-number">Question 1 to 10</h1>
+        </div>
+
+        <div class="Time-line"></div>
+        <div class="time-line-overlap"></div>
+        <div class="Container">
+            <h2 id="question-text" >Question</h2>
+        </div>
+        <div class="answer-btn" id="answer-btn">
+    <ol>
+        <li>
+            <input type="radio" id="option1" name="answer" value="option1">
+            <label for="option1">Option </label>
+        </li>
+        <li>
+            <input type="radio" id="option2" name="answer" value="option2">
+            <label for="option2">Option </label>
+        </li>
+        <li>
+            <input type="radio" id="option3" name="answer" value="option3">
+            <label for="option3">Option </label>
+        </li>
+        <li>
+            <input type="radio" id="option4" name="answer" value="option4">
+            <label for="option4">Option </label>
+        </li>
+    </ol>
+</div>
+
+        <a href="# " class="Previous-btn" id="Previous-btn" onclick="showPreviousQuestion()">
+            <i class='bx bx-left-arrow-alt'></i>
+            <span>Previous</span>
+        </a>
+        <a href="#" class="submit-btn" id="submit-btn"onclick="submitAndContinue()">
+            <span>Submit & Continue</span>
+            <i class='bx bx-right-arrow-alt'></i>
+        </a>
+    </section>
+    
+    <script src="/js/script.js"></script>
+</body>
+</html>

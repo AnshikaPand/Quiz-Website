@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <Section class="signup-page">
+        <div class="signup-img">
+            <img src="/img/welcome.png" alt="img-background">
+        </div>  
+
+        <div class="signup-content">
+            <h1>Signup</h1>
+            <span>Signup to Join</span>
+            <div class="input">
+                <label ><p>Full Name</p></label>
+                <input type="text" id="name" name="name" placeholder="Full Name" required>
+
+                <label ><p>Email ID</p></label>
+                <input type="email" id="email" name="email" placeholder="xyz12@gmail.com" required>
+
+                <label ><p>Password</p></label>
+                <input type="password" id="password" name="password" placeholder="password" required>
+            </div>
+
+            <div class="signup-btn">
+                <button class="btn-1" onclick="register()">Sign Up</button>
+                <button class="btn-2">
+                  <img src="https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png" alt="Google Logo">
+                  Sign up with Google
+                </button>
+            </div>
+            <div class="checkbox-footer">
+                <input type="checkbox" id="coding" name="interest" value="coding" />
+                <p >I accept <a href="#">Terms & Conditions</a></p>
+            </div>
+            
+            
+            <div class="login-Singup">
+                <span>Don't have an account? <a href="login.html">log in ?</a></span>
+            </div>
+            
+        </div>
+    </Section>
+    <script src="/js/script.js"></script>
+</body>
+</html>

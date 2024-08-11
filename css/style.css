@@ -1,0 +1,734 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-Page {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.login-Img {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-Img img {
+    max-width: 60%;
+    height: auto;
+}
+
+.login-Content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.login-Content h1 {
+    align-self: flex-start;
+    margin: 0;
+    text-align: left;
+}
+
+.login-Content span {
+    color: rgb(103, 100, 100);
+    text-align: left;
+}
+
+.input {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+}
+
+.input input {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 0px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container box-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.login-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.btn-1,
+.btn-2 {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn-1 {
+    background-color: #F3BD00;
+    color: rgb(4, 4, 4);
+    border-radius: 20px;
+}
+
+.btn-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4285F4;
+    /* Google Blue */
+    color: rgb(5, 5, 5);
+    background: #ffffff;
+    box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.20);
+    border-radius: 10px;
+    height: 50px;
+}
+
+.btn-2 img {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.login-Singup {
+    margin-top: 30px;
+    text-align: left;
+    width: 100%;
+    margin-left: 35px;
+}
+
+.login-Singup span {
+    display: inline-block;
+    width: auto;
+    /* Auto width to fit content */
+}
+
+.login-Singup a {
+    text-decoration: none;
+}
+
+/* --------SignUp From -------- */
+
+.signup-page {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.signup-img {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-img img {
+    max-width: 70%;
+    height: auto;
+}
+
+.signup-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.signup-content h1 {
+    align-self: flex-start;
+    margin: 0;
+    text-align: left;
+}
+
+.signup-content span {
+    color: rgb(103, 100, 100);
+    text-align: left;
+}
+
+.input {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+}
+
+.input input {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 0px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container box-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.signup-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.btn-1,
+.btn-2 {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn-1 {
+    background-color: #F3BD00;
+    color: rgb(4, 4, 4);
+    border-radius: 20px;
+}
+
+.btn-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4285F4;
+    /* Google Blue */
+    color: rgb(5, 5, 5);
+    background: #ffffff;
+    box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.20);
+    border-radius: 10px;
+    height: 40px;
+}
+
+.btn-2 img {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.checkbox-footer {
+    display: flex;
+    text-align: left;
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+.checkbox-footer p {
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+
+/* -------Quiz-loading-html----- -*/
+
+.Quiz-loading-page {
+    margin: 0;
+    padding: 0;
+    height: 130%;
+    width: 100%;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    /* Ensure this is set */
+}
+
+.Quiz-loading-page .Navbar img {
+    width: 200px;
+    margin-top: 25px;
+    margin-left: 60px;
+}
+
+.Navbar p{
+    text-align: right;
+    margin-right: 150px;
+    margin-top: -25px;
+}
+
+.Navbar hr {
+    border: 2px solid rgb(204, 195, 195);
+}
+
+.Quiz-loading-body {
+    margin-left: 10px;
+    order: 1;
+    /* Ensure this is set */
+}
+
+span i {
+    color: #C7C7CC;
+}
+
+.Quiz-loading-body-div {
+    height: 620px;
+    width: 1200px;
+    background: #ffffff;
+    box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.20);
+    border-radius: 10px;
+    margin-left: 100px;
+    order: 2;
+    /* Ensure this is set */
+}
+
+.Quiz-loading-body-div1 {
+    height: 220px;
+    width: 1160px;
+    margin-top: 25px;
+    margin-left: 19px;
+    border-radius: 12px;
+}
+
+.Quiz-loading-body-content {
+    margin-top: 180px;
+    text-align: center;
+}
+
+
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    /* Spacing between form fields and button */
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    /* Adjust width as needed */
+    margin-bottom: 15px;
+    /* Spacing between rows */
+}
+
+.form-row label {
+    flex: 1;
+    text-align: left;
+    font-weight: bold;
+    /* Optional: Bold label text */
+    margin-right: 15px;
+    /* Space between labels */
+}
+
+.form-row input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 7px;
+    border: 1px solid #070707;
+    margin-right: 15px;
+    /* Space between inputs */
+    height: 35px;
+}
+
+.Quiz-loading-body-content button {
+    background-color: orange;
+    width: 320px;
+    height: 40px;
+    border-radius: 15px;
+    margin-top: 0px;
+    border: none;
+}
+
+
+/* ----- QuizPage ------ */
+
+
+
+.QuizPage {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+}
+
+.QuizPage .Navbar img {
+    width: 200px;
+    margin-top: 25px;
+    margin-left: 60px;
+}
+
+.Navbar hr {
+    border: 2px solid rgb(204, 195, 195);
+}
+
+.Time-line {
+    height: 12px;
+    width: 95%;
+    background-color: #C7C7CC;
+    margin-left: 2.5%;
+    border-radius: 5px;
+}
+
+.time-line-overlap {
+    height: 12px;
+    width: 9.5%;
+    background-color: #F3BD00;
+    margin-left: 2.5%;
+    margin-top: -13px;
+    border-radius: 5px;
+}
+
+.Count-of-Number h1 {
+    font-size: 30px;
+    margin-left: 50px;
+}
+
+.Container h2 {
+    margin-left: 50px;
+}
+
+.answer-btn {
+    /* margin-left: 50px;  */
+    display: flex;
+    flex-direction: column;
+}
+
+.answer-btn .btn {
+    display: block;
+    width: 200px;
+    /* margin-left: 50px;  */
+    padding: 10px;
+    color: rgb(0, 0, 0);
+    border: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    gap: 3px;
+}
+
+.answer-btn input[type ="radio"]{
+    display: none;
+}
+
+.answer-btn label{
+
+    padding: 10px;
+}
+.answer-btn li{
+    padding: 7px;
+}
+
+
+
+.btn.selected {
+    background-color: #f36d00;
+    color: #fff;
+}
+.Previous-btn{
+    text-decoration: none;
+    margin-left: 40px;
+    margin-top: 100px;
+    font-size: 20px; 
+    display: inline-flex;
+    align-items: center; 
+    color: #8E8E93;
+    font-weight: 400;
+    font-size: 30px;
+}
+
+
+.submit-btn {
+    text-decoration: none;
+    margin-left: 85%;
+    margin-top: 100px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.submit-btn {
+    display: inline-flex;
+    align-items: center;
+}
+
+.submit-btn i {
+    position: relative;
+    top: 2px;
+    /* Adjust the value as needed */
+}
+
+/* ------Rank-Page------ */
+
+
+.Rank-page {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Rank-page .Navbar img {
+    width: 200px;
+    margin-top: 25px;
+    margin-left: 60px;
+}
+
+.Navbar hr {
+    border: 2px solid rgb(204, 195, 195);
+}
+
+
+.head {
+    width: Fixed (1, 360px)px;
+    height: Hug (85px)px;
+    margin-top: 8px;
+    text-align: center;
+    gap: 5px;
+    opacity: 0px;
+}
+
+.head h1 {
+    font-family: Inter;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 48px;
+    text-align: center;
+    color: #1C1C1E;
+}
+
+.head span {
+
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28.8px;
+    text-align: center;
+    color: #8E8E93;
+
+}
+
+.Rank-1st {
+    width: 210px;
+    height: 552px;
+    margin-top: 62px;
+    margin-left: 645px;
+    gap: 0px;
+    opacity: 0px;
+    /* border: 8px solid var(--Brand-Yellow, #F3BD00) */
+}
+
+.Rank-1st-filer {
+    width: 210px;
+    height: 419px;
+    /* margin-top: 316px; */
+    left: 65px;
+    gap: 0px;
+    border-radius: 16px 16px 0px 0px;
+    opacity: 0px;
+    background: var(--Brand-Yellow, #F3BD00);
+
+}
+
+.Rank-1st-circle {
+    width: 140px;
+    height: 140px;
+    margin-top: -500px;
+    margin-left: 25px;
+    gap: 0px;
+    border-radius: 50%;
+    border: 8px 0px 0px 0px;
+    opacity: 0px;
+    background: #FFFFFF;
+    border: 8px solid var(--Brand-Yellow, #F3BD00)
+}
+
+.crown {
+    width: 76px;
+    height: 76px;
+    margin-left: 712px;
+    margin-top: 50px;
+    gap: 0px;
+    opacity: 0px;
+}
+
+.Rank-2st {
+    width: 210px;
+    height: 492px;
+    margin-top: -450px;
+    margin-left: 385px;
+    gap: 0px;
+    opacity: 0px;
+    /* border: 8px solid #F4CE4A */
+}
+
+.Rank-2st-filer{
+    width: 210px;
+height: 419px;
+top: 387px;
+left: 385px;
+gap: 0px;
+border-radius: 16px 16px 0px 0px;
+opacity: 0px;
+background: #F4CE4A;
+}
+
+.Rank-2st-circle{
+width: 140px;
+height: 140px;
+margin-top: -500px;
+margin-left: 20px;
+padding: 10px 4px 0px 4px;
+gap: 0px;
+border-radius: 50%;
+border: 8px 0px 0px 0px;
+opacity: 0px;
+border: 8px solid #F4CE4A;
+background: #FFFFFF;
+}
+
+
+.Rank-3st{
+width: 210px;
+height: 485px;
+margin-top: -390px;
+margin-left: 890px;
+gap: 0px;
+opacity: 0px;
+/* border: 8px solid #F7E296 */
+}
+
+.Rank-3st-filer{
+    width: 210px;
+height: 419px;
+top: 433px;
+left: 845px;
+gap: 0px;
+border-radius: 16px 16px 0px 0px;
+opacity: 0px;
+background: #F7E296;
+}
+.Rank-3st-circle{
+    width: 140px;
+    height: 140px;
+    margin-top: -500px;
+    margin-left: 25px;
+    gap: 0px;
+    border-radius: 50%;
+    border: 8px 0px 0px 0px;
+    opacity: 0px;
+    background: #FFFFFF;
+    border: 8px solid #F7E296      
+}
+
+.Other-Rank {
+    width: 100%;
+    height: 400px; 
+    margin-top: -350px; 
+    position: relative;
+    z-index: 1; /* Lower z-index to go under Other-Rank-Box */
+}
+
+.Other-Rank-Box {
+    width: 1357px;
+    height: 8px;
+    position: relative; /* Ensure proper stacking */
+    z-index: 2; /* Higher z-index to appear above Other-Rank */
+    padding: 24px 32px;
+    gap: 548px;
+    border-radius: 8px 0px 0px 0px;
+    opacity: 1;
+    background: #ffffff;
+    box-shadow: 10px 8px 16px 10px #1C1C1E1A;
+
+    margin-top: -290px; /* Reset or adjust margin-top */
+    margin-left: 40px;
+}
+
+.left{
+    font-weight: 700;
+    margin-top: -15px;
+}
+
+.rigth{
+    font-weight: 600;
+    margin-top: -35px;
+    margin-left: 1300px;
+}
+
+.Other-Rank-Box2{
+    width: 1357px;
+    height: 8px;
+    position: relative; /* Ensure proper stacking */
+    z-index: 2; /* Higher z-index to appear above Other-Rank */
+    padding: 24px 32px;
+    gap: 548px;
+    border-radius: 8px 0px 0px 0px;
+    opacity: 1;
+    background: #ffffff;
+    box-shadow: 10px 8px 16px 10px #1C1C1E1A;
+    margin-top: 25px; /* Reset or adjust margin-top */
+    margin-left: 40px;   
+}
+
+.Other-Rank-Box3{
+    width: 1357px;
+    height: 8px;
+    position: relative; /* Ensure proper stacking */
+    z-index: 2; 
+    padding: 24px 32px;
+    gap: 548px;
+    border-radius: 8px 0px 0px 0px;
+    opacity: 1;
+    background: #ffffff;
+    box-shadow: 10px 8px 16px 10px #1C1C1E1A;
+    margin-top: 25px; /* Reset or adjust margin-top */
+    margin-left: 40px; 
+}
+
+
+
+
