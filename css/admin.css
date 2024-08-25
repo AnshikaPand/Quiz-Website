@@ -1,0 +1,268 @@
+/* home page */
+#home-page a{
+    text-decoration: none;
+    
+}
+#home-page .nav-bar a{
+    color: black;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+.nav-bar {
+    display: flex; 
+    justify-content: space-between; /* Distribute space between items */
+    align-items: center; /* Align items vertically centered */
+    padding: 10px 20px;
+    background-color: #d2b708; 
+}
+
+
+.nav-bar ul {
+    display: flex; 
+    gap: 25px; 
+}
+
+#oderlist {
+    font-family: "Matemasie", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: larger;
+}
+
+.nav-bar ul li {
+    font-size: 18px; 
+    font-weight: bold; 
+}
+
+/* Style for the logo image */
+.nav-img img {
+    height: 30px; 
+}
+
+
+section {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 80vh; 
+    padding: 20px;
+    background-color: #e0e0e0; 
+}
+
+
+#container {
+    text-align: center;
+    max-width: 1500px;
+    padding: 20px;
+    background-color: #ffffff; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px;
+}
+
+#container >#start{
+    display: block;
+    font-size: 34px; 
+    font-weight: bold; 
+    margin-bottom: 10px;
+    color: #F3BD00;
+}
+
+#container p {
+    font-size: 16px; 
+    margin-bottom: 10px;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+#container >#ligth-color{
+color: #7e7979;
+font-size: larger;
+
+}
+
+#home-btn span{
+    font-weight: 700;
+}
+
+#container >#home-btn > button{
+
+    border: none;
+    background-color: #F3BD00;
+    height: 60px;
+    width: 100px; 
+    margin-top: 20px;
+}
+
+#container >#home-btn > button a{
+    color: #ffffff;
+    font-size: 20px;
+}
+#container >#home-btn > button i{
+
+    font-size: 20px;
+}
+
+
+
+
+
+
+/* --------teacher.html ----------*/
+
+.Teacher-Page #head {
+    background-color: #F3BD00;
+    height: 400px; 
+    width: 100%;
+    border-radius: 20px 20px 0px 0%;
+}
+
+.Teacher-Page {
+    height: 80vh; 
+}
+.Teacher-Page #head a {
+    display: inline-block; /* Ensure it's not inline */
+    box-sizing: border-box; /* Optional, ensures padding is included in width/height */
+    margin-top: 40px;
+    margin-left: 30px;
+    height: 80px;
+    width: 50px;
+    font-size: 40px; 
+    font-weight: 500;
+    text-decoration: none; /* Ensure no underline */
+    color: inherit
+}
+
+
+
+
+.teacher-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+    grid-auto-rows: minmax(300px, auto);   /* Ensure each row is at least 300px */
+    gap: 20px;                             /* Adjust the gap as needed */
+    padding: 20px;
+    margin-top: -300px;
+}
+
+/* General styles for each div */
+.teacher-container > div {
+    background-color: #ffffff;
+    height: 300px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px; /* Optional: Adjust padding for better spacing */
+   
+}
+
+/* Image styling */
+.teacher-container img {
+    width: 100px; 
+    height: 100px; /* Set the height of the images */
+    object-fit: cover; 
+    margin-bottom: 10px; /* Space between the image and the text */
+}
+
+/* Text styling below the image */
+.teacher-container > div > img + div {
+    margin-bottom: 10px;
+}
+
+.teacher-container a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+}
+
+.teacher-container img {
+    margin-top: 8px; 
+    width: 100px; 
+    height: auto; 
+}
+
+.teacher-container span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* ------Questionspage-------- */
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+}
+
+#question-page {
+    height: 630px;
+    max-width: 900px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.questions,
+.option,
+.correct-answer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start; /* Align content to the left */
+}
+
+label {
+    font-weight: bold;
+}
+
+/* Set specific widths for inputs */
+.questions input[type="text"] {
+    width: 600px;
+}
+
+.option input[type="text"],
+.correct-answer input[type="text"] {
+    width: 200px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Align buttons to the right */
+.questionpg-btn {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 10px; 
+}
+
+.questionpg-btn button {
+    background-color: #F3BD00;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

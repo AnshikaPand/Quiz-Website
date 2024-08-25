@@ -11,43 +11,39 @@
 </head>
 
 <body>
-    <div class="Quiz-loading-page">
-        <div class="Navbar">
-            <img src="https://techpaathshala.com/assets/\images\home\techpathshala_mobile_logo.svg"
+    <div class="quiz-loading-page">
+        <div class="navbar">
+            <img src="https://techpaathshala.com/assets/images/home/techpathshala_mobile_logo.svg"
                 alt="techpaathshala">
 
-                <p>NAME</p>
+            <p id="userNameDisplay"></p>
+
             <hr>
         </div>
-        <!-- Move Quiz-loading-body above Quiz-loading-body-div -->
-        <div class="Quiz-loading-body">
+        <div class="quiz-loading-body">
             <h1>Let's Start the Quiz</h1>
-            <span><i class='bx bx-time-five'></i> 10 min</span><br>
-            <span><i class='bx bxs-circle bx-tada bx-rotate-90'></i>Disclaimers</span><br>
-            <span><i class='bx bxs-circle bx-tada bx-rotate-90'></i>Disclaimers</span>
+            <Ul>
+                <li><i class='bx bx-time-five'></i> 10 min</li>
+                <li></i>Disclaimers</li>
+                <li></i>Disclaimers</li>
+            </Ul>
         </div>
-        <div class="Quiz-loading-body-div">
-            <div class="Quiz-loading-body-div1">
-                <img src="/img/Frame 1000009892.png" alt="loading pg img">
+        <div class="quiz-loading-body-div">
+            <div class="quiz-loading-body-div1">
+                <img src="/img/quizloading.png" alt="loading page img">
             </div>
-            <div class="Quiz-loading-body-content">
+            <div class="quiz-loading-body-content">
                 <div class="form-group">
-                    <div class="form-row">
-                        <!-- <label>Full Name</label>
-                        <label>Email</label>
-                        <label>Contact No</label>
-                    </div>
-                    <div class="form-row">
-                        <input type="text" id="username" placeholder="Full Name">
-                        <input type="email" id="email" placeholder="Email">
-                        <input type="tel" id="contact" placeholder="Contact No"> -->
-                    </div>
+                    <!-- Any form content goes here -->
                 </div>
-                <button class="start-btn" onclick="loading();move();">Start Quiz</button>
+                <button id="startQuizBtn "  onclick = "startQuiz()">Start Quiz</button>
             </div>
         </div>
     </div>
-    <script src="/js/script.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        // startbtn();
+    </script>
 </body>
 
 </html>

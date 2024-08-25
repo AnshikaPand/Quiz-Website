@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'); */
 
-body,
-html {
+body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
-    background-color: #f0f0f0;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    font-family: 'Roboto', sans-serif;
 }
 
 .login-Page {
@@ -31,8 +32,9 @@ html {
 }
 
 .login-Img img {
-    max-width: 60%;
+    max-width: 80%;
     height: auto;
+    border-radius: 10px;
 }
 
 .login-Content {
@@ -41,118 +43,143 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    padding: 20px;
 }
 
 .login-Content h1 {
-    align-self: flex-start;
     margin: 0;
     text-align: left;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
 }
 
 .login-Content span {
-    color: rgb(103, 100, 100);
+    color: #8E8E93;
     text-align: left;
+    margin-bottom: 30px;
 }
 
 .input {
-    width: 100%;
-    max-width: 300px;
-    margin-bottom: 10px;
+    width: 100%; /* Takes full width of the container */
+    max-width: 600px; /* Maximum width for larger screens */
+    margin-bottom: 20px;
 }
 
 .input input {
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 0px;
+    width: 100%; /* Ensures the input takes up the full width of its container */
+    padding: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-}
-
-.password-container {
-    position: relative;
-}
-
-.password-container box-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
+    font-size: 1rem;
 }
 
 .login-btn {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     width: 100%;
-    max-width: 300px;
+    max-width: 330px;
+    margin-bottom: 20px;
 }
 
 .btn-1,
 .btn-2 {
-    padding: 10px 20px;
+    padding: 15px;
     border: none;
-    border-radius: 2px;
+    border-radius: 5px;
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
+    font-size: 1rem;
+    height: 40px;
+    margin-top: 15px;
 }
 
 .btn-1 {
     background-color: #F3BD00;
-    color: rgb(4, 4, 4);
-    border-radius: 20px;
+    color: #000;
 }
 
 .btn-2 {
+    background-color: #4285F4;
+    color: #fff;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #4285F4;
-    /* Google Blue */
-    color: rgb(5, 5, 5);
-    background: #ffffff;
-    box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.20);
-    border-radius: 10px;
-    height: 50px;
+
 }
 
 .btn-2 img {
     margin-right: 10px;
     width: 20px;
-    height: 20px;
+    height: 50px;
 }
 
 .login-Singup {
-    margin-top: 30px;
     text-align: left;
     width: 100%;
-    margin-left: 35px;
+    margin-top: 35px;
 }
 
 .login-Singup span {
     display: inline-block;
     width: auto;
-    /* Auto width to fit content */
+    text-align: center;
 }
 
 .login-Singup a {
     text-decoration: none;
+    color: #4285F4;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .login-Page {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .login-Img {
+        margin-bottom: 20px;
+    }
+
+    .login-Content {
+        align-items: center;
+        padding: 0;
+    }
+
+    .login-Content h1,
+    .login-Content span,
+    .login-Singup {
+        text-align: center;
+    }
 }
 
 /* --------SignUp From -------- */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+}
 
 .signup-page {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 100%;
+    height: 100vh; /* Use full viewport height */
     justify-content: center;
     align-items: center;
     background-color: white;
     padding: 20px;
     box-sizing: border-box;
+    overflow: auto; /* Allow scrolling if content overflows */
 }
 
 .signup-img {
@@ -160,10 +187,11 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 20px; /* Adjust spacing between image and content */
 }
 
 .signup-img img {
-    max-width: 70%;
+    max-width: 60%;
     height: auto;
 }
 
@@ -172,45 +200,41 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: flex-start; /* Align items to the left */
+    padding: 20px;
+    margin-left: 0; /* Reset margin-left */
 }
 
 .signup-content h1 {
-    align-self: flex-start;
     margin: 0;
-    text-align: left;
+    text-align: left; /* Ensure text is aligned to the left */
+    width: 100%;
 }
 
 .signup-content span {
     color: rgb(103, 100, 100);
-    text-align: left;
+    text-align: left; /* Ensure text is aligned to the left */
+    margin-bottom: 30px; /* Add spacing between text and inputs */
+    width: 100%;
 }
 
 .input {
     width: 100%;
-    max-width: 300px;
-    margin-bottom: 10px;
+    max-width: 350px; /* Set max-width for inputs */
+    margin-bottom: 10px; /* Add spacing between inputs */
+}
+
+.input label p {
+    margin: 0;
 }
 
 .input input {
     width: 100%;
-    padding: 5px;
-    margin-bottom: 0px;
+    padding: 10px;
+    margin-bottom: 30px; /* Add spacing between inputs */
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 7px;
     box-sizing: border-box;
-}
-
-.password-container {
-    position: relative;
-}
-
-.password-container box-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
 }
 
 .signup-btn {
@@ -218,17 +242,19 @@ html {
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    max-width: 300px;
+    margin-top: -30px;
+    max-width: 350px; /* Set max-width for buttons */
 }
 
 .btn-1,
 .btn-2 {
-    padding: 10px 20px;
+    padding: 15px;
     border: none;
-    border-radius: 2px;
+    border-radius: 8px;
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
+    font-size: 1rem;
 }
 
 .btn-1 {
@@ -241,13 +267,13 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #4285F4;
-    /* Google Blue */
-    color: rgb(5, 5, 5);
-    background: #ffffff;
-    box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.20);
-    border-radius: 10px;
-    height: 40px;
+    border: 1px solid #DEDEDE;
+    box-shadow: 0px 8px 16px 0px #1C1C1E1A;
+    background-color: #fffefe;
+    color: #000;
+    border-radius: 8px;
+    height: 50px;
+    margin-bottom: 30px;
 }
 
 .btn-2 img {
@@ -258,57 +284,138 @@ html {
 
 .checkbox-footer {
     display: flex;
-    text-align: left;
-    margin-left: 15px;
-    text-decoration: none;
+    align-items: center;
+    margin-top: 7px;
+    margin-bottom: 20px; /* Add spacing from other elements */
 }
 
 .checkbox-footer p {
-    margin-left: 5px;
+    margin: 0;
+    margin-left: 10px;
+    align-items: center;
+}
+
+.login-Singup {
+    text-align: center;
+    width: 100%;
+}
+
+.login-Singup span {
+    display: inline-block;
+    align-items: center;
+    width: auto;
+    margin-left: -350px;
+}
+
+.login-Singup a {
     text-decoration: none;
+    color: #4285F4;
+}
+.login-Singup {
+    text-align: center; 
+    margin: 0 auto;    /* Centers the div itself horizontally */
+    width: fit-content; 
+}
+/* Ensure the parent container is set up correctly */
+.parent-container { 
+    display: flex;
+    justify-content: center; /* Centers child elements horizontally */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .signup-page {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .signup-img {
+        margin-bottom: 10px;
+    }
+
+    .signup-content {
+        align-items: center;
+        padding: 20px;
+        margin-left: 10px; /* Remove margin-left for small screens */
+    }
+
+    .signup-content h1,
+    .signup-content span {
+        text-align: left; 
+    }
+
+    .input {
+        max-width: 90%; 
+    }
+
+    .signup-btn {
+        max-width: 90%; 
+    }
 }
 
 
 /* -------Quiz-loading-html----- -*/
 
-.Quiz-loading-page {
+
+body, html {
     margin: 0;
     padding: 0;
-    height: 130%;
+    height: 100%;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.quiz-loading-page {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     width: 100%;
     background-color: #f0f0f0;
     display: flex;
     flex-direction: column;
-    /* Ensure this is set */
 }
 
-.Quiz-loading-page .Navbar img {
+.quiz-loading-page .navbar img {
     width: 200px;
     margin-top: 25px;
     margin-left: 60px;
 }
 
-.Navbar p{
+.navbar p {
     text-align: right;
     margin-right: 150px;
     margin-top: -25px;
 }
 
-.Navbar hr {
+.navbar hr {
     border: 2px solid rgb(204, 195, 195);
+    margin-top: 50px;
 }
 
-.Quiz-loading-body {
-    margin-left: 10px;
+.quiz-loading-body {
+    margin-left: 50px;
     order: 1;
-    /* Ensure this is set */
 }
 
-span i {
+
+.quiz-loading-body ul {
+    list-style-type: decimal;
+    margin: 10px 0 0 20px; /* Adjust the margin as needed */
+    padding: 0;
+}
+
+.quiz-loading-body ul li {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.quiz-loading-body ul li i {
+    margin-right: 5px;
     color: #C7C7CC;
 }
 
-.Quiz-loading-body-div {
+.quiz-loading-body-div {
     height: 620px;
     width: 1200px;
     background: #ffffff;
@@ -316,10 +423,10 @@ span i {
     border-radius: 10px;
     margin-left: 100px;
     order: 2;
-    /* Ensure this is set */
+    margin-top: 20px;
 }
 
-.Quiz-loading-body-div1 {
+.quiz-loading-body-div1 {
     height: 220px;
     width: 1160px;
     margin-top: 25px;
@@ -327,50 +434,19 @@ span i {
     border-radius: 12px;
 }
 
-.Quiz-loading-body-content {
+.quiz-loading-body-content {
     margin-top: 180px;
     text-align: center;
 }
-
-
 
 .form-group {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
-    /* Spacing between form fields and button */
 }
 
-.form-row {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    /* Adjust width as needed */
-    margin-bottom: 15px;
-    /* Spacing between rows */
-}
-
-.form-row label {
-    flex: 1;
-    text-align: left;
-    font-weight: bold;
-    /* Optional: Bold label text */
-    margin-right: 15px;
-    /* Space between labels */
-}
-
-.form-row input {
-    flex: 1;
-    padding: 8px;
-    border-radius: 7px;
-    border: 1px solid #070707;
-    margin-right: 15px;
-    /* Space between inputs */
-    height: 35px;
-}
-
-.Quiz-loading-body-content button {
+.quiz-loading-body-content button {
     background-color: orange;
     width: 320px;
     height: 40px;
@@ -383,6 +459,11 @@ span i {
 /* ----- QuizPage ------ */
 
 
+
+* {
+    box-sizing: border-box;
+    transition: none !important;
+}
 
 .QuizPage {
     margin: 0;
@@ -402,6 +483,7 @@ span i {
 
 .Navbar hr {
     border: 2px solid rgb(204, 195, 195);
+    margin-top: 20px;
 }
 
 .Time-line {
@@ -419,55 +501,90 @@ span i {
     margin-left: 2.5%;
     margin-top: -13px;
     border-radius: 5px;
-}
+   transition: width 0.3s ease-in-out; /* Smooth transition */
+    }
+
 
 .Count-of-Number h1 {
-    font-size: 30px;
-    margin-left: 50px;
+    /* font-size: 30px; */
+    margin-left: 80px;
+    font-weight: 700;
 }
 
-.Container h2 {
+#question-text {
     margin-left: 50px;
+    text-align: left;
+    font-size: medium;
+}
+
+
+.Container span{
+    margin-left: 50px;
+    font-weight: 600;
+    color: #8E8E93;
 }
 
 .answer-btn {
-    /* margin-left: 50px;  */
     display: flex;
     flex-direction: column;
+    margin-left: 80px; /* Re-enabled this if spacing is needed */
 }
 
 .answer-btn .btn {
     display: block;
     width: 200px;
-    /* margin-left: 50px;  */
     padding: 10px;
     color: rgb(0, 0, 0);
-    border: none;
     border: none;
     cursor: pointer;
     text-align: center;
     gap: 3px;
 }
 
-.answer-btn input[type ="radio"]{
-    display: none;
+.options-list li label {
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.answer-btn label{
+.options-list li label:hover {
+    background-color: #F3BD00;/* Change background color on hover */
+    width: 100px;
+    border-radius: 10px;
+    color: #333; /* Change text color on hover */
+}
 
+input[type="radio"]:focus, 
+input[type="radio"]:active {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Optionally, add your custom styles */
+
+
+#question-number {
+    margin-left: 50px; /* Add a 50px left margin */
+}
+
+.options-list input[type="radio"] {
+    display: none; /* Hide radio buttons */
+}
+.answer-btn label {
     padding: 10px;
 }
-.answer-btn li{
+
+.answer-btn li {
     padding: 7px;
 }
-
-
 
 .btn.selected {
     background-color: #f36d00;
     color: #fff;
 }
-.Previous-btn{
+
+.Previous-btn {
     text-decoration: none;
     margin-left: 40px;
     margin-top: 100px;
@@ -479,16 +596,11 @@ span i {
     font-size: 30px;
 }
 
-
 .submit-btn {
     text-decoration: none;
-    margin-left: 85%;
-    margin-top: 100px;
+    margin-left: auto; /* Aligns to the right */
     font-size: 20px;
-    font-weight: 400;
-}
-
-.submit-btn {
+    font-weight: 700;
     display: inline-flex;
     align-items: center;
 }
@@ -589,7 +701,7 @@ span i {
 .crown {
     width: 76px;
     height: 76px;
-    margin-left: 712px;
+    margin-left: 706px;
     margin-top: 50px;
     gap: 0px;
     opacity: 0px;
@@ -695,8 +807,8 @@ background: #F7E296;
 
 .rigth{
     font-weight: 600;
-    margin-top: -35px;
-    margin-left: 1300px;
+    margin-top: -45px;
+    margin-left: 1200px;
 }
 
 .Other-Rank-Box2{
@@ -731,4 +843,24 @@ background: #F7E296;
 
 
 
+#rank-firest,
+#rank-second,
+#rank-third {
+    margin-top: -40px;
+}
 
+#rank-firest h2,
+#rank-second h2,
+#rank-third h2 {
+    position: relative;
+    top: -1000px;
+}
+
+.score{
+
+    margin-left: 60px;
+   position: absolute;
+   margin-top: 60px;
+   font-size: x-large;
+}                   
+                
