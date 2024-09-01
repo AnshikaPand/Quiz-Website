@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information</title>
+     <!-- CSS -->
+     <link rel="stylesheet" href="/css/admin.css">
+     <!-- Boxicon -->
+     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <div id="student-information">
+        <div id="Information">
+            <div class="sr-no">Sr.No</div>
+            <div class="name">Name</div>
+            <div class="email">Email id</div>
+            <div class="score">Score</div>
+            
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+
+    <script>
+   // Function to display all user signup information and scores on the page
+function displayAllUsersInfo() {
+    const userInfoDiv = document.getElementById('Information');
+
+    if (!userInfoDiv) {
+        console.warn('User info div is not available');
+        return;
+    }
+
+    const users = JSON.parse(localStorage.getItem('users')) || []; // Retrieve all users
+    const scores = JSON.parse(localStorage.getItem('scores')) || []; // Retrieve all scores
+
+    if (users.length === 0) {
+        userInfoDiv.innerHTML = `<p>No user information available.</p>`;
+        return;
+    }
+
+    userInfoDiv.innerHTML = '<h3>Student Information</h3>'; // Header for the section
+
+    users.forEach((user, index) => {
+        // Find the user's score
+        const userScore = scores.find(score => score.email === user.email)?.score || 'Not Attempted';
+
+        const userRowHtml = `
+            <div class="user-row">
+                <div><span class="label">Sr.No:</span> ${index + 1}</div>
+                <div><span class="label">Name:</span> ${user.name}</div>
+                <div><span class="label">Email id:</span> ${user.email}</div>
+                <div><span class="label">Score:</span> ${userScore}</div>
+            </div>
+        `;
+
+        userInfoDiv.innerHTML += userRowHtml; // Append each user row to the info div
+    });
+}
+
+// Ensure displayAllUsersInfo is called when the page loads
+window.onload = function() {
+    displayName(); // Existing function to display name
+    displayAllUsersInfo(); // New function to display all user information and scores
+};
+
+
+    </script>
+</body>
+</html>

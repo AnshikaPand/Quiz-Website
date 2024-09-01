@@ -13,6 +13,7 @@
     <div class="Rank-page">
         <div class="Navbar">
             <img src="https://techpaathshala.com/assets/\images\home\techpathshala_mobile_logo.svg" alt="techpaathshala">
+            <div id="userimg"></div>
             <hr>
         </div> 
 
@@ -20,50 +21,83 @@
             <h1>Wow You Rank </h1>
             <span>Supporting Text</span>
         </div>
-
+  
         <div class="Rank-Position"> 
             <img class="crown" src="/img/fluent_crown-24-filled.png">
             <div class="Rank-1st">
                
-                <div class="Rank-1st-filer"><h1 class="score">Score</h1></div>
-                <div id="score-number"></div>
+                <div class="Rank-1st-filer"><h1 class="score1">Score</h1></div>
+                <div id="score-number1" style="margin-top: 100px;"></div>
                 <div class="Rank-1st-circle"></div>
             </div>
 
             <div class="Rank-2st">
-                <!-- <h2 id="rank-second"> #2 </h2> -->
-                <div class="Rank-2st-filer"><h1 class="score">Score</h1></div>
-                <div id="score-number"></div>
+                <h2 id="score-heading2 "> #2 </h2>
+                <div class="Rank-2st-filer"><h1 class="score2">Score</h1></div>
+                <div id="score-number2" style="margin-top: 20px;"></div>
                 <div class="Rank-2st-circle"></div>
             </div>
 
             <div class="Rank-3st">
-                <!-- <h2 id="rank-third">#3</h2> -->
-                <div class="Rank-3st-filer"><h1 class="score">Score</h1></div>
-                <div id="score-number"></div>
+                <h2 id="score-heading3">#3</h2>
+                <div class="Rank-3st-filer"><h1 class="score3">Score</h1></div>
+                <div id="score-number3"></div>
                 <div class="Rank-3st-circle"></div>  
             </div>
         </div>
 
        <div class="All-Rank">
-        <img  class="Other-Rank" src="/img/Vector 15.png"><!-- This should be visible -->
+        <img  class="Other-Rank" src="/img/Vector 15.png">
         <div class="Other-Rank-Box">
-            <h2 class="left">#4 Name</h2> 
-            <h2 class="rigth" id="score-number">400</h2> 
+            <h2 class="left"id="name">#6 Name</h2> 
+            <h2 class="rigth" id="score-number6"></h2> 
         </div>
 
         <div class="Other-Rank-Box2">
-            <h2 class="left">#5 Name</h2> 
-            <h2 class="rigth"  id="score-number">600</h2> 
+            <h2 class="left" id="name">#5 Name</h2> 
+            <h2 class="rigth"  id="score-number5"></h2> 
         </div>
 
         <div class="Other-Rank-Box3">
-            <h2 class="left">#6 Name</h2> 
-            <h2 class="rigth" id="score-number" >800</h2> 
+            <h2 class="left" id="name">#4 Name</h2> 
+            <h2 class="rigth" id="score-number4" ></h2> 
         </div>
 
     </div>
-
     </div>
+    <script src="/js/main.js"></script>
+   
+     
+     <script>
+    // Retrieve scores from localStorage
+let scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+// Sort scores in descending order
+scores.sort((a, b) => b.score - a.score);
+
+// Function to display scores
+function displayScores() {
+    // Display top ranks
+    document.getElementById('score-number1').innerText = scores[0] ? `${scores[0].score}` : 'Rank 1: No Data';
+document.getElementById('score-number2').innerText = scores[1] ? `${scores[1].score}` : 'Rank 2: No Data';
+document.getElementById('score-number3').innerText = scores[2] ? `${scores[2].score}` : 'Rank 3: No Data';
+
+    document.getElementById('score-number4').innerText = scores[3] ? `${scores[3].name} - ${scores[3].score}` : 'Rank 4: No Data';
+    document.getElementById('score-number5').innerText = scores[4] ? `${scores[4].name} - ${scores[4].score}` : 'Rank 5: No Data';
+    document.getElementById('score-number6').innerText = scores[5] ? `${scores[5].name} - ${scores[5].score}` : 'Rank 6: No Data';
+
+    // Ensure names are correctly assigned
+    document.getElementById('name4').innerText = scores[3] ? `${scores[3].name}` : 'Rank 4: No Data';
+    document.getElementById('name5').innerText = scores[4] ? `${scores[4].name}` : 'Rank 5: No Data';
+    document.getElementById('name6').innerText = scores[5] ? `${scores[5].name}` : 'Rank 6: No Data';
+}
+
+// Initialize display on page load
+document.addEventListener('DOMContentLoaded', displayScores);
+</script>
+
+
+
+    
 </body>
 </html>

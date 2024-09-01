@@ -11,6 +11,8 @@
     <section class="QuizPage">
         <div class="Navbar">
             <img src="https://techpaathshala.com/assets/images/home/techpathshala_mobile_logo.svg" alt="techpaathshala">
+
+            <div id="userimg"></div>
             <hr>
         </div>
         <div class="Count-of-Question" id="Count-of-Question">
@@ -18,7 +20,7 @@
         </div>
 
         <div class="Time-line"></div>
-        <div class="time-line-overlap"></div>
+        <div class="time-line-overlap" id="time-line-overlap"></div>
         <div class="Container">
             <h2 id="question-text">Question</h2>
         </div>
@@ -56,174 +58,6 @@
     <script src="/js/main.js"></script>
 
     <script>
-
-
-
-    
-    // const questions = [
-    //     {
-    //         question: 'A set of instructions that tells the computer how to behave, what to do, and derive a solution to a particular problem is:', 
-    //         a: "Algorithm", 
-    //         b: "Pseudocode", 
-    //         c: "Programming", 
-    //         d: "Program", 
-    //         answer: "Program"
-    //     },
-    //     {
-    //         question: 'A set of logically sequenced instructions that allows finding the solution to a problem is:', 
-    //         a: "Algorithm", 
-    //         b: "Pseudocode", 
-    //         c: "Programming", 
-    //         d: "Program", 
-    //         answer: "Algorithm" 
-    //     },
-    //     {
-    //         question: 'The six stages of program development in logical order are:', 
-    //         a: "Define, Analyze, Write, Test, Document, Debug", 
-    //         b: "Define, Analyze, Develop, Write, Test and Debug, Document", 
-    //         c: "Define, Write, Develop, Analyze, Test, Document", 
-    //         d: "Define, Develop, Write, Test, Document, Debug", 
-    //         answer: "Define, Analyze, Develop, Write, Test and Debug, Document" 
-    //     },
-    //     {
-    //         question: 'The programming language used to show pupils the concept and structure of programming is called:', 
-    //         a: "Basic", 
-    //         b: "Cobol", 
-    //         c: "Pascal", 
-    //         d: "Java", 
-    //         answer: "Pascal"
-    //     },
-    //     {
-    //         question: 'Java is an example of which generation programming language:', 
-    //         a: "4GLs", 
-    //         b: "3rd", 
-    //         c: "2nd", 
-    //         d: "1st", 
-    //         answer: "3rd" 
-    //     },
-    //     {
-    //         question: 'Which of the following generations of programming language executed code faster:', 
-    //         a: "4GLs", 
-    //         b: "3rd", 
-    //         c: "2nd", 
-    //         d: "1st", 
-    //         answer: "1st" 
-    //     },
-    //     { 
-    //         question: 'Algorithms must be all of the following except:', 
-    //         a: "Logical", 
-    //         b: "Ambiguous", 
-    //         c: "Concise", 
-    //         d: "Precise", 
-    //         answer: "Ambiguous" 
-    //     },
-    //     { 
-    //         question: 'Which language had codes such as MOV, ADD, SUB:', 
-    //         a: "Java", 
-    //         b: "Binary", 
-    //         c: "Pascal", 
-    //         d: "Assembly", 
-    //         answer: "Assembly" 
-    //     },
-    //     {
-    //         question: 'Which of the following executes programming codes line by line, rather than the whole program:', 
-    //         a: 'Compiler', 
-    //         b: 'Interpreter', 
-    //         c: 'Executer', 
-    //         d: 'Translator', 
-    //         answer: 'Interpreter'
-    //     },
-    //     {
-    //         question: 'All the following are examples of third programming languages except:', 
-    //         a: "Pascal", 
-    //         b: "C#", 
-    //         c: "Basic", 
-    //         d: "Fortran", 
-    //         answer: 'Fortran'
-    //     }
-    // ];
-    
-    
-    // let currentQuestionIndex = 0;
-    //     let score = 0;
-    //     const userAnswers = []; // Array to store the user's selected answers
-
-       
-    //     function displayQuestion(index) {
-    //         const questionContainer = document.getElementById('question-text');
-    //         const questionNumber = document.getElementById('question-number');
-    //         const optionLabels = document.querySelectorAll('.options-list label');
-    //         const optionInputs = document.querySelectorAll('.options-list input[type="radio"]');
-
-    //         if (!questionContainer || !questionNumber || optionLabels.length !== 4 || optionInputs.length !== 4) {
-    //             console.error('One or more DOM elements not found or incorrect number of options');
-    //             return;
-    //         }
-
-    //         if (index >= questions.length || index < 0) return;
-
-    //         const questionData = questions[index];
-
-    //         // Update the question text and number
-    //         questionContainer.innerHTML = `<h2>${questionData.question}</h2>`;
-    //         questionNumber.textContent = `Question ${index + 1} of ${questions.length}`;
-
-    //         // Update the options text and values
-    //         ['a', 'b', 'c', 'd'].forEach((option, idx) => {
-    //             optionInputs[idx].value = option;
-    //             optionLabels[idx].textContent = questionData[option];
-    //             optionInputs[idx].checked = false;
-
-                
-    //             if (userAnswers[index] === option) {
-    //                 optionInputs[idx].checked = true;
-    //             }
-    //         });
-    //     }
-
-    //     // Check the selected answer, update the score, and store the answer
-    //     function checkAnswer() {
-    //         const selectedOption = document.querySelector('.options-list input[type="radio"]:checked');
-    //         if (selectedOption) {
-    //             const selectedAnswer = selectedOption.value;
-    //             userAnswers[currentQuestionIndex] = selectedAnswer; // Store the selected answer
-
-    //             if (questions[currentQuestionIndex].answer === selectedAnswer) {
-    //                 score++;
-    //             }
-    //         }
-    //     }
-
-    //     // Store the score and answers in local storage
-    //     function storeResults() {
-    //         localStorage.setItem('quizScore', score);
-    //         localStorage.setItem('userAnswers', JSON.stringify(userAnswers)); // Convert the answers array to a JSON string
-    //     }
-
-    //     // Initial display of the first question
-    //     displayQuestion(currentQuestionIndex);
-
-    //     // Event listener for the Previous button
-    //     document.getElementById('Previous-btn').onclick = function(e) {
-    //         e.preventDefault();
-    //         if (currentQuestionIndex > 0) {
-    //             currentQuestionIndex--;
-    //             displayQuestion(currentQuestionIndex);
-    //         }
-    //     };
-
-    //     // Event listener for the Submit button
-    //     document.getElementById('submit-btn').onclick = function(e) {
-    //         e.preventDefault();
-    //         checkAnswer(); // Check the answer before moving to the next question
-    //         if (currentQuestionIndex < questions.length - 1) {
-    //             currentQuestionIndex++;
-    //             displayQuestion(currentQuestionIndex);
-    //         } else {
-    //             storeResults(); // Store the score and answers when the quiz is completed
-    //             alert(`You have completed the quiz! Your score is ${score}/${questions.length}.`);
-    //         }
-    //     }
             </script>
     
 </body>
