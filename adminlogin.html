@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="/css/admin.css">  
+</head>
+<body>
+    <div id="admin-login-page">
+        <div class="admin-login-container">
+            <div class="admin-login-img">
+                <img src="/img/undraw_Questions_re_1fy7 (1) (1).png" alt="Admin Login Image">
+            </div>
+            <div class="admin-login-content">
+                <h1>Admin Login</h1>
+                <span>Please enter your admin details below</span>
+                <div class="admin-input">
+                    <label for="admin-email">
+                        <p>Admin Email ID</p>
+                    </label>
+                    <input type="email" id="admin-email" name="admin-email" placeholder="admin@example.com" required>
+                </div>
+                <div class="admin-input">
+                    <label for="admin-password">
+                        <p>Password</p>
+                    </label>
+                    <div class="admin-password-container">
+                        <input type="password" id="admin-password" name="admin-password" placeholder="admin password" required>
+                        <i class='bx bx-hide' id="toggleAdminPassword"></i>
+                    </div>
+                </div>
+                <div class="admin-login-btn">
+                    <button class="admin-btn-1" onclick="adminLogin()">Login</button>
+                    <button class="admin-btn-2">
+                        <img src="https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png" alt="Google Logo">Sign up with Google
+                    </button>
+                </div>
+                <div class="admin-login-signup">
+                    <span>Don't have an account? <a href="signup.html">Sign up</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascript/main.js"></script>
+    <script>
+        
+         const toggleAdminPassword = document.querySelector('#toggleAdminPassword');
+        const adminPassword = document.querySelector('#admin-password');
+
+        toggleAdminPassword.addEventListener('click', function () {
+           const type = adminPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            adminPassword.setAttribute('type', type);
+            this.classList.toggle('bx-hide');
+           this.classList.toggle('bx-show');
+        });
+
+        // // Admin login function with voice welcome message
+         function adminLogin() {
+           const adminEmail = document.getElementById('admin-email').value;
+            const adminPassword = document.getElementById('admin-password').value;
+
+            if (adminEmail === "admin@gmail.com" && adminPassword === "admin") {
+                // Welcome message with user's name
+                const username = "Anshika"; 
+
+        //         // Create a new SpeechSynthesisUtterance instance
+               const utterance = new SpeechSynthesisUtterance(`Welcome ${username}`);
+               utterance.pitch = 1; 
+                utterance.rate = 1; 
+
+                // Speak the message
+                 window.speechSynthesis.speak(utterance);
+
+                alert("Admin login successful!");
+               window.location.href = "teacher.html";
+             } else {
+                alert("Incorrect admin email or password. Please try again.");
+            }
+         }
+    </script>
+</body>
+</html>

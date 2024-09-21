@@ -77,7 +77,8 @@ function login() {
         localStorage.setItem('currentUserEmail', email); // Store current user email in localStorage
         localStorage.setItem('isLoggedIn', 'true'); // Set login status to true
         alert('Login successful!');
-        window.location.href = "Quiz-loading.html";
+        speakWelcomeMessage(foundUser.name); // Call the function to speak the welcome message
+        window.location.href = "quiz-loading.html";
     } else {
         alert('Invalid email or password');
     }
@@ -85,6 +86,12 @@ function login() {
     return false; // Prevent form submission
 }
 
+// Function to speak a welcome message
+function speakWelcomeMessage(userName) {
+    const message = `Welcome, ${userName}`;
+    const utterance = new SpeechSynthesisUtterance(message);
+    speechSynthesis.speak(utterance);
+}
 // Function to get the current user's email from localStorage
 function getUserKey() {
     return localStorage.getItem('currentUserEmail');
@@ -113,8 +120,6 @@ window.onload = displayName();
 
 
 //  // ------QuizPage.html------//
-
-
 
 const questions = [
     {
@@ -199,17 +204,19 @@ const questions = [
     }
 ];
 
+
+
 const totalQuestions = questions.length;
 let currentQuestionIndex = 0;
 let score = 0;
 
 
+// Store the quiz questions in localStorage
 function storeQuestionsInLocalStorage() {
-
     localStorage.setItem('quizQuestions', JSON.stringify(questions));
 }
 
-// Function to get the current user's name from localStorage
+// Retrieve the current user's name from localStorage
 function getUserName() {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const userEmail = localStorage.getItem('currentUserEmail');
@@ -217,61 +224,90 @@ function getUserName() {
     return user ? user.name : 'Guest';
 }
 
-// Function to calculate and store the user's score and details
-function calculateAndStoreScore() {
-    const userAnswers = JSON.parse(localStorage.getItem('userAnswers')) || [];
-    const userEmail = localStorage.getItem('currentUserEmail');
-    const userName = getUserName(); // Retrieve user name from local storage
-
-    if (!userEmail || !userName) {
-        console.error('User email or name is missing.');
-        return;
-    }
-
-    let score = 0; // Reset score to recalculate
-
-    userAnswers.forEach(answer => {
-        const correctAnswer = questions[answer.questionIndex].answer;
-        if (answer.selectedAnswer === correctAnswer) {
-            score += 10; // Increment score based on correct answers
-        }
-    });
-
-    // Retrieve existing scores from local storage
-    const scores = JSON.parse(localStorage.getItem('scores')) || [];
-    const existingUserIndex = scores.findIndex(record => record.email === userEmail);
+// Update or add the user's score to localStorage
+function updateOrAddUserScore(userEmail, score, userName, answeredQuestions) {
+    let scores = JSON.parse(localStorage.getItem('scores')) || [];
+    const existingUserIndex = scores.findIndex(user => user.email === userEmail);
 
     if (existingUserIndex !== -1) {
-        // Update score and name if user already exists
         scores[existingUserIndex].score = score;
         scores[existingUserIndex].name = userName;
+        scores[existingUserIndex].answeredQuestions = answeredQuestions || [];
     } else {
-        // Add new user score
-        scores.push({ email: userEmail, score, name: userName });
+        scores.push({ email: userEmail, score, name: userName, answeredQuestions: answeredQuestions });
     }
-
-    localStorage.setItem('scores', JSON.stringify(scores)); // Save updated scores list
-    localStorage.setItem('quizScore', score); // Store the updated score in local storage
+    localStorage.setItem('scores', JSON.stringify(scores)); // Save updated scores
 }
 
-                       // Function to store user answers in local storage
+// Store the user's selected answer for each question
 function storeUserAnswer(questionIndex, selectedAnswer) {
     let userAnswers = JSON.parse(localStorage.getItem('userAnswers')) || [];
+    const existingAnswerIndex = userAnswers.findIndex(answer => answer.questionIndex === questionIndex);
 
-    let currentAnswer = userAnswers.find(answer => answer.questionIndex === questionIndex);
-
-    if (currentAnswer) {
-        currentAnswer.selectedAnswer = selectedAnswer; 
+    if (existingAnswerIndex !== -1) {
+        userAnswers[existingAnswerIndex].selectedAnswer = selectedAnswer;
     } else {
-        userAnswers.push({ questionIndex, selectedAnswer }); // Store the new answer
+        userAnswers.push({ questionIndex, selectedAnswer });
     }
 
     localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
-
-    calculateAndStoreScore(); // Calculate and store the score after each answer
 }
 
-                                 // Function to display the current question
+// Calculate the user's score based on their answers and store it
+function calculateAndStoreScore() {
+    try {
+        console.log('Starting score calculation...');
+
+        // Retrieve and parse user answers from localStorage
+        const userAnswers = JSON.parse(localStorage.getItem('userAnswers')) || [];
+        const userEmail = localStorage.getItem('currentUserEmail');
+        const userName = getUserName();
+
+        console.log('User Email:', userEmail);
+        console.log('User Name:', userName);
+        console.log('User Answers:', userAnswers);
+
+        if (!userEmail || !userName) {
+            console.error('User email or name is missing.');
+            return;
+        }
+
+        let score = 0;
+        const answeredQuestions = userAnswers.map(answer => {
+            if (typeof answer.questionIndex !== 'number' || answer.questionIndex < 0 || answer.questionIndex >= questions.length) {
+                console.warn(`Invalid question index: ${answer.questionIndex}`);
+                return null;
+            }
+
+            const questionData = questions[answer.questionIndex];
+            const isCorrect = answer.selectedAnswer === questionData.answer;
+
+            if (isCorrect) {
+                score += 10;
+            }
+
+            return {
+                question: questionData.question,
+                selectedAnswer: answer.selectedAnswer,
+                correctAnswer: questionData.answer,
+                isCorrect: isCorrect
+            };
+        }).filter(q => q !== null);
+
+        console.log('Answered Questions:', answeredQuestions);
+        console.log('Final Score:', score);
+
+        // Update or add the user score
+        updateOrAddUserScore(userEmail, score, userName, answeredQuestions);
+
+        localStorage.setItem('quizScore', score);
+        console.log('Score calculation and storage completed successfully.');
+    } catch (error) {
+        console.error('An error occurred while calculating and storing the score:', error);
+    }
+}
+
+// Display the current question
 function displayQuestion(index) {
     const questionContainer = document.getElementById('question-text');
     const optionsList = document.getElementById('options-list');
@@ -294,12 +330,13 @@ function displayQuestion(index) {
         const optionItem = document.createElement('li');
         optionItem.style.marginLeft = `45px`;
         optionItem.style.marginTop = `20px`;
-        optionItem.style.display = 'flex'; 
-        optionItem.style.alignItems = 'center'; 
-        optionItem.style.cursor = 'pointer'; 
-        optionItem.style.height = '50px';  
-        optionItem.style.width = '150px'; 
+        optionItem.style.display = 'flex';
+        optionItem.style.alignItems = 'center';
+        optionItem.style.cursor = 'pointer';
+        optionItem.style.height = '50px';
+        optionItem.style.width = '350px';
         optionItem.style.borderRadius = '10px';
+
         optionItem.innerHTML = `
             <input type="radio" id="option${option}" name="answer" value="${option}">
             <label for="option${option}">${questionData[option]}</label>
@@ -307,85 +344,66 @@ function displayQuestion(index) {
 
         optionItem.querySelector('input').addEventListener('change', function () {
             storeUserAnswer(index, this.value);
-            
-            document.querySelectorAll('#options-list li').forEach(li => {
-                li.style.backgroundColor = ''; 
-            });
-
+            document.querySelectorAll('#options-list li').forEach(li => li.style.backgroundColor = '');
             optionItem.style.backgroundColor = 'gray';
         });
 
-        optionItem.addEventListener('mouseover', function() {
-            if (this.style.backgroundColor !== 'gray') {
-                this.style.backgroundColor = '#d3d3d3'; // Light gray for hover
-            }
-        });
-
-        optionItem.addEventListener('mouseout', function() {
-            if (this.style.backgroundColor !== 'gray') {
-                this.style.backgroundColor = ''; // Reset background color on mouse out
-            }
-        });
+        // optionItem.addEventListener('mouseover', function() {
+        //     if (this.style.backgroundColor !== 'gray') {
+        //         this.style.backgroundColor = '#d3d3d3'; // Light gray for hover
+        //     }
+        // });
 
         optionsList.appendChild(optionItem);
     });
-
-    updateTimeline(); 
 }
 
-                           // Function to handle form submission and quiz progress
+// Submit the answer and move to the next question
 function submitAndContinue() {
     const selectedAnswer = document.querySelector('input[name="answer"]:checked');
-    const userEmail = localStorage.getItem('currentUserEmail') || 'Guest'; // Retrieve user email from local storage
 
     if (!selectedAnswer) {
         alert('Please select an answer before continuing.');
         return;
     }
 
-
-
-
-    const currentQuestion = questions[currentQuestionIndex];
     storeUserAnswer(currentQuestionIndex, selectedAnswer.value);
-    
     currentQuestionIndex++;
-
-
-
-
 
     if (currentQuestionIndex < totalQuestions) {
         displayQuestion(currentQuestionIndex);
+        updateTimeline();
+        if (currentQuestionIndex === totalQuestions - 1) {
+            document.getElementById('submit-btn').textContent = 'Submit';
+        }
     } else {
-
-
-        calculateAndStoreScore(); 
+        calculateAndStoreScore();
         alert('Quiz completed! Your score has been saved.');
-        window.location.href = "Rank Page.html"; 
+        window.location.href = "Rank Page.html";
     }
 }
 
+// Store the current question index
+function storeCurrentQuestionIndex() {
+    localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
+}
 
-function updateTimeline() {
-    const timeline = document.getElementById('timeline');
-
-
-    if (timeline) {
-         
-        timeline.innerHTML = '';
-        questions.forEach((_, index) => {
-            const step = document.createElement('div');
-            step.classList.add('timeline-step');
-            if (index <= currentQuestionIndex) {
-                step.classList.add('completed');
-            }
-            timeline.appendChild(step);
-        });
+// Load the current question index from localStorage
+function loadCurrentQuestionIndex() {
+    const storedIndex = localStorage.getItem('currentQuestionIndex');
+    if (storedIndex !== null) {
+        currentQuestionIndex = parseInt(storedIndex, 10);
     }
 }
 
-// Function to handle the next button click
+// Initialize the quiz
+document.addEventListener('DOMContentLoaded', () => {
+    loadCurrentQuestionIndex();
+    displayQuestion(currentQuestionIndex);
+    updateTimeline();
+});
+
+// Function to move to the next question
 function nextQuestion() {
     const selectedAnswer = document.querySelector('input[name="answer"]:checked');
     if (!selectedAnswer) {
@@ -394,52 +412,52 @@ function nextQuestion() {
     }
 
     storeUserAnswer(currentQuestionIndex, selectedAnswer.value);
-
     currentQuestionIndex++;
+    storeCurrentQuestionIndex();
+
     if (currentQuestionIndex < totalQuestions) {
         displayQuestion(currentQuestionIndex);
+        updateTimeline();
     } else {
         calculateAndStoreScore();
-        
         alert('Quiz completed! Your score has been saved.');
-        window.location.href = "rank.html"; 
+        window.location.href = "Rank Page.html";
     }
 }
 
-// Function to handle the previous button click
+// Function to move to the previous question
 function previousQuestion() {
     if (currentQuestionIndex > 0) {
         currentQuestionIndex--;
+        storeCurrentQuestionIndex();
         displayQuestion(currentQuestionIndex);
+        updateTimeline();
     }
-}
 
-// Initialize the quiz page
-document.addEventListener('DOMContentLoaded', () => {
-    storeQuestionsInLocalStorage(); 
-    displayQuestion(currentQuestionIndex);
-    setupLogout(); 
-});
+    document.getElementById('next-btn').disabled = false;
 
- const nextQueston = document.getElementById('next-btn')
- if(nextQueston){
-    next-btn.addEventListener('click', nextQuestion);
- }
-const previous = document.getElementById('previous-btn')
-if(previous){
-    previous-btn .addEventListener('click', previousQuestion);
-}
-
-
-
-function setupLogout() {
-    const userImg = document.getElementById('userimg');
-    if (userImg) {
-        userImg.addEventListener('click', handleLogout);
+    if (currentQuestionIndex === 0) {
+        document.getElementById('Previous-btn').disabled = true;
     }
 }
 
 
+function updateTimeline() {
+
+    const progressBar = document.getElementById('Progressbar');
+    if (progressBar) {
+        const progressPercentage = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+        progressBar.style.width = `${progressPercentage}%`;
+    } else {
+        console.error('Progress bar element not found.');
+    }
+}
+
+
+
+
+
+// Handle logout functionality
 function handleLogout() {
     const confirmation = confirm('Are you sure you want to log out?');
     if (confirmation) {
@@ -448,9 +466,236 @@ function handleLogout() {
         localStorage.removeItem('finalScore');
         localStorage.removeItem('userGmail');
         localStorage.removeItem('userName');
-        window.location.href = 'login.html'; 
+        window.location.href = 'index.html';  // Redirect to login page
     }
 }
+
+
+// Set up image upload functionality
+function setupImageUpload() {
+    const userImgDiv = document.getElementById('userimg');
+    const imageUploadInput = document.getElementById('imageUpload');
+
+    if (!userImgDiv || !imageUploadInput) {
+        console.error('Element not found: userimg or imageUpload');
+        return;
+    }
+
+    userImgDiv.addEventListener('click', function () {
+        imageUploadInput.click();
+    });
+
+    imageUploadInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imgData = e.target.result;
+                localStorage.setItem('userImage', imgData); // Save image data to localStorage
+                userImgDiv.style.backgroundImage = `url(${imgData})`; // Update the div with the image
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+// Load and display user image on page load
+function loadUserImage() {
+    const userImgDiv = document.getElementById('userimg');
+    const storedImage = localStorage.getItem('userImage');
+
+    if (storedImage && userImgDiv) {
+        userImgDiv.style.backgroundImage = `url(${storedImage})`;
+    }
+}
+
+// Initialize the page
+document.addEventListener('DOMContentLoaded', () => {
+    storeQuestionsInLocalStorage();
+    loadUserImage();
+    setupImageUpload();
+});
+
+function previousQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        storeCurrentQuestionIndex(); // Store updated index
+        displayQuestion(currentQuestionIndex);
+        updateTimeline(); // Update progress bar
+    }
+
+    // Enable next button
+    document.getElementById('next-btn').disabled = false;
+
+    // Disable previous button if at the first question
+    if (currentQuestionIndex === 0) {
+        document.getElementById('Previous-btn').disabled = true;
+    }
+}
+
+// function updateTimeline() {
+//     const progressBar = document.getElementById('time-line-overlap');
+//     console.log('Updating progress bar...'); // Debugging line
+//     console.log('Current Question Index:', currentQuestionIndex); // Debugging line
+
+//     if (!progressBar) {
+//         console.error('Progress bar element not found.');
+//         return;
+//     }
+
+//     if (typeof currentQuestionIndex === 'undefined' || currentQuestionIndex < 0) {
+//         console.error('Invalid question index.');
+//         return;
+//     }
+
+//     const totalQuestions = questions.length;
+// const progressPercentage = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+
+//     console.log(`Progress Percentage: ${progressPercentage}`); // Debugging line
+
+//     progressBar.style.width = `${progressPercentage}%`;
+// }
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     console.log('DOM fully loaded and parsed'); // Check if this logs
+//     storeQuestionsInLocalStorage();
+//     displayQuestion(currentQuestionIndex);
+//     updateTimeline();
+
+
+//     // Add event listeners for buttons after the DOM is loaded
+//     const nextQueston = document.getElementById('next-btn');
+//     if (nextQueston) {
+//         nextQueston.addEventListener('click', nextQuestion);
+//     }
+
+//     const previous = document.getElementById('Previous-btn');
+//     if (previous) {
+//         previous.addEventListener('click', previousQuestion);
+//     }
+// });
+
+// function updateButtonState() {
+//     document.getElementById('Previous-btn').disabled = (currentQuestionIndex === 0);
+//     document.getElementById('next-btn').disabled = (currentQuestionIndex === totalQuestions - 1);
+// }
+
+
+// // Function to handle logout with confirmation
+// function handleLogout()
+//  {
+//     console.log('handleLogout function called'); // Debugging line
+//     const confirmation = confirm('Are you sure you want to log out?');
+//     if (confirmation) 
+//         {
+//         // Clear all relevant localStorage items
+//         localStorage.removeItem('userAnswers');
+//         localStorage.removeItem('quizScore');
+
+//         localStorage.removeItem('finalScore');
+
+//         localStorage.removeItem('userGmail');
+//         localStorage.removeItem('userName');
+
+//         window.location.href = 'login.html'; 
+//     }
+// }
+// // Function to setup image upload functionality
+// function setupImageUpload() 
+// {
+//     const userImgDiv = document.getElementById('userimg');
+
+
+//     const imageUploadInput = document.getElementById('imageUpload');
+
+//     if (!userImgDiv || !imageUploadInput) {
+
+//         console.error('Element not found: userimg or imageUpload');
+
+//         return;
+//     }
+
+//     // Handle click on user image container to trigger file input
+//     userImgDiv.addEventListener('click', function() {
+
+//         imageUploadInput.click(); 
+//     });
+
+//     // Handle image upload
+//     imageUploadInput.addEventListener('change', function(event) {
+//         const file = event.target.files[0];
+//         if (file) {
+
+//             const reader = new FileReader();
+//             reader.onload = function(e)
+//              {
+//                 const imgData = e.target.result; // Image data URL
+
+//                 localStorage.setItem('userImage', imgData);
+
+//                 // Display the image
+//                 displayImage(imgData);
+//             };
+//             reader.readAsDataURL(file);
+//         }
+//     });
+
+//     // Function to display the image
+//     function displayImage(imgData)
+//      {
+//         const imgElement = document.createElement('img');
+//         imgElement.src = imgData;
+//         imgElement.alt = 'User Image';
+
+//         imgElement.style.width = '60px'
+//         ; 
+//         imgElement.style.height = '60px';
+
+//         imgElement.style.borderRadius = '50%'; 
+
+//         // Clear previous content and append new image
+//         userImgDiv.innerHTML = '';
+//         userImgDiv.appendChild(imgElement);
+
+
+//         imgElement.style.position = 'relative';
+//         imgElement.style.top = '-25px'; 
+//         imgElement.style.marginLeft = '-2px'; 
+//     }
+
+//     // Load image from local storage on page load
+//     const savedImage = localStorage.getItem('userImage');
+//     if (savedImage) {
+//         displayImage(savedImage);
+//     }
+
+//     // Prevent the context menu from appearing on right-click
+//     userImgDiv.addEventListener('contextmenu', function(event) {
+//         event.preventDefault(); // Prevent the default context menu
+//     });
+// }
+
+
+// // Ensure setupImageUpload is called when the page loads
+// document.addEventListener('DOMContentLoaded', setupImageUpload);
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const userEmail = localStorage.getItem('currentUserEmail');
+//     if (!userEmail) {
+//         alert('Please log in to start the quiz.');
+//         window.location.href = "login.html"; // Redirect to login page
+//         return;
+//     }
+
+//     storeQuestionsInLocalStorage();
+//     displayQuestion(currentQuestionIndex);
+//     updateTimeline();
+
+// });
+
+
+
 
 
 
@@ -462,9 +707,10 @@ function handleLogout() {
 // Function to display user signup information on the page
 function displayUserInfo() {
     const userInfoDiv = document.getElementById('Information');
-    const currentUserEmail = localStorage.getItem('currentUserEmail'); 
 
-    if (!userInfoDiv || !currentUserEmail) return; // Return if the div or email is not available
+    const currentUserEmail = localStorage.getItem('currentUserEmail');
+
+    if (!userInfoDiv || !currentUserEmail) return;
 
     const users = JSON.parse(localStorage.getItem('users')) || []; // Retrieve all users
     const currentUser = users.find(user => user.email === currentUserEmail); // Find the current user
@@ -474,6 +720,7 @@ function displayUserInfo() {
         userInfoDiv.innerHTML = `
             <h3>User Information</h3>
             <p><strong>Name:</strong> ${currentUser.name}</p>
+
             <p><strong>Email:</strong> ${currentUser.email}</p>
         `;
     } else {
@@ -484,9 +731,9 @@ function displayUserInfo() {
 }
 
 
-window.onload = function() {
-    displayName(); // Existing function to display name
-    displayUserInfo(); // New function to display user information
+window.onload = function () {
+    displayName();
+    displayUserInfo();
 };
 
 

@@ -8,7 +8,7 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -130,11 +130,28 @@ body, html {
     width: auto;
     text-align: center;
 }
+.checkbox-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px; /* Space between checkbox and text */
+    margin: 0 auto;
+    
+}
+
+.checkbox-footer input[type="checkbox"] {
+    width: 15px; 
+    height: 15px; 
+    transform: scale(1.5);
+    margin-right: 5px; 
+}
 
 .login-Singup a {
     text-decoration: none;
     color: #4285F4;
 }
+
+
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -214,14 +231,27 @@ body, html {
 .signup-content span {
     color: rgb(103, 100, 100);
     text-align: left; /* Ensure text is aligned to the left */
-    margin-bottom: 30px; /* Add spacing between text and inputs */
+    margin-bottom: 10px; /* Add spacing between text and inputs */
     width: 100%;
 }
 
 .input {
     width: 100%;
-    max-width: 350px; /* Set max-width for inputs */
-    margin-bottom: 10px; /* Add spacing between inputs */
+    max-width: 450px; /* Set max-width for inputs */
+    margin-bottom: 10px; 
+   
+}
+input[type="email"], input[type="password"], .login-btn button {
+   width: 450px;
+    padding: 10px; 
+    font-size: 16px; 
+    border-radius: 10px; 
+    height: 55px; /* Adjust height */
+    box-sizing: border-box; /* Ensures padding doesn't increase element size */
+}
+
+.password-container i {
+    font-size: 20px; /* Adjust icon size */
 }
 
 .input label p {
@@ -260,7 +290,7 @@ body, html {
 .btn-1 {
     background-color: #F3BD00;
     color: rgb(4, 4, 4);
-    border-radius: 20px;
+    border-radius: 30px;
 }
 
 .btn-2 {
@@ -269,7 +299,7 @@ body, html {
     justify-content: center;
     border: 1px solid #DEDEDE;
     box-shadow: 0px 8px 16px 0px #1C1C1E1A;
-    background-color: #fffefe;
+    background-color: #ffffff;
     color: #000;
     border-radius: 8px;
     height: 50px;
@@ -370,7 +400,7 @@ body, html {
     padding: 0;
     height: 100%;
     width: 100%;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
 }
@@ -404,11 +434,11 @@ body, html {
     padding: 0;
 }
 
-.quiz-loading-body ul li {
+/* .quiz-loading-body ul li {
     font-size: 1rem;
     color: #333;
     margin-bottom: 5px;
-}
+} */
 
 .quiz-loading-body ul li i {
     margin-right: 5px;
@@ -455,6 +485,24 @@ body, html {
     border: none;
 }
 
+/* Basic styling for the upload-container to ensure it's placed correctly */
+#upload-container {
+    position: relative;
+    margin-top: 10px; /* Adjust as needed */
+}
+
+/* Styling for user image to ensure correct positioning */
+#userimg {
+    position: relative;
+    margin-top: 0; /* Reset margin if needed */
+    
+}
+
+
+#imageUpload {
+    display: none; /* Hide input */
+}
+
 
 /* ----- QuizPage ------ */
 
@@ -470,7 +518,7 @@ body, html {
     padding: 0;
     height: 100%;
     width: 100%;
-    background-color: #F5F5F5;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
 }
@@ -480,26 +528,30 @@ body, html {
     margin-top: 25px;
     margin-left: 60px;
 }
-
-.QuizPage #userimg {
+#userimg {
     background-color: #8E8E93;
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     border-radius: 30px;
-    text-align: right;
-    justify-content: end;
-    float: right; /* Aligns the div to the left side */
+    float: right; /* Aligns the div to the right side */
     margin-right: 60px;
     margin-top: 20px;
+    cursor: pointer; 
+    background-size: cover; /* Ensures the uploaded image covers the div */
+    background-position: center; /* Centers the uploaded image within the div */
+    background-repeat: no-repeat; /* Ensures the image doesn't repeat */
 }
 
+#imageUpload {
+    display: none; /* Hides the file input element */
+}
 
 .Navbar hr {
     border: 2px solid rgb(204, 195, 195);
     margin-top: 20px;
 }
 
-.Time-line {
+#Progressbar-background {
     height: 12px;
     width: 95%;
     background-color: #C7C7CC;
@@ -507,19 +559,18 @@ body, html {
     border-radius: 5px;
 }
 
-.time-line-overlap {
+#Progressbar {
     height: 12px;
-    width: 9.5%;
+    width: 0%; /* Start with no progress */
     background-color: #F3BD00;
-    margin-left: 2.5%;
-    margin-top: -13px;
     border-radius: 5px;
-   transition: width 0.3s ease-in-out; /* Smooth transition */
-    }
+    transition: width 0.3s ease-in-out;
+}
+
 
 
 .Count-of-Number h1 {
-    /* font-size: 30px; */
+    font-size: 30px;
     margin-left: 80px;
     font-weight: 700;
 }
@@ -545,7 +596,7 @@ body, html {
 
 .answer-btn .btn {
     display: block;
-    width: 200px;
+    /* width: 200px; */
     padding: 10px;
     color: rgb(0, 0, 0);
     border: none;
@@ -563,7 +614,7 @@ body, html {
 
 .options-list li label:hover {
     background-color: #F3BD00;/* Change background color on hover */
-    width: 100px;
+    width: 350px;
     border-radius: 10px;
     color: #333; /* Change text color on hover */
 }
@@ -601,7 +652,7 @@ input[type="radio"]:active {
     text-decoration: none;
     margin-left: 40px;
     margin-top: 50px;
-    font-size: 22px; 
+    font-size: 25px; 
     display: inline-flex;
     align-items: center; 
     color: #8E8E93;
@@ -612,10 +663,11 @@ input[type="radio"]:active {
 .submit-btn {
     text-decoration: none;
     margin-left: auto; /* Aligns to the right */
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 700;
     display: inline-flex;
     align-items: center;
+    margin-right: 50px;
 }
 
 .submit-btn i {
@@ -634,6 +686,7 @@ input[type="radio"]:active {
     width: 100%;
     display: flex;
     flex-direction: column;
+    background-color: #ffffff;
 }
 
 .Rank-page .Navbar img {
@@ -644,6 +697,7 @@ input[type="radio"]:active {
 
 .Navbar hr {
     border: 2px solid rgb(204, 195, 195);
+    margin-top: 25px;
 }
 
 
@@ -691,13 +745,13 @@ input[type="radio"]:active {
 
 /* Container for Rank elements in Horizontal Layout */
 .Rank-Position {
-    display: flex; /* Use Flexbox for horizontal layout */
+    display: flex; 
     gap: 20px; 
     width: 40%; 
     padding: 20px;
-    justify-content: center; /* Center all rank elements horizontally */
-    align-items: flex-start; /* Align items to the top */
-    margin: 150px auto; /* Center the container horizontally */
+    justify-content: center; 
+    align-items: flex-start;
+    margin: 150px auto; 
     
 }
 
@@ -717,14 +771,14 @@ input[type="radio"]:active {
 /* Individual Background Colors for Each Rank */
 .Rank-1st {
     background-color: var(--Brand-Yellow, #F3BD00); 
-    order: 2; /* Set order to 2 to position Rank 1 in the center */
+    order: 2; 
     height: 300px;
     
 }
 
 .Rank-2st {
     background-color: #F4CE4A; 
-    order: 1; /* Set order to 1 to position Rank 2 on the left side */
+    order: 1; 
     margin-top: 70px;
     height: 300px;
 }
@@ -735,6 +789,8 @@ input[type="radio"]:active {
     margin-top: 140px;
     height: 300px;
 }
+
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -759,27 +815,27 @@ input[type="radio"]:active {
 
 /* Center circles above their respective rank elements */
 .Rank-1st-circle {
-    top: 300px; /* Position above Rank 1 */
+    top: 300px; 
     align-self: center; 
     border-color: var(--Brand-Yellow, #F3BD00); 
 }
 
 .Rank-2st-circle {
-    top: 380px; /* Position above Rank 2 */
-    align-self: center; /* Align with the start of the parent */
+    top: 380px;
+    align-self: center; 
     border-color: #F4CE4A; 
 }
 
 .Rank-3st-circle {
     top: 440px;
     align-self: center; 
-    border-color: #F7E296; /* Border color for Rank 3 */
+    border-color: #F7E296;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .Rank-Position {
-        flex-direction: column; /* Stack elements vertically on smaller screens */
+        flex-direction: column; 
         align-items: center; 
         gap: 10px;
     }
@@ -796,18 +852,17 @@ input[type="radio"]:active {
 }
 .Other-Rank {
     width: 100%;
-    height: 55vh; /* Use viewport height to ensure it adjusts based on screen size */
+    height: 55vh; 
     box-sizing: border-box;
     position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center items horizontally */
+    align-items: center; 
     justify-content: center; /* Center items vertically */
-    gap: 10px; /* Space between boxes */
+    gap: 10px; 
     padding: 20px;
-    margin-top: -400px; /* Adjust if necessary */
-}
+    margin-top: -400px; }
 
 
 /* Rank boxes */
@@ -815,7 +870,7 @@ input[type="radio"]:active {
     width: 90%; /* 90% of the parent's width */
     max-width: 1357px;
     height: 70px;
-    z-index: 2; /* Higher z-index to appear above .Other-Rank */
+    z-index: 2; 
     padding: 24px 32px;
     border-radius: 8px;
     background: #ffffff;

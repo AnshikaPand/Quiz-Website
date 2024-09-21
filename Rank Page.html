@@ -4,100 +4,316 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rank</title>
-    <!-- css -->
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/style.css">
-    <!-- Boxicon -->
+    <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <div class="Rank-page">
         <div class="Navbar">
-            <img src="https://techpaathshala.com/assets/\images\home\techpathshala_mobile_logo.svg" alt="techpaathshala">
-            <div id="userimg"></div>
+            <img src="https://techpaathshala.com/assets/images/home/techpathshala_mobile_logo.svg" alt="techpaathshala">
+           
+            <!-- <div id="upload-container">
+                <div id="userimg" style="margin-top: -40px;"></div>
+                <input type="file" id="imageUpload" onclick="handleLogout()" accept="image/*" style="display: none;">
+            </div> -->
+            
+            <div id="upload-container">
+                <div id="userimg" style="margin-top: -40px;" onclick="handleLogout()"></div>
+                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+            </div>
             <hr>
         </div> 
 
+        <!-- Example HTML element to display the test count -->
+        
+
         <div class="head">
-            <h1>Wow You Rank </h1>
+            <h1 id="user-rank">Wow You Rank</h1> <!-- ID added to dynamically update rank -->
             <span>Supporting Text</span>
         </div>
-  
+
         <div class="Rank-Position"> 
             <img class="crown" src="/img/fluent_crown-24-filled.png">
             <div class="Rank-1st">
-               
                 <div class="Rank-1st-filer"><h1 class="score1">Score</h1></div>
                 <div id="score-number1" style="margin-top: 100px;"></div>
                 <div class="Rank-1st-circle"></div>
             </div>
 
             <div class="Rank-2st">
-                <h2 id="score-heading2 "> #2 </h2>
+                <h2 id="score-heading2" style="margin-top: -100px;">#2</h2>
                 <div class="Rank-2st-filer"><h1 class="score2">Score</h1></div>
-                <div id="score-number2" style="margin-top: 20px;"></div>
+                <div id="score-number2" style="margin-top: 140px; z-index: 2;"></div>
                 <div class="Rank-2st-circle"></div>
             </div>
 
             <div class="Rank-3st">
-                <h2 id="score-heading3">#3</h2>
+                <h2 id="score-heading3" style="margin-top: -110px;">#3</h2>
                 <div class="Rank-3st-filer"><h1 class="score3">Score</h1></div>
-                <div id="score-number3"></div>
+                <div id="score-number3" style="margin-top: 110px; z-index: 2;"></div>
                 <div class="Rank-3st-circle"></div>  
             </div>
         </div>
 
-       <div class="All-Rank">
-        <img  class="Other-Rank" src="/img/Vector 15.png">
-        <div class="Other-Rank-Box">
-            <h2 class="left"id="name">#6 Name</h2> 
-            <h2 class="rigth" id="score-number6"></h2> 
-        </div>
+        <div class="All-Rank">
+            <img class="Other-Rank" src="/img/Vector 15.png">
+            <div class="Other-Rank-Box">
+                <h2 class="left" id="name6">#6</h2> 
+                <h2 class="right" id="score-number6"></h2> 
+            </div>
 
-        <div class="Other-Rank-Box2">
-            <h2 class="left" id="name">#5 Name</h2> 
-            <h2 class="rigth"  id="score-number5"></h2> 
-        </div>
+            <div class="Other-Rank-Box2">
+                <h2 class="left" id="name5">#5</h2> 
+                <h2 class="right" id="score-number5"></h2> 
+            </div>
 
-        <div class="Other-Rank-Box3">
-            <h2 class="left" id="name">#4 Name</h2> 
-            <h2 class="rigth" id="score-number4" ></h2> 
+            <div class="Other-Rank-Box3">
+                <h2 class="left" id="name4">#4</h2> 
+                <h2 class="right" id="score-number4"></h2> 
+            </div>
         </div>
-
     </div>
-    </div>
-    <script src="/js/main.js"></script>
-   
-     
-     <script>
-    // Retrieve scores from localStorage
+
+    <script src="/javascript/main.js"></script>
+    <script>
+    // Initialize scores from local storage
 let scores = JSON.parse(localStorage.getItem('scores')) || [];
 
-// Sort scores in descending order
-scores.sort((a, b) => b.score - a.score);
+// Sort scores in descending order by score value
+scores.sort((a, b) => b.score - a.score); 
+localStorage.setItem('scores', JSON.stringify(scores));
+
+// Function to display the rank and score of the currentUserEmail
+function displayUserRank() {
+    const RankPositionHeader = document.getElementById("user-rank");
+    const currentUserEmail = localStorage.getItem('currentUserEmail'); // Get currentUserEmail from local storage
+
+    if (!RankPositionHeader) {
+        console.error('Element with ID "user-rank" not found.');
+        return;
+    }
+
+    if (!currentUserEmail) {
+        RankPositionHeader.innerHTML = 'No current user email found.';
+        return;
+    }
+
+    // Find the user with the currentUserEmail in the scores array
+    const userIndex = scores.findIndex(user => user.email === currentUserEmail);
+
+    if (userIndex !== -1) {
+        const userRank = userIndex + 1; // Rank is the index + 1
+        const userScore = scores[userIndex].score;
+        
+        // Display rank and score
+        if (userRank === 1) {
+            RankPositionHeader.innerHTML = `Wow! You Rank 1st with Score ${userScore}`;
+        } else if (userRank === 2) {
+            RankPositionHeader.innerHTML = `Wow! You Rank 2nd with Score ${userScore}`;
+        } else if (userRank === 3) {
+            RankPositionHeader.innerHTML = `Wow! You Rank 3rd with Score ${userScore}`;
+        } else {
+             RankPositionHeader.innerHTML = `Wow You Rank ${userRank}th `;
+        }
+    } else {
+        RankPositionHeader.innerHTML = 'Your score is not available in the ranking list.';
+    }
+}
+// Function to display the current user's score in the element with ID 'score-number6'
+function displayCurrentUserScore() {
+    const scoreElement = document.getElementById("score-number6");
+    const currentUserEmail = localStorage.getItem('currentUserEmail'); // Get currentUserEmail from local storage
+
+    if (!scoreElement) {
+        console.error('Element with ID "score-number6" not found.');
+        return;
+    }
+
+    if (!currentUserEmail) {
+        scoreElement.innerHTML = 'No current user email found.';
+        return;
+    }
+
+    // Find the user with the currentUserEmail in the scores array
+    const user = scores.find(user => user.email === currentUserEmail);
+
+    if (user) {
+        // Display only the score of the current user
+        scoreElement.innerHTML = `${user.score}`;
+    } else {
+        scoreElement.innerHTML = 'Your score is not available.';
+    }
+}
+
+
+// Function to display the current user's score and rank in the element with ID 'score-number6'
+function displayCurrentUserScoreAndRank() {
+    const scoreElement = document.getElementById("score-number6");
+    const currentUserEmail = localStorage.getItem('currentUserEmail'); // Get currentUserEmail from local storage
+
+    if (!scoreElement) {
+        console.error('Element with ID "score-number6" not found.');
+        return;
+    }
+
+    if (!currentUserEmail) {
+        scoreElement.innerHTML = 'No current user email found.';
+        return;
+    }
+
+    // Find the user with the currentUserEmail in the scores array
+    const userIndex = scores.findIndex(user => user.email === currentUserEmail);
+
+    if (userIndex !== -1) {
+        // Display the score and rank of the current user
+        const userScore = scores[userIndex].score;
+        const userRank = userIndex + 1; // Rank is the position in the array + 1
+        // scoreElement.innerHTML = `Rank: ${userRank}, Score: ${userScore}`;
+        scoreElement.innerHTML = ` ${userScore}`;
+    } else {
+        scoreElement.innerHTML = 'Your score is not available.';
+    }
+}
+// Function to display the current user's name, rank, and score in the element with ID 'name6' when the rank is greater than 6
+function displayCurrentUserNameAndRankForGreaterThanSix() {
+    const nameElement = document.getElementById("name6");
+    const currentUserEmail = localStorage.getItem('currentUserEmail'); // Get currentUserEmail from local storage
+
+    if (!nameElement) {
+        console.error('Element with ID "name6" not found.');
+        return;
+    }
+
+    if (!currentUserEmail) {
+        nameElement.innerHTML = 'No current user email found.';
+        return;
+    }
+
+    // Find the user with the currentUserEmail in the scores array
+    const userIndex = scores.findIndex(user => user.email === currentUserEmail);
+
+    if (userIndex !== -1) {
+        const userRank = userIndex + 1; // Rank is the position in the array + 1
+        const userName = scores[userIndex].name || 'No Name';
+        const userScore = scores[userIndex].score || 0;
+
+        // Display the name, rank, and score only if the rank is greater than 6
+        if (userRank > 6) {
+            nameElement.innerHTML = `# ${userRank} ${userName} with: ${userScore}`;
+        } else {
+            nameElement.innerHTML = 'Your rank is 6 or less.';
+        }
+    } else {
+        nameElement.innerHTML = 'Your name is not available.';
+    }
+}
+
+
+// let scores = JSON.parse(localStorage.getItem('scores')) || [];
+function updateTestCount() {
+    const currentUserEmail = localStorage.getItem('currentUserEmail'); // Get currentUserEmail from local storage
+
+    if (!currentUserEmail) {
+        console.warn('No current user email found.');
+        return;
+    }
+
+    // Find the user with the currentUserEmail in the scores array
+    const userIndex = scores.findIndex(user => user.email === currentUserEmail);
+
+    if (userIndex !== -1) {
+        // Increment test count
+        scores[userIndex].testCount = (scores[userIndex].testCount || 0) + 1;
+        localStorage.setItem('scores', JSON.stringify(scores));
+        console.log(`Updated test count for ${currentUserEmail}: ${scores[userIndex].testCount}`);
+    } else {
+        console.warn('User not found in scores array.');
+    }
+}
+// Function to display and update the current user's test count in an element with ID 'test-count'
+// Function to display the current user's test count in an element with ID 'test-count'
+function displayCurrentUserTestCount() {
+    const testCountElement = document.getElementById("test-count");
+    const currentUserEmail = localStorage.getItem('currentUserEmail'); // Get currentUserEmail from local storage
+
+    if (!testCountElement) {
+        console.error('Element with ID "test-count" not found.');
+        return;
+    }
+
+    if (!currentUserEmail) {
+        testCountElement.innerHTML = 'No current user email found.';
+        return;
+    }
+
+    // Retrieve scores from localStorage
+    let scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+    // Find the user with the currentUserEmail in the scores array
+    let userIndex = scores.findIndex(user => user.email === currentUserEmail);
+
+    if (userIndex === -1) {
+        // User not found, create a new user entry
+        scores.push({
+            email: currentUserEmail,
+            testCount: 1
+        });
+        userIndex = scores.length - 1; 
+    } else {
+        
+        scores[userIndex].testCount = (scores[userIndex].testCount || 0) + 1;
+    }
+
+    // Save the updated scores array to localStorage
+    localStorage.setItem('scores', JSON.stringify(scores));
+
+    // Display the updated test count
+    const userTestCount = scores[userIndex].testCount;
+    testCountElement.innerHTML = `Test Count: ${userTestCount}`;
+
+    // Debugging
+    console.log(`User Email: ${currentUserEmail}`);
+    console.log(`User Index: ${userIndex}`);
+    console.log(`Updated Scores: ${JSON.stringify(scores)}`);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    displayCurrentUserTestCount();
+});
+
+
+// Initialize display on page load
+document.addEventListener('DOMContentLoaded', function() {
+    displayScores();
+    displayUserRank();
+    displayScoresName();
+    
+    // Call the functions separately
+    displayCurrentUserScoreAndRank();  // Update score and rank in 'score-number6'
+    // displayCurrentUserNameAndRankForGreaterThanSix();   // Display name and rank in 'name6' if rank > 6
+    // displayCurrentUserTestCount(); // Display test count in 'test-count'
+});
 
 // Function to display scores
 function displayScores() {
-    // Display top ranks
     document.getElementById('score-number1').innerText = scores[0] ? `${scores[0].score}` : 'Rank 1: No Data';
-document.getElementById('score-number2').innerText = scores[1] ? `${scores[1].score}` : 'Rank 2: No Data';
-document.getElementById('score-number3').innerText = scores[2] ? `${scores[2].score}` : 'Rank 3: No Data';
-
-    document.getElementById('score-number4').innerText = scores[3] ? `${scores[3].name} - ${scores[3].score}` : 'Rank 4: No Data';
-    document.getElementById('score-number5').innerText = scores[4] ? `${scores[4].name} - ${scores[4].score}` : 'Rank 5: No Data';
-    document.getElementById('score-number6').innerText = scores[5] ? `${scores[5].name} - ${scores[5].score}` : 'Rank 6: No Data';
-
-    // Ensure names are correctly assigned
-    document.getElementById('name4').innerText = scores[3] ? `${scores[3].name}` : 'Rank 4: No Data';
-    document.getElementById('name5').innerText = scores[4] ? `${scores[4].name}` : 'Rank 5: No Data';
-    document.getElementById('name6').innerText = scores[5] ? `${scores[5].name}` : 'Rank 6: No Data';
+    document.getElementById('score-number2').innerText = scores[1] ? `${scores[1].score}` : 'Rank 2: No Data';
+    document.getElementById('score-number3').innerText = scores[2] ? `${scores[2].score}` : 'Rank 3: No Data';
+    document.getElementById('score-number4').innerText = scores[3] ? `${scores[3].score}` : 'Rank 4: No Data';
+    document.getElementById('score-number5').innerText = scores[4] ? `${scores[4].score}` : 'Rank 5: No Data';
+    document.getElementById('score-number6').innerText = scores[5] ? `${scores[5].score}` : 'Rank 6: No Data';
 }
 
-// Initialize display on page load
-document.addEventListener('DOMContentLoaded', displayScores);
-</script>
+// Function to display names in the rank list
+function displayScoresName() {
+    document.getElementById('name4').innerText = scores.length > 3 ? `#4 ${scores[3].name || 'No Name'}` : '#4 No Data';
+    document.getElementById('name5').innerText = scores.length > 4 ? `#5 ${scores[4].name || 'No Name'}` : '#5 No Data';
+    document.getElementById('name6').innerText = scores.length > 5 ? `#6 ${scores[5].name || 'No Name'}` : '#6 No Data';
+}
 
 
-
-    
+    </script>
 </body>
 </html>

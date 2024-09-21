@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <link rel="stylesheet" href="/css/admin.css"> <!-- Optional: Add your styles here -->
+</head>
+<body>
+
+    <div class="user-details-container">
+        <h1>User Details</h1>
+
+        <!-- User Details Table -->
+        <table id="user-details-table">
+            <tr>
+                <th>Name</th>
+                <td id="user-name"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td id="user-email"></td>
+            </tr>
+            <tr>
+                <th>Score</th>
+                <td id="user-score"></td>
+            </tr>
+            <tr>
+                <th>Answered Questions</th>
+                <td id="answered-questions"></td>
+            </tr>
+            <tr>
+                <th>Test Count</th>
+                <td id="test-count"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="/javascript/main.js"></script>
+    <script>
+        // Function to get query parameters from the URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Function to display user details
+        function displayUserDetails() {
+            const email = getQueryParam('email'); // Get the email from the URL
+            if (!email) {
+                alert('No user selected!');
+                return;
+            }
+
+            // Retrieve user and scores from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+            // Find the user by email
+            const user = users.find(u => u.email === email);
+            const userScoreData = scores.find(s => s.email === email) || {};
+
+            if (user) {
+                document.getElementById('user-name').textContent = user.name;
+                document.getElementById('user-email').textContent = user.email;
+                document.getElementById('user-score').textContent = userScoreData.score || 'Not Attempted';
+
+                // Handle Answered Questions display
+                const answeredQuestionsElement = document.getElementById('answered-questions');
+                const answeredQuestions = userScoreData.answeredQuestions || [];
+
+                console.log('Answered Questions:', answeredQuestions); // Log for debugging
+
+                if (Array.isArray(answeredQuestions)) {
+                    // If it's an array, display as a list
+                    answeredQuestionsElement.innerHTML = answeredQuestions.length > 0
+                        ? '<ul>' + answeredQuestions.map((question, index) => `<li>${question}</li>`).join('') + '</ul>'
+                        : 'No answered questions';
+                } else if (typeof answeredQuestions === 'object') {
+                    // If it's an object, display as a formatted string
+                    answeredQuestionsElement.innerHTML = Object.entries(answeredQuestions).length > 0
+                        ? '<ul>' + Object.entries(answeredQuestions).map(([key, value]) => `<li>${key}: ${value}</li>`).join('') + '</ul>'
+                        : 'No answered questions';
+                } else {
+                    // If neither array nor object, display as plain text
+                    answeredQuestionsElement.textContent = answeredQuestions || 'No answered questions available';
+                }
+
+                document.getElementById('test-count').textContent = userScoreData.testCount || 'N/A';
+            } else {
+                alert('User not found!');
+            }
+        }
+
+        // Call the function when the page loads
+        window.onload = function() {
+            displayUserDetails();
+        };
+    </script>
+
+</body>
+</html>

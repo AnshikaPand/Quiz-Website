@@ -13,10 +13,15 @@
 <body>
     <div class="quiz-loading-page">
         <div class="navbar">
-            <img src="https://techpaathshala.com/assets/images/home/techpathshala_mobile_logo.svg"
-                alt="techpaathshala">
+            <img src="https://techpaathshala.com/assets/images/home/techpathshala_mobile_logo.svg" alt="techpaathshala">
 
             <p id="userNameDisplay"></p>
+            <div id="upload-container">
+                <div id="userimg" style="margin-top: -50px;"></div>
+                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+            </div>
+
+
 
             <hr>
         </div>
@@ -36,11 +41,11 @@
                 <div class="form-group">
                     <!-- Any form content goes here -->
                 </div>
-                <button id="startQuizBtn "  onclick = "startQuiz()">Start Quiz</button>
+                <button id="startQuizBtn " onclick="startQuiz()">Start Quiz</button>
             </div>
         </div>
     </div>
-    <script src="/js/main.js"></script>
+    <script src="/javascript/main.js"></script>
     <script>
         // startbtn();
     </script>

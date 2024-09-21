@@ -4,68 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Information</title>
-     <!-- CSS -->
-     <link rel="stylesheet" href="/css/admin.css">
-     <!-- Boxicon -->
-     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/admin.css">
+    <!-- Boxicon -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 
-    <div id="student-information">
-        <div id="Information">
-            <div class="sr-no">Sr.No</div>
-            <div class="name">Name</div>
-            <div class="email">Email id</div>
-            <div class="score">Score</div>
-            
-        </div>
-    </div>
-    <script src="js/main.js"></script>
-
-    <script>
-   // Function to display all user signup information and scores on the page
-function displayAllUsersInfo() {
-    const userInfoDiv = document.getElementById('Information');
-
-    if (!userInfoDiv) {
-        console.warn('User info div is not available');
-        return;
-    }
-
-    const users = JSON.parse(localStorage.getItem('users')) || []; // Retrieve all users
-    const scores = JSON.parse(localStorage.getItem('scores')) || []; // Retrieve all scores
-
-    if (users.length === 0) {
-        userInfoDiv.innerHTML = `<p>No user information available.</p>`;
-        return;
-    }
-
-    userInfoDiv.innerHTML = '<h3>Student Information</h3>'; // Header for the section
-
-    users.forEach((user, index) => {
-        // Find the user's score
-        const userScore = scores.find(score => score.email === user.email)?.score || 'Not Attempted';
-
-        const userRowHtml = `
-            <div class="user-row">
-                <div><span class="label">Sr.No:</span> ${index + 1}</div>
-                <div><span class="label">Name:</span> ${user.name}</div>
-                <div><span class="label">Email id:</span> ${user.email}</div>
-                <div><span class="label">Score:</span> ${userScore}</div>
+    <div class="Teacher-Page">
+    <header>
+        <nav>
+            <div id="head">
+                <i class='bx bx-menu'></i> <!-- Icon for toggling the sidebar -->
+                <img src="/img/techpathsala-logo.jpeg">
+                <div id="admin-logout-btn"></div>
+                <p id="welcome-admin">Welcome Anshika</p>
             </div>
-        `;
+        </nav>
+    </header>
 
-        userInfoDiv.innerHTML += userRowHtml; // Append each user row to the info div
-    });
-}
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li class="menu-title">Dashboard</li>
+            <li><a href="teacher.html"><i class='bx bx-home' ></i>Home</a></li>
+            <li><a href="Studentinformation.html"><i class='bx bxs-user-circle' ></i>User</a></li>
+            <li><a href="EditeQuestion.html"><i class='bx bx-question-mark' ></i>Quizzes</a></li>
+        </ul>
+    </div>
 
-// Ensure displayAllUsersInfo is called when the page loads
-window.onload = function() {
-    displayName(); // Existing function to display name
-    displayAllUsersInfo(); // New function to display all user information and scores
-};
+    <!-- Student Information Table -->
+    <div id="student-information">
+        <table id="Information">
+            <thead>
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Name</th>
+                    <th>Email id</th>
+                    <th>Score</th>
+                    <th>View More</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 
+    <script src="/javascript/main.js"></script>
+    <script>
+        // Toggle sidebar visibility when menu icon is clicked
+        document.querySelector('.bx-menu').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        });
 
+        function displayAllUsersInfo() {
+            const tbody = document.querySelector('#Information tbody');
+
+            const users = JSON.parse(localStorage.getItem('users')) || []; // Retrieve all users
+            const scores = JSON.parse(localStorage.getItem('scores')) || []; // Retrieve all scores
+
+            if (users.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5">No user information available.</td></tr>`;
+                return;
+            }
+
+            // Iterate over users and create table rows
+            users.forEach((user, index) => {
+                const userScore = scores.find(score => score.email === user.email)?.score || 'Not Attempted';
+
+                // Create a row for each user
+                const userRowHtml = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>${userScore}</td>
+                        <td><a href="viewmore.html?email=${encodeURIComponent(user.email)}" class="view-more-btn">View More</a></td>
+                    </tr>
+                `;
+
+                tbody.innerHTML += userRowHtml; // Append each user row to the table body
+            });
+        }
+
+        // Ensure displayAllUsersInfo is called when the page loads
+        window.onload = function() {
+            displayAllUsersInfo(); // Function to display all user information and scores
+        };
     </script>
 </body>
 </html>

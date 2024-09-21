@@ -16,8 +16,8 @@
             <h1>Signup</h1>
             <span>Signup to Join</span>
             <div class="input">
-                <label ><p>Full Name</p></label>
-                <input type="text" id="name" name="name" placeholder="Full Name" required>
+                <label ><p style="margin-top: 20px;" >Full Name</p></label>
+                <input type="text" id="name" name="name" placeholder="Full Name" required style="height: 50px;">
 
                 <label ><p>Email ID</p></label>
                 <input type="email" id="email" name="email" placeholder="xyz12@gmail.com" required>
@@ -27,25 +27,25 @@
             </div>
 
             <div class="signup-btn">
-                <button class="btn-1" onclick="register()">Sign Up</button>
-                <button class="btn-2">
+                <button class="btn-1" onclick="register()" style="width: 450px;">Sign Up</button>
+                <button class="btn-2" style="width: 450px;">
                   <img src="https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png" alt="Google Logo">
                   Sign up with Google
                 </button>
             </div>
-            <div class="checkbox-footer">
+            <div class="checkbox-footer" style="margin-left: 100px;">
                 <input type="checkbox" id="coding" name="interest" value="coding" />
-                <p >I accept <a href="#">Terms & Conditions</a></p>
+                <p>I accept <a href="#">Terms & Conditions</a></p>
             </div>
             
             
             <div class="login-Singup">
-                <span>Don't have an account? <a href="login.html">log in ?</a></span>
+                <span >Don't have an account? <a href="login.html">log in ?</a></span>
             </div>
             
         </div>
     </Section>
-    <script src="/js/main.js"></script>
+    <script src="/javascript/main.js"></script>
     <!-- <script>document.getElementById('signup-form').addEventListener('submit', function(event) {
         event.preventDefault();
         handleSignup();

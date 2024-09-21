@@ -3,51 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adim Page</title>
-    <!-- css -->
+    <title>Admin Page</title>
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/admin.css">
     <!-- Boxicon -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Typed.js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 </head>
 <body>
-   <div class="Teacher-Page">
-    <header>
-        <nav>
-            <div id="head">
-                <a href="home.html"><i class='bx bx-arrow-back'></i></a>
-            </div>
-        </nav>
+  
+    <div class="Teacher-Page">
+        <header>
+            <nav>
+                <div id="head">
+                    <i class='bx bx-menu'></i> <!-- Icon for toggling the sidebar -->
+                    <img src="/img/techpathsala-logo.jpeg">
+                    <div id="admin-logout-btn"></div>
+                    <p id="welcome-admin">Welcome Anshika</p>
+                </div>
+                
+            </nav>
+        </header>
         <hr>
-    </header>
-
-    <section>
-        <div class="teacher-container">
-            <div class="quiz-score">
-                <a href="Rank Page.html">
-                    <img src="https://static.vecteezy.com/system/resources/previews/025/637/850/non_2x/scoring-icon-design-free-vector.jpg" alt="Quiz Score">
-                    <span>Quiz Score</span>
-                </a>
-            </div>
-            <div class="questions">
-                <a href="EditeQuestion.html">
-                    <img src="https://cdn0.iconfinder.com/data/icons/education-70/512/Examtest-512.png" alt="Questions">
-                    <span>Questions</span>
-                </a>
-            </div>  
-            <div class="student-info">
-                <a href="Studentinformation.html">
-                    <img src="https://cdn4.iconfinder.com/data/icons/professions-1-2/151/8-512.png" alt="Student Information">
-                    <span>Student Information</span>
-                </a>
-            </div>
-            <div class="Course">
-                <a href="#">
-                    <img src="https://cdn-icons-png.flaticon.com/512/7856/7856238.png" alt="Course">
-                    <span>Course</span>
-                </a>
+    
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <ul>
+                <li class="menu-title">Dashboard</li>
+                <li><a href="teacher.html"><i class='bx bx-home'></i>Home</a></li>
+                <li><a href="Studentinformation.html"><i class='bx bxs-user-circle'></i>User</a></li>
+                <li><a href="EditeQuestion.html"><i class='bx bx-question-mark'></i>Quizzes</a></li>
+            </ul>
+        </div>
+    
+       <!-- Main content -->
+<div class="content">
+    <!-- User Count Box -->
+    <div class="user-count-container">
+        <!-- User Count Box -->
+        <div class="user-count-box">
+            <i class="fa-solid fa-user-graduate" style="color: #74C0FC;"></i>
+            <div class="user-count-text">
+                <h2>Total Student</h2>
+                <p id="user-count">Loading...</p>
             </div>
         </div>
-    </section>
-   </div> 
-</body>
+        
+        <!-- Teacher Count Box -->
+        <div class="user-count-box">
+            <i class="fa-solid fa-chalkboard-user" style="color: #402b7c;"></i>
+            <div class="user-count-text">
+                <h2>Total Teacher</h2>
+                <p id="user-count">1</p>
+            </div>
+        </div>
+        
+        <!-- Subject Count Box -->
+        <div class="user-count-box">
+            <i class="fa-solid fa-book" style="color: #63E6BE;"></i>
+            <div class="user-count-text">
+                <h2>Total Course</h2>
+                <p id="user-count">1</p>
+            </div>
+        </div>
+        
+        <!-- Question Count Box -->
+        <!-- <div class="user-count-box">
+            <i class="fa-solid fa-circle-question" style="color: #FFD43B;"></i>
+            <div class="user-count-text">
+                <h2>Total Question</h2>
+                <p id="user-count">10</p>
+            </div>
+        </div> -->
+    </div>
+    
+
+       <script src="/javascript/main.js"></script>
+       <script>
+        // Toggle sidebar visibility when menu icon is clicked
+        document.querySelector('.bx-menu').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            let welcomeAdminElement = document.getElementById("welcome-admin");
+
+            new Typed(welcomeAdminElement, {
+                strings: ["Welcome Anshika"],
+                typeSpeed: 10,
+                backSpeed: 300,
+                backDelay: 100,
+                loop: true
+            });
+
+            // Function to display user count
+            function displayUserCount() {
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const userCount = users.length;
+
+                document.getElementById('user-count').textContent = userCount;
+            }
+
+            // Call the function to update user count
+            displayUserCount();
+
+            // Logout functionality
+            const logoutButton = document.getElementById('admin-logout-btn');
+            logoutButton.addEventListener('click', function() {
+                const confirmation = confirm('Are you sure you want to log out?');
+                if (confirmation) {
+                    window.location.href = 'adminlogin.html'; 
+                } else {
+                    console.log('Logout cancelled');
+                }
+            });
+        });
+    </script>
+    </body>
 </html>
