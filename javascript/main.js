@@ -336,26 +336,32 @@ function displayQuestion(index) {
         optionItem.style.height = '50px';
         optionItem.style.width = '350px';
         optionItem.style.borderRadius = '10px';
-
+    
         optionItem.innerHTML = `
-            <input type="radio" id="option${option}" name="answer" value="${option}">
+            <input type="radio" id="option${option}" name="answer" value="${option}" style="display: none;">
             <label for="option${option}">${questionData[option]}</label>
         `;
-
-        optionItem.querySelector('input').addEventListener('change', function () {
-            storeUserAnswer(index, this.value);
-            document.querySelectorAll('#options-list li').forEach(li => li.style.backgroundColor = '');
-            optionItem.style.backgroundColor = 'gray';
+    
+        // Add click event to the entire list item
+        optionItem.addEventListener('click', function () {
+            const radioButton = optionItem.querySelector('input[type="radio"]');
+            radioButton.checked = true; // Check the radio button
+            storeUserAnswer(index, radioButton.value); // Store the answer
+            document.querySelectorAll('#options-list li').forEach(label => label.style.backgroundColor = '');
+            optionItem.style.backgroundColor = 'gray'; // Highlight the selected option
         });
-
+    
+        optionsList.appendChild(optionItem);
+    });
+    
         // optionItem.addEventListener('mouseover', function() {
         //     if (this.style.backgroundColor !== 'gray') {
         //         this.style.backgroundColor = '#d3d3d3'; // Light gray for hover
         //     }
         // });
 
-        optionsList.appendChild(optionItem);
-    });
+    //     optionsList.appendChild(optionItem);
+    // });
 }
 
 // Submit the answer and move to the next question
