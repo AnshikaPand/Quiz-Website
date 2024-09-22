@@ -354,14 +354,7 @@ function displayQuestion(index) {
         optionsList.appendChild(optionItem);
     });
     
-        // optionItem.addEventListener('mouseover', function() {
-        //     if (this.style.backgroundColor !== 'gray') {
-        //         this.style.backgroundColor = '#d3d3d3'; // Light gray for hover
-        //     }
-        // });
-
-    //     optionsList.appendChild(optionItem);
-    // });
+       
 }
 
 // Submit the answer and move to the next question

@@ -41,7 +41,7 @@
 
     <div id="edit-question-page" >
         <div class="question-container">
-            <h1 style="margin-top: 6%;"><button class="add-question-btn" id="add-question-btn">Add Question</button></h1>
+            <h1 style="margin-top: 6%;"><button class="add-question-btn" id="add-question-btn" onclick="clickAddQuesiton()">Add Question</button></h1>
             <table id="questions-table">
                 <thead>
                     <tr>
@@ -133,6 +133,14 @@
                     container.appendChild(questionRow);
                 });
             }
+
+
+            function clickAddQuesiton(){
+                const btnClick = document.getElementById('add-question-btn')
+                nextPage = addEventListener('click',()=>{
+                window.location.href="question.html"
+                })           
+             }
 
             function addQuestion() {
                 const questionText = prompt('Enter the question:');

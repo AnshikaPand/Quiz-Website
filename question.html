@@ -3,124 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questions</title>
- <!-- css -->
- <link rel="stylesheet" href="/css/admin.css">
- <!-- Boxicon -->
- <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
- <style>
-    
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Arial, sans-serif; /* Optional: Set a base font family */
-}
-
-/* Style for the question page container */
-#question-page {
-    width: 80%;
-    max-width: 600px; /* Optional: Limit the max width */
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for better appearance */
-}
-
-/* Style for the questions section */
-.questions label,
-.option label,
-.correct-answer label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-/* Style for the input fields */
-.questions input,
-.option input,
-.correct-answer input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-/* Style for the question page buttons */
-.questionpg-btn {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-/* Style for the buttons inside the question page */
-.questionpg-btn button {
-    padding: 10px 15px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    flex: 1;
-    margin-right: 10px;
-}
-
-.questionpg-btn button:last-child {
-    margin-right: 0;
-}
-
-/* Optional: Add hover effects to buttons */
-.questionpg-btn button:hover {
-    background-color: #0056b3;
-}
-
-
-
-/* edite Question */
-
-
- </style>
+    <title>Question Input Page</title>
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
-<body>
-    <div id="question-page">
-        <section>
-            <div class="questions">
-                <label for="question">Question:</label>
-                <input type="text" id="question" name="question">
-            </div>
+<body >
+    <div id="questioInput-Page">
+    <div class="container">
+        <h2>Add New Question</h2>
+        <!-- Question Input -->
+        <label for="question">Question:</label>
+        <input type="text" id="question" class="question-input" placeholder="Enter your question">
 
-            <div class="option">
-                <label for="option1">Option 1:</label>
-                <input type="text" id="option1" name="option1">
+        <!-- Option Inputs -->
+        <label for="option1">Option 1:</label>
+        <input type="text" id="option1" class="option-input" placeholder="Enter option 1">
 
-                <label for="option2">Option 2:</label>
-                <input type="text" id="option2" name="option2">
-              
-                <label for="option3">Option 3:</label>
-                <input type="text" id="option3" name="option3">
+        <label for="option2">Option 2:</label>
+        <input type="text" id="option2" class="option-input" placeholder="Enter option 2">
 
-                <label for="option4">Option 4:</label>
-                <input type="text" id="option4" name="option4">
-            </div>
+        <label for="option3">Option 3:</label>
+        <input type="text" id="option3" class="option-input" placeholder="Enter option 3">
 
-            <div class="correct-answer">
-                <label for="correct-answer">Correct Answer:</label>
-                <input type="text" id="correct-answer" name="correct-answer">
-            </div>
+        <label for="option4">Option 4:</label>
+        <input type="text" id="option4" class="option-input" placeholder="Enter option 4">
 
-            <div class="questionpg-btn">
-              <button>Add</button>
-              <button>Delete</button>
-              <button>Edite</button>
-            </div>
-        </section>
+        <!-- Correct Answer Input -->
+        <label for="answer">Correct Answer:</label>
+        <input type="text" id="answer" class="answer-input" placeholder="Enter the correct answer">
+
+        <!-- Add Button -->
+        <button id="add-btn">Add Question</button>
     </div>
 
-    <script src="/javascript/main.js"></script>
+</div>
+
+    <script src="script.js"></script>
 </body>
 </html>

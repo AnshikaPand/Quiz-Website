@@ -530,7 +530,7 @@ body {
 
 
 
-/*------- Studentinformation------ */
+/*------- Student information------ */
 
 
 /* Specific container for the student information section */
@@ -661,14 +661,16 @@ table {
             cursor: pointer;
         }
 
-        /* view more */
+        /*----------------- view more------------ */
         .user-details-container {
+            top: 100px;
             width: 50%;
             margin: auto;
             text-align: left;
         }
         
         table {
+            
             width: 100%;
             border-collapse: collapse;
         }
@@ -687,4 +689,69 @@ table {
         td {
             background-color: #fafafa;
         }
+
+
         
+       -------- /* question Page */--------
+
+       #addquestion-page {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #bcaeae;
+    }
+    
+    .container {
+        width: 80%;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-left: 250px;
+        margin-top: 90px;
+        position: fixed;
+    }
+    
+    h2 {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+    
+    label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+    }
+
+     .option-input,.answer-input{
+        width: 50%;
+    }
+    
+    input {
+        width: 80%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    button {
+        width: 30%;
+        padding: 10px;
+        background-color: #F3BD00;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+       align-items: center;
+    }
+    
+    button:hover {
+        background-color: #F3BD00;
+    }
+    
