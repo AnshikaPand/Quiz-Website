@@ -578,9 +578,13 @@ body {
 }
 /*------ EditeQuestion .html ------*/
 
-#edit-question-page{
+
+
+#edit-question-page {
     background-color: #ffffff;   
 }
+
+
 #edit-question-page table {
     width: 80%;
     border-collapse: collapse;
@@ -588,6 +592,7 @@ body {
     margin-left: 18%;
     background-color: #ffffff;
 }
+
 
 #edit-question-page th, #edit-question-page td {
     padding: 12px;
@@ -599,17 +604,19 @@ body {
     background-color: #ede8e8;
     color: #2d3748;
     font-weight: bold;
-
 }
+
 
 #edit-question-page tbody tr:hover {
     background-color: #f3f4f6;
 }
 
+
 #edit-question-page .actions {
     display: flex;
     gap: 10px;
 }
+
 
 #edit-question-page .edit-btn, #edit-question-page .delete-btn {
     padding: 8px 16px;
@@ -621,45 +628,61 @@ body {
     cursor: pointer;
 }
 
+
 #edit-question-page .edit-btn {
-    background-color: #3182ce;
+    background-color: #3182ce; /* Edit button color */
 }
 
 #edit-question-page .delete-btn {
-    background-color: #e53e3e;
+    background-color: #e53e3e; /* Delete button color */
 }
 
+
 #add-question-btn {
-    background-color: #F4CE4A;
+    background-color: #F4CE4A; /* Color */
     height: 50px;
     width: 150px;
-    display: flex; /* This ensures the button content is centered */
-  padding: 15px 30px;
-  margin-left: 50%;
-  font-weight: 500;
-   
+    display: flex; /* Center button content */
+    justify-content: center; /* Center align content */
+    align-items: center; /* Center align vertically */
+    padding: 15px 30px;
+    margin-left: 50%;
+    font-weight: 500;
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
 }
+
+
 table {
-            width: 80%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #F4CE4A;
-        }
-        .question-container h1 {
-            text-align: center;
-        }
-        .edit-btn, .delete-btn {
-            margin-right: 10px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd; /* Light border */
+}
+
+
+th {
+    background-color: #F4CE4A; /* Consistent header color */
+}
+
+
+.question-container h1 {
+    text-align: center; /* Center the title */
+}
+
+/* Adjustments for buttons in the action area */
+.edit-btn, .delete-btn {
+    margin-right: 10px; /* Space between buttons */
+    padding: 5px 10px; /* Padding */
+    cursor: pointer; /* Pointer cursor */
+}
 
         /*----------------- view more------------ */
         .user-details-container {
@@ -706,7 +729,7 @@ table {
     }
     
     .container {
-        width: 80%;
+        width: 75%;
         padding: 20px;
         background-color: #fff;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

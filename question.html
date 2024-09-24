@@ -4,9 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question Input Page</title>
-    <link rel="stylesheet" href="/css/admin.css">
+     <!-- CSS -->
+     <link rel="stylesheet" href="/css/admin.css">
+     <!-- Boxicon -->
+     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body >
+
+
+    <div class="Teacher-Page">
+        <header>
+            <nav>
+                <div id="head">
+                    <i class='bx bx-menu'></i> <!-- Icon for toggling the sidebar -->
+                    <img src="/img/techpathsala-logo.jpeg">
+                    <div id="admin-logout-btn">
+                        
+                    </div>
+                    <p id="welcome-admin">Welcome Anshika</p>
+                </div>
+            </nav>
+        </header>
+    
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <ul>
+                <li class="menu-title">Dashboard</li>
+                <li><a href="teacher.html"><i class='bx bx-home' ></i>Home</a></li>
+                <li><a href="Studentinformation.html"><i class='bx bxs-user-circle' ></i>User</a></li>
+                <li><a href="EditeQuestion.html"><i class='bx bx-question-mark' ></i>Quizzes</a></li>
+            </ul>
+        </div>
+
+   
     <div id="questioInput-Page">
     <div class="container">
         <h2>Add New Question</h2>
@@ -32,11 +62,20 @@
         <input type="text" id="answer" class="answer-input" placeholder="Enter the correct answer">
 
         <!-- Add Button -->
-        <button id="add-btn">Add Question</button>
+         <br>
+        <button id="add-btn">Task Done</button>
     </div>
 
 </div>
 
-    <script src="script.js"></script>
+    <script src="/javascript/main.js"></script>
+    <script>
+        // Toggle sidebar visibility when menu icon is clicked
+        document.querySelector('.bx-menu').addEventListener('click', function () {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.toggle('active');
+            });
+
+    </script>
 </body>
 </html>

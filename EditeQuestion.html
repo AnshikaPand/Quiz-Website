@@ -9,7 +9,7 @@
     <!-- Boxicon -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
-        
+        /* Your additional CSS styles if needed */
     </style>
 </head>
 <body>
@@ -21,7 +21,7 @@
                     <i class='bx bx-menu'></i> <!-- Icon for toggling the sidebar -->
                     <img src="/img/techpathsala-logo.jpeg">
                     <div id="admin-logout-btn">
-                        
+                        <!-- Logout button placeholder -->
                     </div>
                     <p id="welcome-admin">Welcome Anshika</p>
                 </div>
@@ -32,191 +32,136 @@
         <div class="sidebar" id="sidebar">
             <ul>
                 <li class="menu-title">Dashboard</li>
-                <li><a href="teacher.html"><i class='bx bx-home' ></i>Home</a></li>
-                <li><a href="Studentinformation.html"><i class='bx bxs-user-circle' ></i>User</a></li>
-                <li><a href="EditeQuestion.html"><i class='bx bx-question-mark' ></i>Quizzes</a></li>
+                <li><a href="teacher.html"><i class='bx bx-home'></i>Home</a></li>
+                <li><a href="Studentinformation.html"><i class='bx bxs-user-circle'></i>User</a></li>
+                <li><a href="EditeQuestion.html"><i class='bx bx-question-mark'></i>Quizzes</a></li>
             </ul>
         </div>
 
-
-    <div id="edit-question-page" >
-        <div class="question-container">
-            <h1 style="margin-top: 6%;"><button class="add-question-btn" id="add-question-btn" onclick="clickAddQuesiton()">Add Question</button></h1>
-            <table id="questions-table">
-                <thead>
-                    <tr>
-                        <th>Question</th>
-                        <th>Option A</th>
-                        <th>Option B</th>
-                        <th>Option C</th>
-                        <th>Option D</th>
-                        <th>Correct Answer</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="questions-container"></tbody>
-            </table>
-            <!-- <button class="add-question-btn" id="add-question-btn">Add Question</button> -->
+        <!-- Edit Question Page -->
+        <div id="edit-question-page">
+            <div class="question-container">
+                <h1 style="margin-top: 6%;">
+                    <button class="add-question-btn" id="add-question-btn" onclick="clickAddQuestion()">Add Question</button>
+                </h1>
+                <table id="questions-table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Option A</th>
+                            <th>Option B</th>
+                            <th>Option C</th>
+                            <th>Option D</th>
+                            <th>Correct Answer</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="questions-container"></tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    <script src="/javascript/main.js"></script>
-    <script>
-        // Toggle sidebar visibility when menu icon is clicked
-        document.querySelector('.bx-menu').addEventListener('click', function() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('questions-container');
-            const addButton = document.getElementById('add-question-btn');
-
-            function getQuestions() {
-                try {
-                    const storedQuestions = localStorage.getItem('quizQuestions');
-                    return storedQuestions ? JSON.parse(storedQuestions) : [];
-                } catch (e) {
-                    console.error('Error retrieving questions from localStorage:', e);
-                    return [];
+        <script src="/javascript/main.js"></script>
+        <script>
+            // Toggle sidebar visibility when menu icon is clicked
+            document.querySelector('.bx-menu').addEventListener('click', function() {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.toggle('active');
+            });
+        
+            document.addEventListener('DOMContentLoaded', function() {
+                const container = document.getElementById('questions-container');
+                const addQuestionBtn = document.getElementById('add-question-btn');
+        
+                function getQuestions() {
+                    try {
+                        const storedQuestions = localStorage.getItem('quizQuestions');
+                        return storedQuestions ? JSON.parse(storedQuestions) : [];
+                    } catch (e) {
+                        console.error('Error retrieving questions from localStorage:', e);
+                        return [];
+                    }
                 }
-            }
-
-            let questions = getQuestions();
-
-            function renderQuestions() {
-                container.innerHTML = ''; // Clear the container before re-rendering
-
-                questions.forEach((q, index) => {
-                    const questionRow = document.createElement('tr');
-
-                    const questionCell = document.createElement('td');
-                    questionCell.textContent = q.question;
-
-                    const optionACell = document.createElement('td');
-                    optionACell.textContent = q.a;
-
-                    const optionBCell = document.createElement('td');
-                    optionBCell.textContent = q.b;
-
-                    const optionCCell = document.createElement('td');
-                    optionCCell.textContent = q.c;
-
-                    const optionDCell = document.createElement('td');
-                    optionDCell.textContent = q.d;
-
-                    const answerCell = document.createElement('td');
-                    answerCell.textContent = q.answer.toUpperCase();
-
-                    const actionsCell = document.createElement('td');
-
-                    const editBtn = document.createElement('button');
-                    editBtn.classList.add('edit-btn');
-                    editBtn.innerHTML = '<i class="bx bx-pencil" ></i>';
-                    editBtn.addEventListener('click', () => editQuestion(index));
-
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.classList.add('delete-btn');
-                    deleteBtn.innerHTML = '<i class="bx bx-trash"></i>'; // Use innerHTML to insert the icon
-                   deleteBtn.addEventListener('click', () => deleteQuestion(index));
-
-                    actionsCell.appendChild(editBtn);
-                    actionsCell.appendChild(deleteBtn);
-
-                    questionRow.appendChild(questionCell);
-                    questionRow.appendChild(optionACell);
-                    questionRow.appendChild(optionBCell);
-                    questionRow.appendChild(optionCCell);
-                    questionRow.appendChild(optionDCell);
-                    questionRow.appendChild(answerCell);
-                    questionRow.appendChild(actionsCell);
-
-                    container.appendChild(questionRow);
-                });
-            }
-
-
-            function clickAddQuesiton(){
-                const btnClick = document.getElementById('add-question-btn')
-                nextPage = addEventListener('click',()=>{
-                window.location.href="question.html"
-                })           
-             }
-
-            function addQuestion() {
-                const questionText = prompt('Enter the question:');
-                if (questionText) {
-                    const options = {};
-                    ['a', 'b', 'c', 'd'].forEach(option => {
-                        options[option] = prompt(`Enter option ${option.toUpperCase()}:`);
+        
+                let questions = getQuestions();
+        
+                function renderQuestions() {
+                    container.innerHTML = ''; // Clear the container before re-rendering
+        
+                    questions.forEach((q, index) => {
+                        const questionRow = document.createElement('tr');
+        
+                        const questionCell = document.createElement('td');
+                        questionCell.textContent = q.question;
+        
+                        const optionACell = document.createElement('td');
+                        optionACell.textContent = q.a;
+        
+                        const optionBCell = document.createElement('td');
+                        optionBCell.textContent = q.b;
+        
+                        const optionCCell = document.createElement('td');
+                        optionCCell.textContent = q.c;
+        
+                        const optionDCell = document.createElement('td');
+                        optionDCell.textContent = q.d;
+        
+                        const answerCell = document.createElement('td');
+                        answerCell.textContent = q.answer.toUpperCase();
+        
+                        const actionsCell = document.createElement('td');
+        
+                        const editBtn = document.createElement('button');
+                        editBtn.classList.add('edit-btn');
+                        editBtn.id = `edit-btn-${index}`; 
+                        editBtn.innerHTML = '<i class="bx bx-pencil"></i>';
+                        editBtn.addEventListener('click', () => 
+                    window.location.href = "question.html");
+        
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.classList.add('delete-btn');
+                        deleteBtn.innerHTML = '<i class="bx bx-trash"></i>'; // Use innerHTML to insert the icon
+                        deleteBtn.addEventListener('click', () => deleteQuestion(index));
+        
+                        actionsCell.appendChild(editBtn);
+                        actionsCell.appendChild(deleteBtn);
+        
+                        questionRow.appendChild(questionCell);
+                        questionRow.appendChild(optionACell);
+                        questionRow.appendChild(optionBCell);
+                        questionRow.appendChild(optionCCell);
+                        questionRow.appendChild(optionDCell);
+                        questionRow.appendChild(answerCell);
+                        questionRow.appendChild(actionsCell);
+        
+                        container.appendChild(questionRow);
                     });
+                }
 
-                    const answer = prompt('Enter the correct option (a, b, c, d):');
-                    if (options[answer]) {
-                        questions.push({
-                            question: questionText,
-                            ...options,
-                            answer: answer
-                        });
-
+                
+                
+        
+                function clickAddQuestion() {
+                    window.location.href = "question.html"; // Redirect to the next page
+                }
+                 addQuestionBtn.addEventListener('click',clickAddQuestion);
+        
+                function deleteQuestion(index) {
+                    if (confirm('Are you sure you want to delete this question?')) {
+                        questions.splice(index, 1);
                         try {
                             localStorage.setItem('quizQuestions', JSON.stringify(questions));
-                            console.log("Questions saved:", questions);
+                            console.log("Questions after deletion:", questions);
                         } catch (e) {
-                            console.error('Error saving questions to localStorage:', e);
+                            console.error('Error deleting questions from localStorage:', e);
                         }
                         renderQuestions();
-                    } else {
-                        alert('Invalid answer option.');
                     }
                 }
-            }
-
-            function editQuestion(index) {
-                const newQuestion = prompt('Enter the new question:', questions[index].question);
-                if (newQuestion !== null) {
-                    questions[index].question = newQuestion;
-
-                    ['a', 'b', 'c', 'd'].forEach(option => {
-                        const newOption = prompt(`Enter new option ${option.toUpperCase()}:`, questions[index][option]);
-                        if (newOption !== null) {
-                            questions[index][option] = newOption;
-                        }
-                    });
-
-                    const newAnswer = prompt('Enter the correct option (a, b, c, d):', questions[index].answer);
-                    if (['a', 'b', 'c', 'd'].includes(newAnswer)) {
-                        questions[index].answer = newAnswer;
-                    } else {
-                        alert('Invalid answer option.');
-                    }
-
-                    try {
-                        localStorage.setItem('quizQuestions', JSON.stringify(questions));
-                        console.log("Questions updated:", questions);
-                    } catch (e) {
-                        console.error('Error updating questions in localStorage:', e);
-                    }
-                    renderQuestions();
-                }
-            }
-
-            function deleteQuestion(index) {
-                if (confirm('Are you sure you want to delete this question?')) {
-                    questions.splice(index, 1);
-                    try {
-                        localStorage.setItem('quizQuestions', JSON.stringify(questions));
-                        console.log("Questions after deletion:", questions);
-                    } catch (e) {
-                        console.error('Error deleting questions from localStorage:', e);
-                    }
-                    renderQuestions();
-                }
-            }
-
-            addButton.addEventListener('click', addQuestion);
-
-            renderQuestions();
-        });
-    </script>
-</body>
+        
+                renderQuestions();
+            });
+        </script>
+        </body>
+        </body>
 </html>
