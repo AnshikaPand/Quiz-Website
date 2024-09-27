@@ -131,7 +131,7 @@ font-size: larger;
 .Teacher-Page, #student-information{
     width: 100%;
     height: 100vh;
-    background-color: #ece6e6;
+    background-color: #ffffff;
 }
 /* Admin Page specific CSS for the navbar */
  header {
@@ -236,39 +236,45 @@ font-size: larger;
     z-index: 999;
 } */
 
-
+/* Ensure the sidebar is shown by default */
 .sidebar {
     position: fixed;
     margin-top: 5.5%;
     padding-top: 20px;
-    left: -250px; 
+    left: 0; /* Sidebar visible by default */
     top: 0;
     width: 250px;
     height: 100%;
     background-color: #f7f7f7;
     transition: left 0.3s ease; 
     z-index: 1000;
+
+    /* Adding right border only */
+    border-right: 2px solid #ccc; /* Change color and thickness as needed */
 }
 
-/* When the sidebar is active, show it */
+/* When the sidebar is toggled (hidden), it moves left */
 .sidebar.active {
-    left: 0; /* Move the sidebar into view */
+    left: -250px; /* Sidebar hidden */
 }
 
 /* Page content */
 .content {
-    margin-left: 0;
+    margin-left: 250px; /* By default, content moves to make space for the sidebar */
     transition: margin-left 0.3s ease;
 }
 
+/* When sidebar is hidden, content takes full width */
 .sidebar.active ~ .content {
-    margin-left: 250px; /* Shift content when sidebar is active */
+    margin-left: 0; /* Content expands when sidebar is hidden */
 }
 
-/* Add padding to the body to account for the sidebar */
-body {
-    padding-left: 0;
-    transition: padding-left 0.3s ease;
+/* Style for the Boxicon Menu */
+.Teacher-Page #head i {
+    color: #000; 
+    font-size: 30px; 
+    margin-left: -45px; 
+    z-index: 1001;
 }
 
 .sidebar.active ~ body {
@@ -690,6 +696,7 @@ th {
             width: 50%;
             margin: auto;
             text-align: left;
+            
         }
         
         table {

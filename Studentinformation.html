@@ -61,15 +61,15 @@
         function displayAllUsersInfo() {
             const tbody = document.querySelector('#Information tbody');
 
-            const users = JSON.parse(localStorage.getItem('users')) || []; // Retrieve all users
-            const scores = JSON.parse(localStorage.getItem('scores')) || []; // Retrieve all scores
+            const users = JSON.parse(localStorage.getItem('users')) || []; 
+            const scores = JSON.parse(localStorage.getItem('scores')) || []; 
 
             if (users.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="5">No user information available.</td></tr>`;
                 return;
             }
 
-            // Iterate over users and create table rows
+        
             users.forEach((user, index) => {
                 const userScore = scores.find(score => score.email === user.email)?.score || 'Not Attempted';
 

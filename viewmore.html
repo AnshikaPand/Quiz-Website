@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Details</title>
-    <link rel="stylesheet" href="/css/admin.css"> 
-    <!-- Boxicon -->
+    <link rel="stylesheet" href="/css/admin.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
@@ -15,30 +14,26 @@
         <header>
             <nav>
                 <div id="head">
-                    <i class='bx bx-menu'></i> <!-- Icon for toggling the sidebar -->
+                    <i class='bx bx-menu'></i>
                     <img src="/img/techpathsala-logo.jpeg">
-                    <div id="admin-logout-btn">
-                        
-                    </div>
+                    <div id="admin-logout-btn"></div>
                     <p id="welcome-admin">Welcome Anshika</p>
                 </div>
             </nav>
         </header>
-    
-        <!-- Sidebar -->
+
         <div class="sidebar" id="sidebar">
             <ul>
                 <li class="menu-title">Dashboard</li>
-                <li><a href="teacher.html"><i class='bx bx-home' ></i>Home</a></li>
-                <li><a href="Studentinformation.html"><i class='bx bxs-user-circle' ></i>User</a></li>
-                <li><a href="EditeQuestion.html"><i class='bx bx-question-mark' ></i>Quizzes</a></li>
+                <li><a href="teacher.html"><i class='bx bx-home'></i>Home</a></li>
+                <li><a href="Studentinformation.html"><i class='bx bxs-user-circle'></i>User</a></li>
+                <li><a href="EditeQuestion.html"><i class='bx bx-question-mark'></i>Quizzes</a></li>
             </ul>
         </div>
 
-        <div class="user-details-container" style="margin-left: 300px; position: fixed;">
+        <div class="user-details-container" style="margin-left: 300px; margin-top: 100px;">
             <h1>User Details</h1>
 
-            <!-- User Details Table -->
             <table id="user-details-table">
                 <tr>
                     <th>Name</th>
@@ -63,22 +58,17 @@
             </table>
         </div>
 
-        <script src="/javascript/main.js"></script>
         <script>
-            // Toggle sidebar visibility when menu icon is clicked
             document.querySelector('.bx-menu').addEventListener('click', function () {
                 const sidebar = document.getElementById('sidebar');
                 sidebar.classList.toggle('active');
             });
 
-
-            // Function to get query parameters from the URL
             function getQueryParam(param) {
                 const urlParams = new URLSearchParams(window.location.search);
                 return urlParams.get(param);
             }
 
-            // Function to display user details
             function displayUserDetails() {
                 const email = getQueryParam('email'); // Get the email from the URL
                 if (!email) {
@@ -86,11 +76,9 @@
                     return;
                 }
 
-                // Retrieve user and scores from localStorage
                 const users = JSON.parse(localStorage.getItem('users')) || [];
                 const scores = JSON.parse(localStorage.getItem('scores')) || [];
 
-                // Find the user by email
                 const user = users.find(u => u.email === email);
                 const userScoreData = scores.find(s => s.email === email) || {};
 
@@ -99,25 +87,18 @@
                     document.getElementById('user-email').textContent = user.email;
                     document.getElementById('user-score').textContent = userScoreData.score || 'Not Attempted';
 
-                    // Handle Answered Questions display
                     const answeredQuestionsElement = document.getElementById('answered-questions');
                     const answeredQuestions = userScoreData.answeredQuestions || [];
 
                     console.log('Answered Questions:', answeredQuestions); // Log for debugging
 
-                    if (Array.isArray(answeredQuestions)) {
-                        // If it's an array, display as a list
-                        answeredQuestionsElement.innerHTML = answeredQuestions.length > 0
-                            ? '<ul>' + answeredQuestions.map((question, index) => `<li>${question}</li>`).join('') + '</ul>'
-                            : 'No answered questions';
-                    } else if (typeof answeredQuestions === 'object') {
-                        // If it's an object, display as a formatted string
-                        answeredQuestionsElement.innerHTML = Object.entries(answeredQuestions).length > 0
-                            ? '<ul>' + Object.entries(answeredQuestions).map(([key, value]) => `<li>${key}: ${value}</li>`).join('') + '</ul>'
-                            : 'No answered questions';
+                    if (Array.isArray(answeredQuestions) && answeredQuestions.length > 0) {
+                        answeredQuestionsElement.innerHTML = '<ul>' + answeredQuestions.map((questionObj, index) => {
+                            return `<li>Q${index + 1}: ${questionObj.question}<br>
+                                    Selected Answer: ${questionObj.selectedAnswer || 'None'}</li>`;
+                        }).join('') + '</ul>';
                     } else {
-                        // If neither array nor object, display as plain text
-                        answeredQuestionsElement.textContent = answeredQuestions || 'No answered questions available';
+                        answeredQuestionsElement.textContent = 'No answered questions available';
                     }
 
                     document.getElementById('test-count').textContent = userScoreData.testCount || 'N/A';
@@ -126,12 +107,11 @@
                 }
             }
 
-            // Call the function when the page loads
             window.onload = function () {
                 displayUserDetails();
             };
         </script>
-
+    </div>
 </body>
 
 </html>
