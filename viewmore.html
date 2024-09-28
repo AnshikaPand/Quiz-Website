@@ -70,46 +70,70 @@
             }
 
             function displayUserDetails() {
-                const email = getQueryParam('email'); // Get the email from the URL
-                if (!email) {
-                    alert('No user selected!');
-                    return;
-                }
+    const email = getQueryParam('email'); // Get the email from the URL
+    if (!email) {
+        alert('No user selected!');
+        return;
+    }
 
-                const users = JSON.parse(localStorage.getItem('users')) || [];
-                const scores = JSON.parse(localStorage.getItem('scores')) || [];
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const scores = JSON.parse(localStorage.getItem('scores')) || [];
 
-                const user = users.find(u => u.email === email);
-                const userScoreData = scores.find(s => s.email === email) || {};
+    const user = users.find(u => u.email === email);
+    const userScoreData = scores.find(s => s.email === email) || {};
 
-                if (user) {
-                    document.getElementById('user-name').textContent = user.name;
-                    document.getElementById('user-email').textContent = user.email;
-                    document.getElementById('user-score').textContent = userScoreData.score || 'Not Attempted';
+    if (user) {
+        document.getElementById('user-name').textContent = user.name;
+        document.getElementById('user-email').textContent = user.email;
+        document.getElementById('user-score').textContent = userScoreData.score || 'Not Attempted';
 
-                    const answeredQuestionsElement = document.getElementById('answered-questions');
-                    const answeredQuestions = userScoreData.answeredQuestions || [];
+        const answeredQuestionsElement = document.getElementById('answered-questions');
+        const answeredQuestions = userScoreData.answeredQuestions || [];
 
-                    console.log('Answered Questions:', answeredQuestions); // Log for debugging
+        if (Array.isArray(answeredQuestions) && answeredQuestions.length > 0) {
+            answeredQuestionsElement.innerHTML = '<ul>' + answeredQuestions.map((questionObj, index) => {
+                // Extract options (A, B, C, D) dynamically
+                const options = ['A', 'B', 'C', 'D'].map(optionKey => ({
+                    label: optionKey,
+                    value: questionObj[optionKey] // Get the value of A, B, C, D
+                })).filter(option => option.value); // Filter out undefined options
 
-                    if (Array.isArray(answeredQuestions) && answeredQuestions.length > 0) {
-                        answeredQuestionsElement.innerHTML = '<ul>' + answeredQuestions.map((questionObj, index) => {
-                            return `<li>Q${index + 1}: ${questionObj.question}<br>
-                                    Selected Answer: ${questionObj.selectedAnswer || 'None'}</li>`;
-                        }).join('') + '</ul>';
-                    } else {
-                        answeredQuestionsElement.textContent = 'No answered questions available';
-                    }
+                const selectedAnswer = questionObj.selectedAnswer || 'None';
+                const correctAnswer = questionObj.correctAnswer || 'No correct answer provided';
 
-                    document.getElementById('test-count').textContent = userScoreData.testCount || 'N/A';
-                } else {
-                    alert('User not found!');
-                }
-            }
+                // Display the question, options, selected answer, and correct answer
+                // .map() is a method that creates a new array by applying a function to each element of the original array.
+                return `<li>
+                            <strong>Q${index + 1}: ${questionObj.question}</strong><br>
+                            Options:<br>
+                            ${options.map(option => {
+                                // Highlight the selected answer and correct answer
+                                const isCorrect = correctAnswer === option.label;
+                                const isSelected = selectedAnswer === option.label;
+                                return `<span style="${isCorrect ? 'color:green; font-weight:bold;' : ''}${isSelected && !isCorrect ? 'color:red;' : ''}">
+                                            ${option.label}. ${option.value}
+                                        </span><br>`;
+                            }).join('')}
+                            Selected Answer: <strong style="${selectedAnswer === correctAnswer ? 'color:green;' : 'color:red;'}">${selectedAnswer}</strong><br>
+                            Correct Answer: <strong style="color:green;">${correctAnswer}</strong>
+                        </li>`;
+            }).join('') + '</ul>';//.join('') takes all the elements of an array and concatenates them into a single string.
 
-            window.onload = function () {
-                displayUserDetails();
-            };
+        } else {
+            answeredQuestionsElement.textContent = 'No answered questions available';
+        }
+
+        document.getElementById('test-count').textContent = userScoreData.testCount || 'N/A';
+    } else {
+        alert('User not found!');
+    }
+}
+
+window.onload = function () {
+    displayUserDetails();
+};
+
+
         </script>
     </div>
 </body>

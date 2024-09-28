@@ -1,13 +1,15 @@
 /* home page */
-#home-page a{
+#home-page a {
     text-decoration: none;
-    
+
 }
-#home-page .nav-bar a{
+
+#home-page .nav-bar a {
     color: black;
 }
 
-ul, li {
+ul,
+li {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -15,17 +17,19 @@ ul, li {
 
 
 .nav-bar {
-    display: flex; 
-    justify-content: space-between; /* Distribute space between items */
-    align-items: center; /* Align items vertically centered */
+    display: flex;
+    justify-content: space-between;
+    /* Distribute space between items */
+    align-items: center;
+    /* Align items vertically centered */
     padding: 10px 20px;
-    background-color:  #f7f7f7; 
+    background-color: #f7f7f7;
 }
 
 
 .nav-bar ul {
-    display: flex; 
-    gap: 25px; 
+    display: flex;
+    gap: 25px;
 }
 
 #oderlist {
@@ -36,33 +40,37 @@ ul, li {
 }
 
 .nav-bar ul li {
-    font-size: 18px; 
-    font-weight: bold; 
+    font-size: 18px;
+    font-weight: bold;
 }
 
 /* Style for the logo image */
 .nav-img img {
-    height: 30px; 
+    height: 30px;
 }
 
 
 section {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    height: 95vh; 
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
     padding: 20px;
-    background-color: #e0e0e0; 
+    background-color: #e0e0e0;
 }
 
 
 .background-div {
     max-width: 1500px;
-    height: 100px; /* Minimized height */
+    height: 100px;
+    /* Minimized height */
     background-image: url('/img/undraw_Sign_in_re_o58h (1).png');
-    background-size: contain; /* Ensures the image fits within the div without being cut off */
-    background-position: center; /* Centers the image within the div */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-size: contain;
+    /* Ensures the image fits within the div without being cut off */
+    background-position: center;
+    /* Centers the image within the div */
+    background-repeat: no-repeat;
+    /* Prevents the image from repeating */
     margin-top: -350px;
 }
 
@@ -71,52 +79,53 @@ section {
     text-align: center;
     /* max-width: 1200px; */
     padding: 20px;
-    background-color: #e0e0e0; 
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+    background-color: #e0e0e0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     margin-top: 30vh;
-    
+
 }
 
-#container >#start{
+#container>#start {
     display: block;
-    font-size: 34px; 
-    font-weight: bold; 
+    font-size: 34px;
+    font-weight: bold;
     margin-bottom: 10px;
     color: #F3BD00;
 }
 
 #container p {
-    font-size: 16px; 
+    font-size: 16px;
     margin-bottom: 10px;
     font-weight: 300;
     font-size: 20px;
 }
 
-#container >#ligth-color{
-color: #5d5a5a;
-font-size: larger;
+#container>#ligth-color {
+    color: #5d5a5a;
+    font-size: larger;
 
 }
 
-#home-btn span{
+#home-btn span {
     font-weight: 700;
 }
 
-#container >#home-btn > button{
+#container>#home-btn>button {
 
     border: none;
     background-color: #F3BD00;
     height: 60px;
-    width: 100px; 
+    width: 100px;
     margin-top: 20px;
 }
 
-#container >#home-btn > button a{
+#container>#home-btn>button a {
     color: #ffffff;
     font-size: 20px;
 }
-#container >#home-btn > button i{
+
+#container>#home-btn>button i {
 
     font-size: 20px;
 }
@@ -128,47 +137,54 @@ font-size: larger;
 
 /* --------teacher.html ----------*/
 
-.Teacher-Page, #student-information{
+.Teacher-Page,
+#student-information {
     width: 100%;
     height: 100vh;
     background-color: #ffffff;
 }
+
 /* Admin Page specific CSS for the navbar */
- header {
-    position: fixed; /* Fixes the header at the top of the page */
+header {
+    position: fixed;
+    /* Fixes the header at the top of the page */
     top: 0;
     width: 100%;
     height: 50px;
-    background-color: #f7f7f7; 
-    color: #333; 
+    background-color: #f7f7f7;
+    color: #333;
     padding: 15px 0;
-    z-index: 1000; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .Teacher-Page nav {
     display: flex;
-    justify-content: space-between; /* Space between logo and right-side elements */
+    justify-content: space-between;
+    /* Space between logo and right-side elements */
     align-items: center;
     width: 90%;
     margin: 0 auto;
 }
 
- #head {
+#head {
     display: flex;
     justify-content: space-between;
     width: 100%;
     align-items: center;
 }
 
- #head img {
-    height: 25px; /* Adjust the logo size */
-    margin-right: 10px; /* Space between the logo and the arrow/back icon */
+#head img {
+    height: 25px;
+    /* Adjust the logo size */
+    margin-right: 10px;
+    /* Space between the logo and the arrow/back icon */
     position: fixed;
 }
 
- #head a {
-    color: #333; /* Adjust color for the back arrow */
+#head a {
+    color: #333;
+    /* Adjust color for the back arrow */
     font-size: 24px;
     text-decoration: none;
     margin-right: 20px;
@@ -176,14 +192,14 @@ font-size: larger;
 
 /* Styling for welcome message */
 #welcome-admin {
-    font-size: 24px;  
-    font-weight: bold; 
+    font-size: 24px;
+    font-weight: bold;
     text-align: right;
-    color: #333; 
-    overflow: hidden; 
+    color: #333;
+    overflow: hidden;
     white-space: nowrap;
-    margin-left: auto; 
-    margin-right: 70px; 
+    margin-left: auto;
+    margin-right: 70px;
 }
 
 /* Styling for the admin logout button */
@@ -191,17 +207,18 @@ font-size: larger;
     height: 60px;
     width: 60px;
     border-radius: 50%;
-    background-image: url('/img/Adminbackground\ img.jpg'); 
+    background-image: url('/img/Adminbackground\ img.jpg');
     background-size: cover;
     cursor: pointer;
-    position: fixed; 
+    position: fixed;
     top: 15px;
     right: 20px;
     z-index: 1000;
 }
 
 #admin-logout-btn:hover {
-    background-color: #ccc; /* Light grey on hover */
+    background-color: #ccc;
+    /* Light grey on hover */
 }
 
 /* Optional: Styling the horizontal line under the nav */
@@ -213,9 +230,9 @@ font-size: larger;
 
 /* Style for the Boxicon Menu */
 .Teacher-Page #head i {
-    color: #000; 
-    font-size: 30px; 
-    margin-left: -45px; 
+    color: #000;
+    font-size: 30px;
+    margin-left: -45px;
     z-index: 1001;
 }
 
@@ -241,89 +258,96 @@ font-size: larger;
     position: fixed;
     margin-top: 5.5%;
     padding-top: 20px;
-    left: 0; /* Sidebar visible by default */
+    left: 0;
+    /* Sidebar visible by default */
     top: 0;
     width: 250px;
     height: 100%;
     background-color: #f7f7f7;
-    transition: left 0.3s ease; 
+    transition: left 0.3s ease;
     z-index: 1000;
 
     /* Adding right border only */
-    border-right: 2px solid #ccc; /* Change color and thickness as needed */
+    border-right: 2px solid #ccc;
+    /* Change color and thickness as needed */
 }
 
 /* When the sidebar is toggled (hidden), it moves left */
 .sidebar.active {
-    left: -250px; /* Sidebar hidden */
+    left: -250px;
+    /* Sidebar hidden */
 }
 
 /* Page content */
 .content {
-    margin-left: 250px; /* By default, content moves to make space for the sidebar */
+    margin-left: 250px;
+    /* By default, content moves to make space for the sidebar */
     transition: margin-left 0.3s ease;
 }
 
 /* When sidebar is hidden, content takes full width */
-.sidebar.active ~ .content {
-    margin-left: 0; /* Content expands when sidebar is hidden */
+.sidebar.active~.content {
+    margin-left: 0;
+    /* Content expands when sidebar is hidden */
 }
 
 /* Style for the Boxicon Menu */
 .Teacher-Page #head i {
-    color: #000; 
-    font-size: 30px; 
-    margin-left: -45px; 
+    color: #000;
+    font-size: 30px;
+    margin-left: -45px;
     z-index: 1001;
 }
 
-.sidebar.active ~ body {
+.sidebar.active~body {
     padding-left: 250px;
 }
 
 
 /* Styling for the sidebar menu list */
 .sidebar ul {
-    list-style-type: none; 
+    list-style-type: none;
     padding: 0;
-    margin: 0; 
+    margin: 0;
     text-align: left;
 }
 
 /* Sidebar list items */
 .sidebar ul li {
-    padding: 15px 20px; /* Adds space around each menu item */
-    font-size: 18px; /* Adjust font size */
+    padding: 15px 20px;
+    /* Adds space around each menu item */
+    font-size: 18px;
+    /* Adjust font size */
     /* border-bottom: 1px solid #444;  */
 }
 
 /* Sidebar menu title */
 .sidebar .menu-title {
-    font-size: 20px; 
+    font-size: 20px;
     font-weight: bold;
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
     text-align: center;
 }
 
 /* Sidebar links */
 .sidebar ul li a {
-    color: rgb(4, 4, 4); 
-    text-decoration: none; 
+    color: rgb(4, 4, 4);
+    text-decoration: none;
     display: block;
 }
 
 /* Hover effect for sidebar links */
 .sidebar ul li a:hover {
-    background-color: #575757; 
-    padding-left: 30px; 
-    transition: 0.3s; 
+    background-color: #575757;
+    padding-left: 30px;
+    transition: 0.3s;
 }
 
 /* Container for user count boxes */
 .user-count-container {
     display: flex;
-    justify-content: space-around; 
-    flex-wrap: wrap; 
+    justify-content: space-around;
+    flex-wrap: wrap;
     margin-top: 100px;
 }
 
@@ -342,8 +366,10 @@ font-size: larger;
 }
 
 .user-count-box i {
-    font-size: 56px; /* Icon size */
-    margin-right: 10px; /* Space between icon and text */
+    font-size: 56px;
+    /* Icon size */
+    margin-right: 10px;
+    /* Space between icon and text */
     margin-left: 2cqw;
     /* margin-top: -30px; */
 }
@@ -361,7 +387,7 @@ font-size: larger;
 
 .user-count-text p {
     margin: 5px 0 0;
-    font-size: 20px; 
+    font-size: 20px;
     font-weight: 600;
     margin-left: 40px;
     color: #333;
@@ -371,8 +397,8 @@ font-size: larger;
 /* ------Adminlogin Page-------- */
 
 
- /* Scoped to #admin-login-page */
- #admin-login-page {
+/* Scoped to #admin-login-page */
+#admin-login-page {
     font-family: Arial, sans-serif;
     background-color: white;
     display: flex;
@@ -469,7 +495,8 @@ font-size: larger;
     margin-top: 20px;
 }
 
-#admin-login-page .admin-btn-1, #admin-login-page .admin-btn-2 {
+#admin-login-page .admin-btn-1,
+#admin-login-page .admin-btn-2 {
     width: 100%;
     padding: 15px;
     border: none;
@@ -521,7 +548,8 @@ font-size: larger;
         align-items: center;
     }
 
-    #admin-login-page .admin-login-img, #admin-login-page .admin-login-content {
+    #admin-login-page .admin-login-img,
+    #admin-login-page .admin-login-content {
         width: 80%;
     }
 
@@ -542,10 +570,10 @@ font-size: larger;
 /* Specific container for the student information section */
 #student-information {
     width: 100%;
-    height: 100vh; 
+    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start; 
+    align-items: flex-start;
     padding-top: 20px;
 }
 
@@ -553,20 +581,22 @@ font-size: larger;
 #Information {
     margin-top: 5%;
     width: 100%;
-    max-width: 1000px; 
+    max-width: 1000px;
     border-collapse: collapse;
-    background-color: #ffffff; 
+    background-color: #ffffff;
 }
 
 /* Table header and cell styles */
-#Information th, #Information td {
+#Information th,
+#Information td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #ffffff;
 }
 
 #Information th {
-    background-color: #f2f2f2; /* Optional: can remove if not needed */
+    background-color: #f2f2f2;
+    /* Optional: can remove if not needed */
     font-weight: bold;
     color: #333;
 }
@@ -577,17 +607,20 @@ font-size: larger;
 
 /* Styling for small screens */
 @media screen and (max-width: 768px) {
-    #Information th, #Information td {
+
+    #Information th,
+    #Information td {
         padding: 10px;
         font-size: 14px;
     }
 }
+
 /*------ EditeQuestion .html ------*/
 
 
 
 #edit-question-page {
-    background-color: #ffffff;   
+    background-color: #ffffff;
 }
 
 
@@ -600,7 +633,8 @@ font-size: larger;
 }
 
 
-#edit-question-page th, #edit-question-page td {
+#edit-question-page th,
+#edit-question-page td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #e2e8f0;
@@ -624,7 +658,8 @@ font-size: larger;
 }
 
 
-#edit-question-page .edit-btn, #edit-question-page .delete-btn {
+#edit-question-page .edit-btn,
+#edit-question-page .delete-btn {
     padding: 8px 16px;
     font-size: 0.9em;
     font-weight: bold;
@@ -636,27 +671,30 @@ font-size: larger;
 
 
 #edit-question-page .edit-btn {
-    background-color: #3182ce; /* Edit button color */
+    background-color: #3182ce;
+    /* Edit button color */
 }
 
 #edit-question-page .delete-btn {
-    background-color: #e53e3e; /* Delete button color */
+    background-color: #e53e3e;
+    /* Delete button color */
 }
 
 
 #add-question-btn {
-    background-color: #F4CE4A; /* Color */
+    background-color: #F4CE4A;
+    
     height: 50px;
     width: 150px;
-    display: flex; /* Center button content */
-    justify-content: center; /* Center align content */
-    align-items: center; /* Center align vertically */
+    display: flex;
+    justify-content: right;
+    align-items: center; 
     padding: 15px 30px;
-    margin-left: 50%;
+    margin-left: 85%;
     font-weight: 500;
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 
@@ -667,121 +705,131 @@ table {
 }
 
 
-th, td {
+th,
+td {
     padding: 10px;
     text-align: left;
-    border: 1px solid #ddd; /* Light border */
+    border: 1px solid #ddd;
+    /* Light border */
 }
 
 
 th {
-    background-color: #F4CE4A; /* Consistent header color */
+    background-color: #F4CE4A;
+    /* Consistent header color */
 }
 
 
 .question-container h1 {
-    text-align: center; /* Center the title */
+    text-align: center;
+    /* Center the title */
 }
 
 /* Adjustments for buttons in the action area */
-.edit-btn, .delete-btn {
-    margin-right: 10px; /* Space between buttons */
-    padding: 5px 10px; /* Padding */
-    cursor: pointer; /* Pointer cursor */
+.edit-btn,
+.delete-btn {
+    margin-right: 10px;
+    /* Space between buttons */
+    padding: 5px 10px;
+    /* Padding */
+    cursor: pointer;
+    /* Pointer cursor */
 }
 
-        /*----------------- view more------------ */
-        .user-details-container {
-            top: 100px;
-            width: 50%;
-            margin: auto;
-            text-align: left;
-            
-        }
-        
-        table {
-            
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        
-        th {
-            background-color: #f4f4f4;
-            font-weight: bold;
-        }
-        
-        td {
-            background-color: #fafafa;
-        }
+/*----------------- view more------------ */
+.user-details-container {
+    top: 100px;
+    width: 50%;
+    margin: auto;
+    text-align: left;
+
+}
+
+table {
+
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+td {
+    background-color: #fafafa;
+}
 
 
-        
-       -------- /* question Page */--------
 
-       #addquestion-page {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #bcaeae;
-    }
-    
-    .container {
-        width: 75%;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        margin-left: 250px;
-        margin-top: 90px;
-        position: fixed;
-    }
-    
-    h2 {
-        text-align: left;
-        margin-bottom: 20px;
-    }
-    
-    label {
-        display: block;
-        margin: 10px 0 5px;
-        font-weight: bold;
-    }
+--------
 
-     .option-input,.answer-input{
-        width: 50%;
-    }
-    
-    input {
-        width: 80%;
-        padding: 8px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    
-    button {
-        width: 30%;
-        padding: 10px;
-        background-color: #F3BD00;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-       align-items: center;
-    }
-    
-    button:hover {
-        background-color: #F3BD00;
-    }
-    
+/* question Page */
+-------- #addquestion-page {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #bcaeae;
+}
+
+.container {
+    width: 75%;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-left: 250px;
+    margin-top: 90px;
+    position: fixed;
+}
+
+h2 {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.option-input,
+.answer-input {
+    width: 50%;
+}
+
+input {
+    width: 80%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 30%;
+    padding: 10px;
+    background-color: #F3BD00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    align-items: center;
+}
+
+button:hover {
+    background-color: #F3BD00;
+}

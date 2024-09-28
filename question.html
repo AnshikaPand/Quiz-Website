@@ -114,7 +114,8 @@ function displayQuestions() {
 }
 
 
-document.getElementById('add-btn').addEventListener('click', function () {
+document.getElementById('add-btn').addEventListener('click', function (e) {
+    e.preventDefault();
     const question = document.getElementById('question').value;
     const option1 = document.getElementById('option1').value;
     const option2 = document.getElementById('option2').value;
@@ -152,9 +153,7 @@ document.getElementById('add-btn').addEventListener('click', function () {
 });
 
 // Display saved questions when the page loads
-window.onload = function () {
     displayQuestions();
-};
 
         </script>
 </body>

@@ -82,6 +82,7 @@
                         return [];
                     }
                 }
+                
         
                 let questions = getQuestions();
         
@@ -90,7 +91,10 @@
         
                     questions.forEach((q, index) => {
                         const questionRow = document.createElement('tr');
-        
+                        
+                        // const indexCell = document.createElement('td');
+                        // questionCell.textContent = index;
+
                         const questionCell = document.createElement('td');
                         questionCell.textContent = q.question;
         
@@ -145,6 +149,9 @@
                     window.location.href = "question.html"; // Redirect to the next page
                 }
                  addQuestionBtn.addEventListener('click',clickAddQuestion);
+
+
+                 
         
                 function deleteQuestion(index) {
                     if (confirm('Are you sure you want to delete this question?')) {

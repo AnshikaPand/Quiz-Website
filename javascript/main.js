@@ -213,7 +213,11 @@ let score = 0;
 
 // Store the quiz questions in localStorage
 function storeQuestionsInLocalStorage() {
-    localStorage.setItem('quizQuestions', JSON.stringify(questions));
+   let questionsList =  JSON.parse(localStorage.getItem('quizQuestions'));
+   console.log(questionsList)
+    if(!questionsList){
+        localStorage.setItem('quizQuestions', JSON.stringify(questions));
+    }
 }
 
 // Retrieve the current user's name from localStorage
@@ -509,11 +513,11 @@ function loadUserImage() {
 }
 
 // Initialize the page
-document.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener('DOMContentLoaded', () => {
     storeQuestionsInLocalStorage();
     loadUserImage();
     setupImageUpload();
-});
+// });
 
 function previousQuestion() {
     if (currentQuestionIndex > 0) {
