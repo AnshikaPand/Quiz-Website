@@ -257,6 +257,24 @@ function storeUserAnswer(questionIndex, selectedAnswer) {
     localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
 }
 
+let startTime = null;
+
+// Initialize the quiz and set start time
+document.addEventListener('DOMContentLoaded', () => {
+    startTime = new Date(); 
+    loadCurrentQuestionIndex();
+    displayQuestion(currentQuestionIndex);
+    updateTimeline();
+});
+
+// Calculate the time spent on the test in seconds
+function getTimeSpent() {
+    const endTime = new Date();
+    const timeDiff = (endTime - startTime) / 1000 / 60;     
+    return timeDiff;
+}
+
+
 // Calculate the user's score based on their answers and store it
 function calculateAndStoreScore() {
     try {
@@ -301,6 +319,13 @@ function calculateAndStoreScore() {
         console.log('Answered Questions:', answeredQuestions);
         console.log('Final Score:', score);
 
+        // Calculate time spent on the test
+        const timeSpent = getTimeSpent();
+        console.log('Time Spent (seconds):', timeSpent);
+
+        // Store the test attempt in localStorage
+        storeTestAttempt(userEmail, userName, score, answeredQuestions, timeSpent);
+
         // Update or add the user score
         updateOrAddUserScore(userEmail, score, userName, answeredQuestions);
 
@@ -310,6 +335,28 @@ function calculateAndStoreScore() {
         console.error('An error occurred while calculating and storing the score:', error);
     }
 }
+
+
+function displayTestAttempts() {
+    const testAttempts = JSON.parse(localStorage.getItem('testAttempts')) || [];
+    const userEmail = localStorage.getItem('currentUserEmail');
+    
+    const userAttempts = testAttempts.filter(attempt => attempt.userEmail === userEmail);
+
+    if (userAttempts.length === 0) {
+        console.log('No test attempts found for this user.');
+        return;
+    }
+
+    userAttempts.forEach((attempt, index) => {
+        console.log(`Test Attempt ${index + 1}`);
+        console.log('Score:', attempt.score);
+        console.log('Time Spent (seconds):', attempt.timeSpent);
+        console.log('Answered Questions:', attempt.answeredQuestions);
+        console.log('Timestamp:', attempt.timestamp);  // This is the missing part
+    });
+}
+
 
 // Display the current question
 function displayQuestion(index) {
@@ -535,6 +582,28 @@ function previousQuestion() {
         document.getElementById('Previous-btn').disabled = true;
     }
 }
+
+
+function storeTestAttempt(userEmail, userName, score, answeredQuestions, timeSpent) {
+    let testAttempts = JSON.parse(localStorage.getItem('testAttempts')) || [];
+
+    // Create a new test attempt object
+    const newTestAttempt = {
+        userEmail: userEmail,
+        userName: userName,
+        score: score,
+        answeredQuestions: answeredQuestions,
+        timeSpent: timeSpent,
+        timestamp: new Date().toLocaleString()
+    };
+
+    // Add the new test attempt to the array
+    testAttempts.push(newTestAttempt);
+
+    // Save back to localStorage
+    localStorage.setItem('testAttempts', JSON.stringify(testAttempts));
+}
+
 
 // function updateTimeline() {
 //     const progressBar = document.getElementById('time-line-overlap');

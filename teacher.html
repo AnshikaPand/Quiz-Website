@@ -34,7 +34,7 @@
             <ul>
                 <li class="menu-title">Dashboard</li>
                 <li><a href="teacher.html"><i class='bx bx-home'></i>Home</a></li>
-                <li><a href="Studentinformation.html"><i class='bx bxs-user-circle'></i>User</a></li>
+                <li><a href="student-information.html"><i class='bx bxs-user-circle'></i>Users</a></li>
                 <li><a href="EditeQuestion.html"><i class='bx bx-question-mark'></i>Quizzes</a></li>
             </ul>
         </div>
@@ -72,17 +72,16 @@
 
         <script src="/javascript/main.js"></script>
         <script>
-            // Toggle sidebar visibility when the menu icon is clicked
+            // Toggle sidebar 
             document.querySelector('.bx-menu').addEventListener('click', function() {
                 const sidebar = document.getElementById('sidebar');
                 const content = document.getElementById('content');
 
                 if (sidebar.style.left === '0px' || sidebar.style.left === '') {
-                    // Hide the sidebar
+                    
                     sidebar.style.left = '-250px';
                     content.style.marginLeft = '0';
                 } else {
-                    // Show the sidebar
                     sidebar.style.left = '0px';
                     content.style.marginLeft = '250px';
                 }

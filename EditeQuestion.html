@@ -1,174 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Questions</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin.css" />
     <!-- Boxicon -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <style>
-        /* Your additional CSS styles if needed */
+      td div {
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      .actions-cell {
+        display: flex;
+        gap: 10px;
+      }
+
+      .actions-cell button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 10px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      .actions-cell i {
+        font-size: 20px;
+      }
+
+      /* Modal Styles */
+      #modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        max-width: 90%;
+      }
+
+      .modal-content h2 {
+        margin-bottom: 15px;
+      }
+
+      .close-btn {
+        float: right;
+        cursor: pointer;
+      }
+
+      /* Delete Modal Styles */
+      #delete-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .delete-modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        max-width: 90%;
+      }
+
+      .delete-modal-content h2 {
+        margin-bottom: 15px;
+      }
+
+      .delete-modal-content .actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      /* Edit Modal Styles */
+      #edit-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .edit-modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        max-width: 90%;
+      }
+
+      .edit-modal-content h2 {
+        margin-bottom: 15px;
+      }
+
+      .edit-modal-content form input {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+      }
+
+      .edit-modal-content form button {
+        padding: 10px;
+        background-color: #1f78ff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      .close-edit-btn {
+        float: right;
+        cursor: pointer;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="Teacher-Page">
-        <header>
-            <nav>
-                <div id="head">
-                    <i class='bx bx-menu'></i> <!-- Icon for toggling the sidebar -->
-                    <img src="/img/techpathsala-logo.jpeg">
-                    <div id="admin-logout-btn">
-                        <!-- Logout button placeholder -->
-                    </div>
-                    <p id="welcome-admin">Welcome Anshika</p>
-                </div>
-            </nav>
-        </header>
-    
-        <!-- Sidebar -->
-        <div class="sidebar" id="sidebar">
-            <ul>
-                <li class="menu-title">Dashboard</li>
-                <li><a href="teacher.html"><i class='bx bx-home'></i>Home</a></li>
-                <li><a href="Studentinformation.html"><i class='bx bxs-user-circle'></i>User</a></li>
-                <li><a href="EditeQuestion.html"><i class='bx bx-question-mark'></i>Quizzes</a></li>
-            </ul>
+      <header>
+        <nav>
+          <div id="head">
+            <i class="bx bx-menu"></i>
+            <img src="/img/techpathsala-logo.jpeg" />
+            <div id="admin-logout-btn"></div>
+            <p id="welcome-admin">Welcome Anshika</p>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Sidebar -->
+      <div class="sidebar" id="sidebar">
+        <ul>
+          <li class="menu-title">Dashboard</li>
+          <li>
+            <a href="teacher.html"><i class="bx bx-home"></i>Home</a>
+          </li>
+          <li>
+            <a href="student-information.html"
+              ><i class="bx bxs-user-circle"></i>Users</a
+            >
+          </li>
+          <li>
+            <a href="EditeQuestion.html"
+              ><i class="bx bx-question-mark"></i>Quizzes</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Edit Question Page -->
+      <div id="edit-question-page">
+        <div class="question-container">
+          <h1 style="margin-top: 6%">
+            <button class="add-question-btn" id="add-question-btn">
+              Add new Question
+            </button>
+          </h1>
+          <table id="questions-table">
+            <thead>
+              <tr>
+                <th>Sr. No</th>
+                <th>Question</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="questions-container"></tbody>
+          </table>
         </div>
+      </div>
 
-        <!-- Edit Question Page -->
-        <div id="edit-question-page">
-            <div class="question-container">
-                <h1 style="margin-top: 6%;">
-                    <button class="add-question-btn" id="add-question-btn" onclick="clickAddQuestion()">Add Question</button>
-                </h1>
-                <table id="questions-table">
-                    <thead>
-                        <tr>
-                            <th>Question</th>
-                            <th>Option A</th>
-                            <th>Option B</th>
-                            <th>Option C</th>
-                            <th>Option D</th>
-                            <th>Correct Answer</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="questions-container"></tbody>
-                </table>
-            </div>
+      <!-- Pop-up Modal -->
+      <div id="modal">
+        <div class="modal-content">
+          <span class="close-btn">&times;</span>
+          <h2>Question Details</h2>
+          <p id="modal-question"></p>
+          <p><strong>Options:</strong></p>
+          <p id="modal-options"></p>
+          <p>
+            <strong>Correct Answer:</strong>
+            <span id="modal-correct-answer"></span>
+          </p>
         </div>
+      </div>
 
-        <script src="/javascript/main.js"></script>
-        <script>
-            // Toggle sidebar visibility when menu icon is clicked
-            document.querySelector('.bx-menu').addEventListener('click', function() {
-                const sidebar = document.getElementById('sidebar');
-                sidebar.classList.toggle('active');
+      <!-- Delete Confirmation Modal -->
+      <div id="delete-modal">
+        <div class="delete-modal-content">
+          <span class="close-delete-btn">&times;</span>
+          <h2>Delete Question</h2>
+          <p>Are you sure you want to delete this question?</p>
+          <div class="actions">
+            <button id="confirm-delete-btn">Yes, Delete</button>
+            <button id="cancel-delete-btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Question Modal -->
+      <div id="edit-modal">
+        <div class="edit-modal-content">
+          <span class="close-edit-btn">&times;</span>
+          <h2>Edit Question</h2>
+          <form id="edit-question-form">
+            <label for="edit-question">Question:</label>
+            <input
+              type="text"
+              id="edit-question"
+              name="question"
+              required
+            /><br />
+
+            <label for="edit-option-a">Option A:</label>
+            <input type="text" id="edit-option-a" name="a" required /><br />
+
+            <label for="edit-option-b">Option B:</label>
+            <input type="text" id="edit-option-b" name="b" required /><br />
+
+            <label for="edit-option-c">Option C:</label>
+            <input type="text" id="edit-option-c" name="c" required /><br />
+
+            <label for="edit-option-d">Option D:</label>
+            <input type="text" id="edit-option-d" name="d" required /><br />
+
+            <label for="edit-answer">Correct Answer:</label>
+            <input type="text" id="edit-answer" name="answer" required /><br />
+
+            <button type="submit">Save Changes</button>
+          </form>
+        </div>
+      </div>
+
+      <script src="/javascript/main.js"></script>
+      <script>
+        // Sidebar toggle
+        document
+          .querySelector(".bx-menu")
+          .addEventListener("click", function () {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("active");
+          });
+
+        document.addEventListener("DOMContentLoaded", function () {
+          const container = document.getElementById("questions-container");
+          const addQuestionBtn = document.getElementById("add-question-btn");
+          const modal = document.getElementById("modal");
+          const closeModal = document.querySelector(".close-btn");
+          const modalQuestion = document.getElementById("modal-question");
+          const modalOptions = document.getElementById("modal-options");
+          const modalCorrectAnswer = document.getElementById(
+            "modal-correct-answer"
+          );
+          const deleteModal = document.getElementById("delete-modal");
+          const closeDeleteModal = document.querySelector(".close-delete-btn");
+          const editModal = document.getElementById("edit-modal");
+          const closeEditModal = document.querySelector(".close-edit-btn");
+          const editForm = document.getElementById("edit-question-form");
+          let currentEditIndex = null; // To track which question is being edited
+
+          let questions =
+            JSON.parse(localStorage.getItem("quizQuestions")) || [];
+          function renderQuestions() {
+            console.log(questions);
+            container.innerHTML = "";
+            questions.forEach((q, index) => {
+              const questionRow = document.createElement("tr");
+
+              const srNoCell = document.createElement("td");
+              srNoCell.textContent = index + 1;
+
+              const questionCell = document.createElement("td");
+              questionCell.textContent = q.question;
+
+              const actionsCell = document.createElement("td");
+              actionsCell.classList.add("actions-cell");
+
+              // Edit button
+              const editBtn = document.createElement("button");
+              editBtn.innerHTML =
+                '<i class="bx bx-pencil" style="color:#0fd826;"></i>';
+              editBtn.addEventListener("click", () => {
+                console.log(q);
+                currentEditIndex = index;
+                document.getElementById("edit-question").value = q.question;
+                document.getElementById("edit-option-a").value = q.a;
+                document.getElementById("edit-option-b").value = q.b;
+                document.getElementById("edit-option-c").value = q.c;
+                document.getElementById("edit-option-d").value = q.d;
+                document.getElementById("edit-answer").value = q.answer;
+                editModal.style.display = "flex";
+              });
+
+              // Delete button
+              const deleteBtn = document.createElement("button");
+              deleteBtn.innerHTML =
+                '<i class="bx bx-trash" style="color:#d80f0f;"></i>';
+              deleteBtn.addEventListener("click", () => {
+                questionToDeleteIndex = index;
+                deleteModal.style.display = "flex";
+              });
+
+              // View button
+              const viewBtn = document.createElement("button");
+              viewBtn.innerHTML =
+                '<i class="bx bx-show" style="color:#1f78ff;"></i>';
+              viewBtn.addEventListener("click", () => showModal(q));
+
+              actionsCell.appendChild(editBtn);
+              actionsCell.appendChild(deleteBtn);
+              actionsCell.appendChild(viewBtn);
+
+              questionRow.appendChild(srNoCell);
+              questionRow.appendChild(questionCell);
+              questionRow.appendChild(actionsCell);
+
+              container.appendChild(questionRow);
             });
-        
-            document.addEventListener('DOMContentLoaded', function() {
-                const container = document.getElementById('questions-container');
-                const addQuestionBtn = document.getElementById('add-question-btn');
-        
-                function getQuestions() {
-                    try {
-                        const storedQuestions = localStorage.getItem('quizQuestions');
-                        return storedQuestions ? JSON.parse(storedQuestions) : [];
-                    } catch (e) {
-                        console.error('Error retrieving questions from localStorage:', e);
-                        return [];
-                    }
-                }
-                
-        
-                let questions = getQuestions();
-        
-                function renderQuestions() {
-                    container.innerHTML = ''; // Clear the container before re-rendering
-        
-                    questions.forEach((q, index) => {
-                        const questionRow = document.createElement('tr');
-                        
-                        // const indexCell = document.createElement('td');
-                        // questionCell.textContent = index;
+          }
 
-                        const questionCell = document.createElement('td');
-                        questionCell.textContent = q.question;
-        
-                        const optionACell = document.createElement('td');
-                        optionACell.textContent = q.a;
-        
-                        const optionBCell = document.createElement('td');
-                        optionBCell.textContent = q.b;
-        
-                        const optionCCell = document.createElement('td');
-                        optionCCell.textContent = q.c;
-        
-                        const optionDCell = document.createElement('td');
-                        optionDCell.textContent = q.d;
-        
-                        const answerCell = document.createElement('td');
-                        answerCell.textContent = q.answer.toUpperCase();
-        
-                        const actionsCell = document.createElement('td');
-        
-                        const editBtn = document.createElement('button');
-                        editBtn.classList.add('edit-btn');
-                        editBtn.id = `edit-btn-${index}`; 
-                        editBtn.innerHTML = '<i class="bx bx-pencil"></i>';
-                        editBtn.addEventListener('click', () => 
-                    window.location.href = "question.html");
-        
-                        const deleteBtn = document.createElement('button');
-                        deleteBtn.classList.add('delete-btn');
-                        deleteBtn.innerHTML = '<i class="bx bx-trash"></i>'; // Use innerHTML to insert the icon
-                        deleteBtn.addEventListener('click', () => deleteQuestion(index));
-        
-                        actionsCell.appendChild(editBtn);
-                        actionsCell.appendChild(deleteBtn);
-        
-                        questionRow.appendChild(questionCell);
-                        questionRow.appendChild(optionACell);
-                        questionRow.appendChild(optionBCell);
-                        questionRow.appendChild(optionCCell);
-                        questionRow.appendChild(optionDCell);
-                        questionRow.appendChild(answerCell);
-                        questionRow.appendChild(actionsCell);
-        
-                        container.appendChild(questionRow);
-                    });
-                }
+          let questionToDeleteIndex; // Variable to hold index of question to delete
 
-                
-                
-        
-                function clickAddQuestion() {
-                    window.location.href = "question.html"; // Redirect to the next page
-                }
-                 addQuestionBtn.addEventListener('click',clickAddQuestion);
+          function showModal(questionData) {
+            // Set modal content
+            modalQuestion.textContent = questionData.question;
+            modalOptions.innerHTML = `A: ${questionData.a}<br>B: ${questionData.b}<br>C: ${questionData.c}<br>D: ${questionData.d}`;
+            modalCorrectAnswer.textContent = questionData.answer.toUpperCase();
 
+            modal.style.display = "flex";
+          }
 
-                 
-        
-                function deleteQuestion(index) {
-                    if (confirm('Are you sure you want to delete this question?')) {
-                        questions.splice(index, 1);
-                        try {
-                            localStorage.setItem('quizQuestions', JSON.stringify(questions));
-                            console.log("Questions after deletion:", questions);
-                        } catch (e) {
-                            console.error('Error deleting questions from localStorage:', e);
-                        }
-                        renderQuestions();
-                    }
-                }
-        
-                renderQuestions();
+          // Close edit modal when 'X' is clicked
+          closeEditModal.addEventListener("click", function () {
+            editModal.style.display = "none";
+          });
+
+          window.addEventListener("click", function (event) {
+            if (event.target === editModal) {
+              editModal.style.display = "none";
+            }
+          });
+
+          // Handle form submission to edit question
+          editForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Update the selected question
+            const updatedQuestion = {
+              question: document.getElementById("edit-question").value,
+              a: document.getElementById("edit-option-a").value,
+              b: document.getElementById("edit-option-b").value,
+              c: document.getElementById("edit-option-c").value,
+              d: document.getElementById("edit-option-d").value,
+              answer: document.getElementById("edit-answer").value,
+            };
+
+            questions[currentEditIndex] = updatedQuestion;
+            localStorage.setItem("quizQuestions", JSON.stringify(questions));
+            renderQuestions(); // Re-render questions
+            editModal.style.display = "none"; // Close edit modal
+          });
+
+          // Close modal when 'X' is clicked
+          closeModal.addEventListener("click", function () {
+            modal.style.display = "none";
+          });
+
+          // Close modal when clicking outside the content area
+          window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+              modal.style.display = "none";
+            }
+          });
+
+          // Confirm delete action
+          document
+            .getElementById("confirm-delete-btn")
+            .addEventListener("click", function () {
+              questions.splice(questionToDeleteIndex, 1);
+              localStorage.setItem("quizQuestions", JSON.stringify(questions));
+              renderQuestions(); // Re-render questions after deletion
+              deleteModal.style.display = "none"; // Close delete modal
             });
-        </script>
-        </body>
-        </body>
+
+          // Cancel deletion
+          document
+            .getElementById("cancel-delete-btn")
+            .addEventListener("click", function () {
+              deleteModal.style.display = "none";
+            });
+
+          // Close delete modal when 'X' is clicked
+          closeDeleteModal.addEventListener("click", function () {
+            deleteModal.style.display = "none";
+          });
+
+          function clickAddQuestion() {
+            window.location.href = "question.html";
+          }
+
+          addQuestionBtn.addEventListener("click", clickAddQuestion);
+
+          renderQuestions();
+        });
+      </script>
+    </div>
+  </body>
 </html>

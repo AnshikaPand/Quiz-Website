@@ -30,7 +30,7 @@
             <ul>
                 <li class="menu-title">Dashboard</li>
                 <li><a href="teacher.html"><i class='bx bx-home'></i>Home</a></li>
-                <li><a href="Studentinformation.html"><i class='bx bxs-user-circle'></i>User</a></li>
+                <li><a href="student-information.html"><i class='bx bxs-user-circle'></i>User</a></li>
                 <li><a href="EditeQuestion.html"><i class='bx bx-question-mark'></i>Quizzes</a></li>
             </ul>
         </div>
@@ -93,10 +93,10 @@ function displayQuestions() {
 
     quizQuestions.forEach((questionObj, index) => {
         const options = questionObj.option || []; // Ensure options exist
-        const option1 = options[0] || 'N/A'; // Default to 'N/A' if missing
-        const option2 = options[1] || 'N/A';
-        const option3 = options[2] || 'N/A';
-        const option4 = options[3] || 'N/A';
+        const option1 = options[a] || 'N/A'; // Default to 'N/A' if missing
+        const option2 = options[b] || 'N/A';
+        const option3 = options[c] || 'N/A';
+        const option4 = options[d] || 'N/A';
 
         const questionItem = document.createElement('li');
         questionItem.innerHTML = `
@@ -106,7 +106,7 @@ function displayQuestions() {
                 <li>Option 2: ${option2}</li>
                 <li>Option 3: ${option3}</li>
                 <li>Option 4: ${option4}</li>
-                <li><strong>Correct Answer:</strong> ${questionObj.correctAnswer}</li>
+                <li><strong>Correct Answer:</strong> ${questionObj.answer}</li>
             </ul>
         `;
         questionList.appendChild(questionItem);
@@ -115,15 +115,15 @@ function displayQuestions() {
 
 
 document.getElementById('add-btn').addEventListener('click', function (e) {
-    e.preventDefault();
+    e.preventDefault()
     const question = document.getElementById('question').value;
     const option1 = document.getElementById('option1').value;
     const option2 = document.getElementById('option2').value;
     const option3 = document.getElementById('option3').value;
     const option4 = document.getElementById('option4').value;
-    const correctAnswer = document.getElementById('answer').value;
+    const answer = document.getElementById('answer').value;
 
-    if (!question || !option1 || !option2 || !option3 || !option4 || !correctAnswer) {
+    if (!question || !option1 || !option2 || !option3 || !option4 || !answer) {
         alert('Please fill in all fields.');
         return;
     }
@@ -131,8 +131,11 @@ document.getElementById('add-btn').addEventListener('click', function (e) {
     // Create new question object
     const newQuestion = {
         question: question,
-        option: [option1, option2, option3, option4],
-        correctAnswer: correctAnswer
+        a: option1,
+        b: option2,
+        c: option3,
+        d: option4,
+        answer: answer
     };
 
     // Add new question to array and update local storage

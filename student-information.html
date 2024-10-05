@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/admin.css">
+    <!-- Boxicon -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <div class="Teacher-Page">
+    <header>
+        <nav>
+            <div id="head">
+                <i class='bx bx-menu'></i> <!-- Icon for toggling the sidebar -->
+                <img src="/img/techpathsala-logo.jpeg">
+                <div id="admin-logout-btn"></div>
+                <p id="welcome-admin">Welcome Anshika</p>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li class="menu-title">Dashboard</li>
+            <li><a href="teacher.html"><i class='bx bx-home' ></i>Home</a></li>
+            <li><a href="student-information.html"><i class='bx bxs-user-circle' ></i>Users</a></li>
+            <li><a href="EditeQuestion.html"><i class='bx bx-question-mark' ></i>Quizzes</a></li>
+        </ul>
+    </div>
+
+    <!-- Student Information Table -->
+    <div id="student-information">
+        <table id="Information">
+            <thead>
+                <thead>
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Name</th>
+                        <th>Email id</th>
+                        <th>Score</th>
+                        <th>Test Count</th>
+                        <th>View More</th>
+                    </tr>
+                </thead>                
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="/javascript/main.js"></script>
+    <script>
+        // Toggle sidebar visibility when menu icon is clicked
+        document.querySelector('.bx-menu').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        });
+
+        function displayAllUsersInfo() {
+    const tbody = document.querySelector('#Information tbody');
+
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+    if (users.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6">No user information available.</td></tr>`;
+        return;
+    }
+
+    users.forEach((user, index) => {
+        // Find the user's score and testCount from the scores array
+        const userScoreData = scores.find(score => score.email === user.email) || {};
+        const userScore = userScoreData.score || 'Not Attempted';
+        const userTestCount = userScoreData.testCount || 0; // Default to 0 if not available
+
+        // Create a row for each user
+        const userRowHtml = `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${userScore}</td>
+                <td>${userTestCount}</td> <!-- Display the test count -->
+                <td><a href="viewmore.html?email=${encodeURIComponent(user.email)}" class="view-more-btn">View More</a></td>
+            </tr>
+        `;
+
+        tbody.innerHTML += userRowHtml;
+    });
+}
+
+// Ensure displayAllUsersInfo is called when the page loads
+window.onload = function() {
+    displayAllUsersInfo(); 
+};
+
+    </script>
+</body>
+</html>
