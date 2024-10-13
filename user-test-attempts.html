@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Test Attempts</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/admin.css"> <!-- Your existing CSS -->
+    <style>
+        /* Simple table styling */
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            margin-left: 20%;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 10%;
+        }
+
+        .view-more-btn {
+            color: blue;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .view-more-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Add vertical lines between the columns */
+        td {
+            border-right: 1px solid #ddd;
+        }
+
+        td:last-child {
+            border-right: none; /* Remove the border from the last column */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Teacher-Page">
+        <header>
+            <nav>
+                <div id="head">
+                    <i class='bx bx-menu'></i> <!-- Icon for toggling the sidebar -->
+                    <img src="https://techpaathshala.com/assets//images/home/techpathshala_mobile_logo.svg">
+                    <div id="admin-logout-btn"></div>
+                    <p id="welcome-admin">Welcome Anshika</p>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <ul>
+                <li class="menu-title">Dashboard</li>
+                <li><a href="teacher.html"><i class='bx bx-home'></i>Home</a></li>
+                <li><a href="student-information.html"><i class='bx bxs-user-circle'></i>Users</a></li>
+                <li><a href="EditeQuestion.html"><i class='bx bx-question-mark'></i>Quizzes</a></li>
+            </ul>
+        </div>
+
+        <h1>User Test Attempts</h1>
+
+        <!-- Div part where the table will be displayed -->
+        <div id="test-attempts"></div>
+
+    </div>
+
+    <script>
+        // Toggle sidebar visibility when menu icon is clicked
+        document.querySelector('.bx-menu').addEventListener('click', function () {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        });
+
+        // Function to get query parameters from the URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Function to display the test attempts for the specific user
+        function displayUserTestAttempts() {
+            const userEmail = getQueryParam('email'); // Get the email from the URL query parameter
+
+            if (!userEmail) {
+                document.getElementById('test-attempts').innerHTML = '<p>No user email found.</p>';
+                return;
+            }
+
+            // Retrieve all test attempts from localStorage
+            const testAttempts = JSON.parse(localStorage.getItem('testAttempts')) || [];
+
+            const userAttempts = testAttempts.filter(attempt => attempt.userEmail === userEmail);
+
+            const attemptsContainer = document.getElementById('test-attempts');
+            if (userAttempts.length === 0) {
+                attemptsContainer.innerHTML = '<p>No test attempts found for this user.</p>';
+                return;
+            }
+
+            let tableHtml = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Test Attempt</th>
+                            <th>Score</th>
+                            <th>Timestamp</th>
+                            <th>Time Spent (Second)</th>
+                            <th>View Test Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            userAttempts.forEach((attempt, index) => {
+                tableHtml += `
+                    <tr>
+                        <td>Attempt ${index + 1}</td>
+                        <td>${attempt.score}</td>
+                        <td>${attempt.timestamp}</td>
+                        <td>${attempt.timeSpent}</td>
+                        <td><a href="view-test-details.html?email=${encodeURIComponent(userEmail)}&attempt=${index}" class="view-more-btn">View Details</a></td>
+                    </tr>
+                `;
+            });
+
+            // Close table structure
+            tableHtml += `
+                    </tbody>
+                </table>
+            `;
+
+            attemptsContainer.innerHTML = tableHtml;
+        }
+
+        // Call displayUserTestAttempts when the page loads
+        window.onload = function () {
+            displayUserTestAttempts();
+        };
+    </script>
+
+</body>
+
+</html>

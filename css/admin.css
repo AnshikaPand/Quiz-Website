@@ -3,6 +3,7 @@
 
 *{
     font-family: sans-serif;
+    
 }
 /* home page */
 #home-page a{
@@ -192,6 +193,11 @@ font-size: larger;
     margin-right: 70px; 
 }
 
+.view-more-btn{
+    text-decoration: none;
+   color: #000080;
+}
+
 /* Styling for the admin logout button */
 #admin-logout-btn {
     height: 60px;
@@ -207,7 +213,7 @@ font-size: larger;
 }
 
 #admin-logout-btn:hover {
-    background-color: #ccc; /* Light grey on hover */
+    background-color: #F3BD00; /* Light grey on hover */
 }
 
 /* Optional: Styling the horizontal line under the nav */
@@ -256,7 +262,7 @@ font-size: larger;
     z-index: 1000;
  /* Adding right border only */
     border-right: 2px solid #ccc; /* Change color and thickness as needed */
-    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
     font-family: sans-serif;
 }
 
@@ -267,7 +273,7 @@ font-size: larger;
 
 /* Page content */
 .content {
-    margin-left: 250px; /* By default, content moves to make space for the sidebar */
+    margin-left: 250px; 
     transition: margin-left 0.3s ease;
 }
 
@@ -299,9 +305,9 @@ font-size: larger;
 
 /* Sidebar list items */
 .sidebar ul li {
-    padding: 15px 20px; /* Adds space around each menu item */
-    font-size: 18px; /* Adjust font size */
-    /* border-bottom: 1px solid #444;  */
+    padding: 15px 20px;
+    font-size: 18px; 
+   
 }
 
 /* Sidebar menu title */
@@ -314,14 +320,14 @@ font-size: larger;
 
 /* Sidebar links */
 .sidebar ul li a {
-    color: rgb(4, 4, 4); 
+    color: rgb(53, 52, 52); 
     text-decoration: none; 
     display: block;
 }
 
 /* Hover effect for sidebar links */
 .sidebar ul li a:hover {
-    background-color: #575757; 
+    background-color: #F3BD00; 
     padding-left: 30px; 
     transition: 0.3s; 
 }
@@ -345,7 +351,7 @@ font-size: larger;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     margin: 10px;
     height: 150px;
-    width: 250px;
+    width: 280px;
 }
 
 .user-count-box i {

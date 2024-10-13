@@ -12,6 +12,51 @@
       rel="stylesheet"
     />
     <style>
+
+     
+/* Sidebar active state */
+.sidebar.active {
+    left: -250px; /* Move sidebar off-screen */
+}
+
+/* Edit Question Page shift left when sidebar is active */
+#edit-question-page.shifted {
+    transform: translateX(-150px); 
+    transition: transform 0.3s ease; 
+}
+
+/* Table styles */
+#questions-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#questions-table th,
+#questions-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+#questions-table th {
+    background-color: #f4f4f4;
+}
+
+/* Actions buttons styling */
+.actions-cell button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.actions-cell i {
+    font-size: 20px;
+}
+
       td div {
         display: inline-block;
         margin-right: 10px;
@@ -114,9 +159,9 @@
 
       .edit-modal-content {
         background-color: white;
-        padding: 20px;
+        padding: 50px;
         border-radius: 8px;
-        width: 400px;
+        width: 500px;
         max-width: 90%;
       }
 
@@ -141,6 +186,7 @@
       .close-edit-btn {
         float: right;
         cursor: pointer;
+        height: 50px;
       }
     </style>
   </head>
@@ -150,7 +196,7 @@
         <nav>
           <div id="head">
             <i class="bx bx-menu"></i>
-            <img src="/img/techpathsala-logo.jpeg" />
+            <img src="https://techpaathshala.com/assets//images/home/techpathshala_mobile_logo.svg" />
             <div id="admin-logout-btn"></div>
             <p id="welcome-admin">Welcome Anshika</p>
           </div>
@@ -179,8 +225,11 @@
 
       <!-- Edit Question Page -->
       <div id="edit-question-page">
+
         <div class="question-container">
-          <h1 style="margin-top: 6%">
+          <h2 style="margin-top: 7%; color: #7c7777; margin-left: 48%;">All Quiz Questions</h2>
+          <hr style="margin-left: 10%;">
+          <h1 style="margin-top: 3%;">
             <button class="add-question-btn" id="add-question-btn">
               Add new Question
             </button>
@@ -204,7 +253,7 @@
           <span class="close-btn">&times;</span>
           <h2>Question Details</h2>
           <p id="modal-question"></p>
-          <p><strong>Options:</strong></p>
+          <p><smargin-top: 6%trong>Options:</smargin-top:></p>
           <p id="modal-options"></p>
           <p>
             <strong>Correct Answer:</strong>
@@ -227,9 +276,9 @@
       </div>
 
       <!-- Edit Question Modal -->
-      <div id="edit-modal">
+      <div id="edit-modal" >
         <div class="edit-modal-content">
-          <span class="close-edit-btn">&times;</span>
+          <span class="close-edit-btn " >&times;</span>
           <h2>Edit Question</h2>
           <form id="edit-question-form">
             <label for="edit-question">Question:</label>
@@ -255,21 +304,24 @@
             <label for="edit-answer">Correct Answer:</label>
             <input type="text" id="edit-answer" name="answer" required /><br />
 
-            <button type="submit">Save Changes</button>
+            <button type="submit" style="margin-left: 40%;">Save Changes</button>
           </form>
         </div>
       </div>
 
       <script src="/javascript/main.js"></script>
       <script>
-        // Sidebar toggle
-        document
-          .querySelector(".bx-menu")
-          .addEventListener("click", function () {
-            const sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("active");
-          });
+       // Sidebar toggle
+document.querySelector(".bx-menu").addEventListener("click", function () {
+    const sidebar = document.getElementById("sidebar");
+    const questionPage = document.getElementById("edit-question-page");
 
+    // Toggle the 'active' class on the sidebar
+    sidebar.classList.toggle("active");
+
+    // Toggle the 'shifted' class on the question page to move it to the left
+    questionPage.classList.toggle("shifted");
+});
         document.addEventListener("DOMContentLoaded", function () {
           const container = document.getElementById("questions-container");
           const addQuestionBtn = document.getElementById("add-question-btn");
@@ -385,7 +437,7 @@
 
             questions[currentEditIndex] = updatedQuestion;
             localStorage.setItem("quizQuestions", JSON.stringify(questions));
-            renderQuestions(); // Re-render questions
+            renderQuestions(); 
             editModal.style.display = "none"; // Close edit modal
           });
 

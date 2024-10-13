@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Test Details</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/admin.css">
+    <!-- Boxicon -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        .answer-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px;
+            display: inline-block;
+            width: calc(80% - 22px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            vertical-align: top;
+            margin-left: 15%;
+        }
+
+        .answer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        #test-details-page {
+            margin-top: 8%;
+            text-align: center;
+        }
+
+        #test-details {
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        .test-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            width: 75%;
+            margin-left: 18%;
+            margin-top: 50px;
+        }
+
+        .test-info span {
+            margin-right: 15px;
+        }
+
+        .correct-answer {
+            color: blue;
+            font-weight: bold;
+        }
+
+        .incorrect-answer {
+            color: red;
+            font-weight: bold;
+        }
+
+        .selected-answer {
+            font-weight: bold;
+            color: green;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Teacher-Page">
+        <header>
+            <nav>
+                <div id="head">
+                    <i class='bx bx-menu'></i> <!-- Icon for toggling the sidebar -->
+                    <img src="https://techpaathshala.com/assets//images/home/techpathshala_mobile_logo.svg">
+                    <div id="admin-logout-btn"></div>
+                    <p id="welcome-admin">Welcome Anshika</p>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <ul>
+                <li class="menu-title">Dashboard</li>
+                <li><a href="teacher.html"><i class='bx bx-home'></i>Home</a></li>
+                <li><a href="student-information.html"><i class='bx bxs-user-circle'></i>Users</a></li>
+                <li><a href="EditeQuestion.html"><i class='bx bx-question-mark'></i>Quizzes</a></li>
+            </ul>
+        </div>
+
+        <h1 id="test-details-page">Test Attempt Details</h1>
+
+        <!-- Div part where the detailed test attempt will be displayed -->
+        <div id="test-details"></div>
+
+        <script>
+            // Toggle sidebar visibility when menu icon is clicked
+            document.querySelector('.bx-menu').addEventListener('click', function () {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.toggle('active');
+            });
+
+            // Function to get query parameters from the URL
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+            
+    function displayTestDetails() {
+        const userEmail = getQueryParam('email');
+        const attemptIndex = getQueryParam('attempt');
+
+        if (!userEmail || attemptIndex === null) {
+            document.getElementById('test-details').innerHTML = '<p>Invalid user email or test attempt.</p>';
+            return;
+        }
+
+        const testAttempts = JSON.parse(localStorage.getItem('testAttempts')) || [];
+        const userAttempts = testAttempts.filter(attempt => attempt.userEmail === userEmail);
+        const testAttempt = userAttempts[attemptIndex];
+
+        if (!testAttempt) {
+            document.getElementById('test-details').innerHTML = '<p>No test attempt found.</p>';
+            return;
+        }
+
+        // Display the details of the selected test attempt
+        let detailsHtml = `
+            <div class="test-info">
+                <span><strong>Score:</strong> ${testAttempt.score}</span>
+                <span><strong>Timestamp:</strong> ${testAttempt.timestamp}</span>
+                <span><strong>Time Spent:</strong> ${testAttempt.timeSpent} Second</span>
+            </div>
+            <div class="answer-container">
+        `;
+
+        testAttempt.answeredQuestions.forEach(question => {
+            const selectedAnswer = question.selectedAnswer || 'Not answered';
+            const correctAnswer = question.correctAnswer || 'N/A';
+            const options = Object.values(question.options || {});
+
+            const selectedAnswerClass = selectedAnswer === correctAnswer ? 'selected-answer' : 'incorrect-answer';
+
+            detailsHtml += `
+                <div class="answer-card">
+                    <p><strong>${question.question || 'No question text available'}</strong></p>
+                    <ul>
+            `;
+
+            options.forEach(option => {
+                let optionClass = '';
+                if (option === selectedAnswer) {
+                    optionClass = selectedAnswer === correctAnswer ? 'selected-answer' : 'incorrect-answer';
+                }
+                detailsHtml += `<li class="${optionClass}" style="background-color: ${optionClass === 'selected-answer' ? 'green' : optionClass === 'incorrect-answer' ? 'red' : 'transparent'}">${option}</li>`;
+            });
+
+            detailsHtml += `
+                    </ul>
+                    <p>
+                        <span class="${selectedAnswerClass}">Your Answer: ${selectedAnswer}</span><br>
+                        <span class="correct-answer">Correct Answer: ${correctAnswer}</span>
+                    </p>
+                </div>`;
+        });
+
+        detailsHtml += '</div>'; // Close the answer container
+        document.getElementById('test-details').innerHTML = detailsHtml;
+    }
+
+    // Call displayTestDetails when the page loads
+    window.onload = function () {
+        displayTestDetails();
+    };
+
+          
+        </script>
+
+    </div>
+</body>
+
+</html>

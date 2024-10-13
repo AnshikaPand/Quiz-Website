@@ -8,6 +8,64 @@
     <link rel="stylesheet" href="/css/admin.css">
     <!-- Boxicon -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+      /* Sidebar styles */
+.sidebar {
+    position: fixed;
+    margin-top: 5.5%;
+    padding-top: 20px;
+    left: 0; /* Sidebar visible by default */
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #f7f7f7;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    border-right: 2px solid #ccc; /* Right border for sidebar */
+    font-family: sans-serif;
+}
+
+/* Sidebar active state */
+.sidebar.active {
+    left: -250px; /* Move sidebar off-screen */
+}
+
+/* Table container style when sidebar is active (shift left) */
+#student-information.shifted {
+    transform: translateX(-150px); /* Shift the table to the left */
+    width: calc(100% + 10px); 
+    transition: transform 0.3s ease, width 0.3s ease; /* Ensure width changes smoothly */
+}
+
+/* Table styles */
+#Information {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#Information th,
+#Information td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+#Information th {
+    background-color: #f4f4f4;
+}
+
+.view-more-btn {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.view-more-btn:hover {
+    text-decoration: underline;
+}
+
+
+    </style>
 </head>
 <body>
 
@@ -16,7 +74,7 @@
         <nav>
             <div id="head">
                 <i class='bx bx-menu'></i> <!-- Icon for toggling the sidebar -->
-                <img src="/img/techpathsala-logo.jpeg">
+                <img src="https://techpaathshala.com/assets//images/home/techpathshala_mobile_logo.svg">
                 <div id="admin-logout-btn"></div>
                 <p id="welcome-admin">Welcome Anshika</p>
             </div>
@@ -27,26 +85,24 @@
     <div class="sidebar" id="sidebar">
         <ul>
             <li class="menu-title">Dashboard</li>
-            <li><a href="teacher.html"><i class='bx bx-home' ></i>Home</a></li>
-            <li><a href="student-information.html"><i class='bx bxs-user-circle' ></i>Users</a></li>
-            <li><a href="EditeQuestion.html"><i class='bx bx-question-mark' ></i>Quizzes</a></li>
+            <li><a href="teacher.html"><i class='bx bx-home'></i>Home</a></li>
+            <li><a href="student-information.html"><i class='bx bxs-user-circle'></i>Users</a></li>
+            <li><a href="EditeQuestion.html"><i class='bx bx-question-mark'></i>Quizzes</a></li>
         </ul>
     </div>
 
     <!-- Student Information Table -->
-    <div id="student-information">
+    <div id="student-information" style="width: 100%; margin-left: 10%;">
         <table id="Information">
             <thead>
-                <thead>
-                    <tr>
-                        <th>Sr.No</th>
-                        <th>Name</th>
-                        <th>Email id</th>
-                        <th>Score</th>
-                        <th>Test Count</th>
-                        <th>View More</th>
-                    </tr>
-                </thead>                
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Name</th>
+                    <th>Email id</th>
+                    <th>Score</th>
+                    <th>Test Count</th>
+                    <th>View More</th>
+                </tr>
             </thead>
             <tbody>
             </tbody>
@@ -55,13 +111,19 @@
 
     <script src="/javascript/main.js"></script>
     <script>
-        // Toggle sidebar visibility when menu icon is clicked
-        document.querySelector('.bx-menu').addEventListener('click', function() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        });
+    // Toggle sidebar visibility and shift the table to the left when menu icon is clicked
+document.querySelector('.bx-menu').addEventListener('click', function() {
+    const sidebar = document.getElementById('sidebar');
+    const studentInfo = document.getElementById('student-information'); // The table container
 
-        function displayAllUsersInfo() {
+    // Toggle the 'active' class on the sidebar
+    sidebar.classList.toggle('active');
+
+    studentInfo.classList.toggle('shifted');
+});
+
+// Function to display all users and their information
+function displayAllUsersInfo() {
     const tbody = document.querySelector('#Information tbody');
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
@@ -73,7 +135,7 @@
     }
 
     users.forEach((user, index) => {
-        // Find the user's score and testCount from the scores array
+        // Find the user's score and test count from the scores array
         const userScoreData = scores.find(score => score.email === user.email) || {};
         const userScore = userScoreData.score || 'Not Attempted';
         const userTestCount = userScoreData.testCount || 0; // Default to 0 if not available
@@ -86,7 +148,7 @@
                 <td>${user.email}</td>
                 <td>${userScore}</td>
                 <td>${userTestCount}</td> <!-- Display the test count -->
-                <td><a href="viewmore.html?email=${encodeURIComponent(user.email)}" class="view-more-btn">View More</a></td>
+                <td><a href="user-test-attempts.html?email=${encodeURIComponent(user.email)}" class="view-more-btn" >View More</a></td>
             </tr>
         `;
 
@@ -96,9 +158,8 @@
 
 // Ensure displayAllUsersInfo is called when the page loads
 window.onload = function() {
-    displayAllUsersInfo(); 
+    displayAllUsersInfo();
 };
-
     </script>
 </body>
 </html>

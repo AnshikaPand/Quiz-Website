@@ -18,7 +18,7 @@
             <nav>
                 <div id="head">
                     <i class='bx bx-menu'></i> <!-- Icon for toggling the sidebar -->
-                    <img src="/img/techpathsala-logo.jpeg">
+                    <img src="https://techpaathshala.com/assets//images/home/techpathshala_mobile_logo.svg">
                     <div id="admin-logout-btn"></div>
                     <p id="welcome-admin">Welcome Anshika</p>
                 </div>
@@ -65,7 +65,7 @@
                 <button id="add-btn">Task Done</button>
 
                 <!-- Question List Display -->
-                <h3>Saved Questions</h3>
+                <!-- <h3>Saved Questions</h3> -->
                 <ul id="question-list"></ul>
             </div>
         </div>
@@ -78,7 +78,7 @@
                 sidebar.classList.toggle('active');
             });
 
-           // Retrieve quiz questions from local storage
+          
 let quizQuestions = JSON.parse(localStorage.getItem('quizQuestions')) || [];
 
 // Function to display saved questions
@@ -93,7 +93,7 @@ function displayQuestions() {
 
     quizQuestions.forEach((questionObj, index) => {
         const options = questionObj.option || []; // Ensure options exist
-        const option1 = options[a] || 'N/A'; // Default to 'N/A' if missing
+        const option1 = options[a] || 'N/A'; 
         const option2 = options[b] || 'N/A';
         const option3 = options[c] || 'N/A';
         const option4 = options[d] || 'N/A';
@@ -142,7 +142,7 @@ document.getElementById('add-btn').addEventListener('click', function (e) {
     quizQuestions.push(newQuestion);
     localStorage.setItem('quizQuestions', JSON.stringify(quizQuestions));
 
-    // Reset input fields
+   
     document.getElementById('question').value = "";
     document.getElementById('option1').value = "";
     document.getElementById('option2').value = "";

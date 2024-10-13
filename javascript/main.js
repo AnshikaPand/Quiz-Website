@@ -57,7 +57,7 @@ function register() {
     localStorage.setItem('users', JSON.stringify(existingUsers));
 
     alert('Signup successful!');
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 }
 
 // Function to validate email format
@@ -257,6 +257,14 @@ function storeUserAnswer(questionIndex, selectedAnswer) {
     localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
 }
 
+function resetUserAnswers() {
+    localStorage.removeItem('userAnswers');
+}
+
+// Call this after submitting the quiz
+resetUserAnswers();
+
+
 let startTime = null;
 
 // Initialize the quiz and set start time
@@ -312,7 +320,13 @@ function calculateAndStoreScore() {
                 question: questionData.question,
                 selectedAnswer: answer.selectedAnswer,
                 correctAnswer: questionData.answer,
-                isCorrect: isCorrect
+                isCorrect: isCorrect,
+                options: {
+                    a: questionData.a,
+                    b: questionData.b,
+                    c: questionData.c,
+                    d: questionData.d
+                }
             };
         }).filter(q => q !== null);
 
@@ -335,6 +349,36 @@ function calculateAndStoreScore() {
         console.error('An error occurred while calculating and storing the score:', error);
     }
 }
+
+
+// Store the test attempt in localStorage
+function storeTestAttempt(userEmail, userName, score, answeredQuestions, timeSpent) {
+    let testAttempts = JSON.parse(localStorage.getItem('testAttempts')) || [];
+    
+    const newAttempt = {
+        userEmail,
+        userName,
+        score,
+        timeSpent,
+        timestamp: new Date().toLocaleString(), // Store the timestamp of the attempt
+        answeredQuestions: answeredQuestions.map(q => ({
+            question: q.question,
+            selectedAnswer: q.selectedAnswer,
+            correctAnswer: q.correctAnswer,
+            isCorrect: q.isCorrect,
+            options: {
+                a: questions.find(question => question.question === q.question).a,
+                b: questions.find(question => question.question === q.question).b,
+                c: questions.find(question => question.question === q.question).c,
+                d: questions.find(question => question.question === q.question).d
+            }
+        }))
+    };
+
+    testAttempts.push(newAttempt);
+    localStorage.setItem('testAttempts', JSON.stringify(testAttempts));
+}
+
 
 
 function displayTestAttempts() {
@@ -582,192 +626,6 @@ function previousQuestion() {
         document.getElementById('Previous-btn').disabled = true;
     }
 }
-
-
-function storeTestAttempt(userEmail, userName, score, answeredQuestions, timeSpent) {
-    let testAttempts = JSON.parse(localStorage.getItem('testAttempts')) || [];
-
-    // Create a new test attempt object
-    const newTestAttempt = {
-        userEmail: userEmail,
-        userName: userName,
-        score: score,
-        answeredQuestions: answeredQuestions,
-        timeSpent: timeSpent,
-        timestamp: new Date().toLocaleString()
-    };
-
-    // Add the new test attempt to the array
-    testAttempts.push(newTestAttempt);
-
-    // Save back to localStorage
-    localStorage.setItem('testAttempts', JSON.stringify(testAttempts));
-}
-
-
-// function updateTimeline() {
-//     const progressBar = document.getElementById('time-line-overlap');
-//     console.log('Updating progress bar...'); // Debugging line
-//     console.log('Current Question Index:', currentQuestionIndex); // Debugging line
-
-//     if (!progressBar) {
-//         console.error('Progress bar element not found.');
-//         return;
-//     }
-
-//     if (typeof currentQuestionIndex === 'undefined' || currentQuestionIndex < 0) {
-//         console.error('Invalid question index.');
-//         return;
-//     }
-
-//     const totalQuestions = questions.length;
-// const progressPercentage = ((currentQuestionIndex + 1) / totalQuestions) * 100;
-
-//     console.log(`Progress Percentage: ${progressPercentage}`); // Debugging line
-
-//     progressBar.style.width = `${progressPercentage}%`;
-// }
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     console.log('DOM fully loaded and parsed'); // Check if this logs
-//     storeQuestionsInLocalStorage();
-//     displayQuestion(currentQuestionIndex);
-//     updateTimeline();
-
-
-//     // Add event listeners for buttons after the DOM is loaded
-//     const nextQueston = document.getElementById('next-btn');
-//     if (nextQueston) {
-//         nextQueston.addEventListener('click', nextQuestion);
-//     }
-
-//     const previous = document.getElementById('Previous-btn');
-//     if (previous) {
-//         previous.addEventListener('click', previousQuestion);
-//     }
-// });
-
-// function updateButtonState() {
-//     document.getElementById('Previous-btn').disabled = (currentQuestionIndex === 0);
-//     document.getElementById('next-btn').disabled = (currentQuestionIndex === totalQuestions - 1);
-// }
-
-
-// // Function to handle logout with confirmation
-// function handleLogout()
-//  {
-//     console.log('handleLogout function called'); // Debugging line
-//     const confirmation = confirm('Are you sure you want to log out?');
-//     if (confirmation) 
-//         {
-//         // Clear all relevant localStorage items
-//         localStorage.removeItem('userAnswers');
-//         localStorage.removeItem('quizScore');
-
-//         localStorage.removeItem('finalScore');
-
-//         localStorage.removeItem('userGmail');
-//         localStorage.removeItem('userName');
-
-//         window.location.href = 'login.html'; 
-//     }
-// }
-// // Function to setup image upload functionality
-// function setupImageUpload() 
-// {
-//     const userImgDiv = document.getElementById('userimg');
-
-
-//     const imageUploadInput = document.getElementById('imageUpload');
-
-//     if (!userImgDiv || !imageUploadInput) {
-
-//         console.error('Element not found: userimg or imageUpload');
-
-//         return;
-//     }
-
-//     // Handle click on user image container to trigger file input
-//     userImgDiv.addEventListener('click', function() {
-
-//         imageUploadInput.click(); 
-//     });
-
-//     // Handle image upload
-//     imageUploadInput.addEventListener('change', function(event) {
-//         const file = event.target.files[0];
-//         if (file) {
-
-//             const reader = new FileReader();
-//             reader.onload = function(e)
-//              {
-//                 const imgData = e.target.result; // Image data URL
-
-//                 localStorage.setItem('userImage', imgData);
-
-//                 // Display the image
-//                 displayImage(imgData);
-//             };
-//             reader.readAsDataURL(file);
-//         }
-//     });
-
-//     // Function to display the image
-//     function displayImage(imgData)
-//      {
-//         const imgElement = document.createElement('img');
-//         imgElement.src = imgData;
-//         imgElement.alt = 'User Image';
-
-//         imgElement.style.width = '60px'
-//         ; 
-//         imgElement.style.height = '60px';
-
-//         imgElement.style.borderRadius = '50%'; 
-
-//         // Clear previous content and append new image
-//         userImgDiv.innerHTML = '';
-//         userImgDiv.appendChild(imgElement);
-
-
-//         imgElement.style.position = 'relative';
-//         imgElement.style.top = '-25px'; 
-//         imgElement.style.marginLeft = '-2px'; 
-//     }
-
-//     // Load image from local storage on page load
-//     const savedImage = localStorage.getItem('userImage');
-//     if (savedImage) {
-//         displayImage(savedImage);
-//     }
-
-//     // Prevent the context menu from appearing on right-click
-//     userImgDiv.addEventListener('contextmenu', function(event) {
-//         event.preventDefault(); // Prevent the default context menu
-//     });
-// }
-
-
-// // Ensure setupImageUpload is called when the page loads
-// document.addEventListener('DOMContentLoaded', setupImageUpload);
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const userEmail = localStorage.getItem('currentUserEmail');
-//     if (!userEmail) {
-//         alert('Please log in to start the quiz.');
-//         window.location.href = "login.html"; // Redirect to login page
-//         return;
-//     }
-
-//     storeQuestionsInLocalStorage();
-//     displayQuestion(currentQuestionIndex);
-//     updateTimeline();
-
-// });
-
-
-
 
 
 
