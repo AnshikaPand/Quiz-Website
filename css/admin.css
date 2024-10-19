@@ -1,10 +1,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-*{
-    font-family: sans-serif;
-    
+/* Apply to body and headings */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
 }
+
+h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+}
+
 /* home page */
 #home-page a{
     text-decoration: none;
@@ -232,21 +240,7 @@ font-size: larger;
 }
 
 
-/* Sidebar Styles */
-/* .sidebar {
-    position: fixed; 
-    top: 11%;
-    left: 0.5%;
-    width: 250px;
-    height: 100%;
- background-color: #ffffff; 
-    color: rgb(0, 0, 0); 
-    padding-top: 20px; 
-    z-index: 1000; 
-    overflow-y: auto;
-    transition: left 0.3s ease; 
-    z-index: 999;
-} */
+
 
 /* Ensure the sidebar is shown by default */
 .sidebar {
@@ -257,6 +251,7 @@ font-size: larger;
     top: 0;
     width: 250px;
     height: 100%;
+    font-weight: 500;
     background-color: #f7f7f7;
     transition: left 0.3s ease; 
     z-index: 1000;
@@ -271,6 +266,11 @@ font-size: larger;
     left: -250px; /* Sidebar hidden */
 }
 
+#logout-btn{
+margin-top: 350px;
+margin-left: -3px;
+font-size: x-large;
+}
 /* Page content */
 .content {
     margin-left: 250px; 
@@ -280,6 +280,7 @@ font-size: larger;
 /* When sidebar is hidden, content takes full width */
 .sidebar.active ~ .content {
     margin-left: 0; /* Content expands when sidebar is hidden */
+    font-weight: 500;
 }
 
 /* Style for the Boxicon Menu */
@@ -318,19 +319,49 @@ font-size: larger;
     text-align: center;
 }
 
-/* Sidebar links */
+/* Sidebar Links Styling */
 .sidebar ul li a {
-    color: rgb(53, 52, 52); 
-    text-decoration: none; 
-    display: block;
+    color: #545252;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+    font-size: 20px;
 }
 
-/* Hover effect for sidebar links */
+/* Hover Effect */
 .sidebar ul li a:hover {
-    background-color: #F3BD00; 
-    padding-left: 30px; 
-    transition: 0.3s; 
+    background-color: #F3BD00;
 }
+
+/* Active/Clicked Link State */
+.sidebar ul li.active a {
+    background-color: #989494;
+    color: #000;
+}
+
+/* Ensure Logout Button is Visible */
+.sidebar ul li#logout-btn {
+    margin-top: auto; /* Push logout button to the bottom */
+    background-color: #fffefe;
+    margin-top: 280px;
+}
+
+.sidebar ul li#logout-btn a {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect for Logout Button */
+.sidebar ul li#logout-btn:hover {
+    background-color: #555;
+}
+
+
 
 /* Container for user count boxes */
 .user-count-container {
@@ -711,6 +742,179 @@ th {
     cursor: pointer; /* Pointer cursor */
 }
 
+
+
+/* Edit Question Page shift left when sidebar is active */
+#edit-question-page.shifted {
+    transform: translateX(-150px); 
+    transition: transform 0.3s ease; 
+}
+
+/* Table styles */
+#questions-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#questions-table th,
+#questions-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+#questions-table th {
+    background-color: #f4f4f4;
+}
+
+/* Actions buttons styling */
+.actions-cell button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.actions-cell i {
+    font-size: 20px;
+}
+
+      td div {
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      .actions-cell {
+        display: flex;
+        gap: 10px;
+      }
+
+      .actions-cell button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 10px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      .actions-cell i {
+        font-size: 20px;
+      }
+
+      /* Modal Styles */
+      #modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        max-width: 90%;
+      }
+
+      .modal-content h2 {
+        margin-bottom: 15px;
+      }
+
+      .close-btn {
+        float: right;
+        cursor: pointer;
+      }
+
+      /* Delete Modal Styles */
+      #delete-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .delete-modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        max-width: 90%;
+      }
+
+      .delete-modal-content h2 {
+        margin-bottom: 15px;
+      }
+
+      .delete-modal-content .actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      /* Edit Modal Styles */
+      #edit-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .edit-modal-content {
+        background-color: white;
+        padding: 50px;
+        border-radius: 8px;
+        width: 500px;
+        max-width: 90%;
+      }
+
+      .edit-modal-content h2 {
+        margin-bottom: 15px;
+      }
+
+      .edit-modal-content form input {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+      }
+
+      .edit-modal-content form button {
+        padding: 10px;
+        background-color: #1f78ff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      .close-edit-btn {
+        float: right;
+        cursor: pointer;
+        height: 50px;
+      }
+ 
+
         /*----------------- view more------------ */
         .user-details-container {
             top: 100px;
@@ -805,4 +1009,127 @@ th {
     button:hover {
         background-color: #F3BD00;
     }
+
+    /* user-test-attempts.html */
+
+     /* Simple table styling */
+     #test-attempts table {
+        width: 70%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        margin-left: 20%;
+        /* margin-left: 0%; */
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid #ddd;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 10%;
+    }
+
+    .view-more-btn {
+        color: blue;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .view-more-btn:hover {
+        text-decoration: underline;
+    }
+
+    /* Add vertical lines between the columns */
+    td {
+        border-right: 1px solid #ddd;
+    }
+
+    td:last-child {
+        border-right: none; /* Remove the border from the last column */
+    }
     
+
+    /* view-test-details */
+
+    .answer-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 15px;
+        margin: 10px;
+        display: inline-block;
+        width: calc(80% - 22px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        vertical-align: top;
+        margin-left: 15%;
+    }
+
+    .answer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    #test-details-page {
+        margin-top: 8%;
+        text-align: center;
+    }
+
+    #test-details {
+        margin: 0 auto;
+        width: 80%;
+    }
+
+    .test-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        width: 75%;
+        margin-left: 18%;
+        margin-top: 50px;
+    }
+
+    .test-info span {
+        margin-right: 15px;
+    }
+
+    .correct-answer {
+        color: blue;
+        font-weight: bold;
+    }
+
+    .incorrect-answer {
+        color: red;
+        font-weight: bold;
+    }
+
+    .selected-answer {
+        font-weight: bold;
+        color: green;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    ul li {
+        margin-bottom: 5px;
+    }

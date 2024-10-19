@@ -275,12 +275,16 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTimeline();
 });
 
-// Calculate the time spent on the test in seconds
+// Calculate the time spent on the test in minutes
 function getTimeSpent() {
     const endTime = new Date();
-    const timeDiff = (endTime - startTime) / 1000 / 60;     
-    return timeDiff;
+    const timeDiff = (endTime - startTime) / 1000; // Time difference in seconds
+    const timeDiffInMinutes = timeDiff / 60; // Convert seconds to minutes
+    return timeDiffInMinutes.toFixed(2); // Round to 2 decimal places
 }
+
+
+console.log( getTimeSpent())
 
 
 // Calculate the user's score based on their answers and store it
@@ -333,9 +337,9 @@ function calculateAndStoreScore() {
         console.log('Answered Questions:', answeredQuestions);
         console.log('Final Score:', score);
 
-        // Calculate time spent on the test
-        const timeSpent = getTimeSpent();
-        console.log('Time Spent (seconds):', timeSpent);
+        // Calculate time spent on the test in minutes
+        const timeSpent = getTimeSpent(); // This now returns time in minutes, rounded
+        console.log('Time Spent (minutes):', timeSpent);
 
         // Store the test attempt in localStorage
         storeTestAttempt(userEmail, userName, score, answeredQuestions, timeSpent);
@@ -360,7 +364,7 @@ function storeTestAttempt(userEmail, userName, score, answeredQuestions, timeSpe
         userName,
         score,
         timeSpent,
-        timestamp: new Date().toLocaleString(), // Store the timestamp of the attempt
+        timestamp: new Date().toISOString().split('T')[0], // Store only the date in YYYY-MM-DD format
         answeredQuestions: answeredQuestions.map(q => ({
             question: q.question,
             selectedAnswer: q.selectedAnswer,
@@ -378,6 +382,7 @@ function storeTestAttempt(userEmail, userName, score, answeredQuestions, timeSpe
     testAttempts.push(newAttempt);
     localStorage.setItem('testAttempts', JSON.stringify(testAttempts));
 }
+
 
 
 

@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question Input Page</title>
-    <!-- CSS -->
+    <link rel="stylesheet" href="/css/admin.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/css/admin.css">
     <!-- Boxicon -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -17,9 +20,8 @@
         <header>
             <nav>
                 <div id="head">
-                    <i class='bx bx-menu'></i> <!-- Icon for toggling the sidebar -->
+                    <i class='bx bx-menu'></i>
                     <img src="https://techpaathshala.com/assets//images/home/techpathshala_mobile_logo.svg">
-                    <div id="admin-logout-btn"></div>
                     <p id="welcome-admin">Welcome Anshika</p>
                 </div>
             </nav>
@@ -29,9 +31,11 @@
         <div class="sidebar" id="sidebar">
             <ul>
                 <li class="menu-title">Dashboard</li>
-                <li><a href="teacher.html"><i class='bx bx-home'></i>Home</a></li>
+                <li><a href="admin-home-page.html"><i class='bx bx-home'></i>Home</a></li>
                 <li><a href="student-information.html"><i class='bx bxs-user-circle'></i>User</a></li>
                 <li><a href="EditeQuestion.html"><i class='bx bx-question-mark'></i>Quizzes</a></li>
+                <li id="logout-btn" ><strong><i class='bx bx-log-out' >
+                </i> Logout</strong></li>
             </ul>
         </div>
 
@@ -44,121 +48,104 @@
                 <input type="text" id="question" class="question-input" placeholder="Enter your question">
 
                 <!-- Option Inputs -->
-                <label for="option1">Option 1:</label>
+                <label for="option1">Option a:</label>
                 <input type="text" id="option1" class="option-input" placeholder="Enter option 1">
-                
-                <label for="option2">Option 2:</label>
+
+                <label for="option2">Option b:</label>
                 <input type="text" id="option2" class="option-input" placeholder="Enter option 2">
-                
-                <label for="option3">Option 3:</label>
+
+                <label for="option3">Option c:</label>
                 <input type="text" id="option3" class="option-input" placeholder="Enter option 3">
-                
-                <label for="option4">Option 4:</label>
+
+                <label for="option4">Option d:</label>
                 <input type="text" id="option4" class="option-input" placeholder="Enter option 4">
-                
+
                 <!-- Correct Answer Input -->
                 <label for="answer">Correct Answer:</label>
                 <input type="text" id="answer" class="answer-input" placeholder="Enter the correct answer">
 
                 <!-- Add Button -->
                 <br>
-                <button id="add-btn">Task Done</button>
-
-                <!-- Question List Display -->
-                <!-- <h3>Saved Questions</h3> -->
-                <ul id="question-list"></ul>
+                <button id="add-btn">Add Question</button>
             </div>
         </div>
 
-        <script src="/javascript/main.js"></script>
         <script>
-            // Toggle sidebar visibility when menu icon is clicked
-            document.querySelector('.bx-menu').addEventListener('click', function () {
-                const sidebar = document.getElementById('sidebar');
-                sidebar.classList.toggle('active');
-            });
+           
+           // Sidebar toggle
+    document.querySelector(".bx-menu").addEventListener("click", function () {
+    const sidebar = document.getElementById("sidebar");
+    const questionPage = document.getElementById("edit-question-page");
 
-          
-let quizQuestions = JSON.parse(localStorage.getItem('quizQuestions')) || [];
+    // Toggle the 'active' class on the sidebar
+    sidebar.classList.toggle("active");
 
-// Function to display saved questions
-function displayQuestions() {
-    const questionList = document.getElementById('question-list');
-    questionList.innerHTML = ''; // Clear the list before displaying
-
-    if (quizQuestions.length === 0) {
-        questionList.innerHTML = "<li>No questions added yet.</li>";
-        return;
-    }
-
-    quizQuestions.forEach((questionObj, index) => {
-        const options = questionObj.option || []; // Ensure options exist
-        const option1 = options[a] || 'N/A'; 
-        const option2 = options[b] || 'N/A';
-        const option3 = options[c] || 'N/A';
-        const option4 = options[d] || 'N/A';
-
-        const questionItem = document.createElement('li');
-        questionItem.innerHTML = `
-            <strong>Question ${index + 1}:</strong> ${questionObj.question}
-            <ul>
-                <li>Option 1: ${option1}</li>
-                <li>Option 2: ${option2}</li>
-                <li>Option 3: ${option3}</li>
-                <li>Option 4: ${option4}</li>
-                <li><strong>Correct Answer:</strong> ${questionObj.answer}</li>
-            </ul>
-        `;
-        questionList.appendChild(questionItem);
+    // Toggle the 'shifted' class on the question page to move it to the left
+    questionPage.classList.toggle("shifted");
     });
-}
+    
+    let quizQuestions = JSON.parse(localStorage.getItem('quizQuestions')) || [];
 
+    document.getElementById('add-btn').addEventListener('click', function (e) {
+        e.preventDefault();
 
-document.getElementById('add-btn').addEventListener('click', function (e) {
-    e.preventDefault()
-    const question = document.getElementById('question').value;
-    const option1 = document.getElementById('option1').value;
-    const option2 = document.getElementById('option2').value;
-    const option3 = document.getElementById('option3').value;
-    const option4 = document.getElementById('option4').value;
-    const answer = document.getElementById('answer').value;
+        const question = document.getElementById('question').value;
+        const option1 = document.getElementById('option1').value;
+        const option2 = document.getElementById('option2').value;
+        const option3 = document.getElementById('option3').value;
+        const option4 = document.getElementById('option4').value;
+        const answer = document.getElementById('answer').value.toLowerCase();
 
-    if (!question || !option1 || !option2 || !option3 || !option4 || !answer) {
-        alert('Please fill in all fields.');
-        return;
-    }
+        // Check if all fields are filled
+        if (!question || !option1 || !option2 || !option3 || !option4 || !answer) {
+            alert('Please fill in all fields.');
+            return;
+        }
 
-    // Create new question object
-    const newQuestion = {
-        question: question,
-        a: option1,
-        b: option2,
-        c: option3,
-        d: option4,
-        answer: answer
-    };
+        // Validate correct answer (only a, b, c, or d)
+        const validAnswers = ['a', 'b', 'c', 'd'];
+        if (!validAnswers.includes(answer)) {
+            alert('Correct answer must be either a, b, c, or d.');
+            return;
+        }
 
-    // Add new question to array and update local storage
-    quizQuestions.push(newQuestion);
-    localStorage.setItem('quizQuestions', JSON.stringify(quizQuestions));
+        const newQuestion = {
+            question,
+            a: option1,
+            b: option2,
+            c: option3,
+            d: option4,
+            answer
+        };
 
-   
-    document.getElementById('question').value = "";
-    document.getElementById('option1').value = "";
-    document.getElementById('option2').value = "";
-    document.getElementById('option3').value = "";
-    document.getElementById('option4').value = "";
-    document.getElementById('answer').value = "";
+        // Add the new question to the array and store it in localStorage
+        quizQuestions.push(newQuestion);
+        localStorage.setItem('quizQuestions', JSON.stringify(quizQuestions));
 
-    alert('Question added successfully!');
+        // Clear the form fields
+        document.getElementById('question').value = "";
+        document.getElementById('option1').value = "";
+        document.getElementById('option2').value = "";
+        document.getElementById('option3').value = "";
+        document.getElementById('option4').value = "";
+        document.getElementById('answer').value = "";
 
-    displayQuestions();
-});
+        alert('Question added successfully!');
+    });
 
-// Display saved questions when the page loads
-    displayQuestions();
+    // Logout functionality
+    const logoutButton = document.getElementById('logout-btn');
+    logoutButton.addEventListener('click', function() {
+        const confirmation = confirm('Are you sure you want to log out?');
+        if (confirmation) {
+            window.location.href = 'adminlogin.html'; 
+        } else {
+            console.log('Logout cancelled');
+        }
+    });
+</script>
 
-        </script>
+    </div>
 </body>
 
 </html>

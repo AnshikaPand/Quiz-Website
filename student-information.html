@@ -8,29 +8,10 @@
     <link rel="stylesheet" href="/css/admin.css">
     <!-- Boxicon -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+   
+   
     <style>
-      /* Sidebar styles */
-.sidebar {
-    position: fixed;
-    margin-top: 5.5%;
-    padding-top: 20px;
-    left: 0; /* Sidebar visible by default */
-    top: 0;
-    width: 250px;
-    height: 100%;
-    background-color: #f7f7f7;
-    transition: left 0.3s ease;
-    z-index: 1000;
-    border-right: 2px solid #ccc; /* Right border for sidebar */
-    font-family: sans-serif;
-}
-
-/* Sidebar active state */
-.sidebar.active {
-    left: -250px; /* Move sidebar off-screen */
-}
-
+      
 /* Table container style when sidebar is active (shift left) */
 #student-information.shifted {
     transform: translateX(-150px); /* Shift the table to the left */
@@ -85,9 +66,11 @@
     <div class="sidebar" id="sidebar">
         <ul>
             <li class="menu-title">Dashboard</li>
-            <li><a href="teacher.html"><i class='bx bx-home'></i>Home</a></li>
+            <li><a href="admin-home-page.html"><i class='bx bx-home'></i>Home</a></li>
             <li><a href="student-information.html"><i class='bx bxs-user-circle'></i>Users</a></li>
             <li><a href="EditeQuestion.html"><i class='bx bx-question-mark'></i>Quizzes</a></li>
+            <li id="logout-btn" ><strong><i class='bx bx-log-out' >
+            </i> Logout</strong></li>
         </ul>
     </div>
 
@@ -155,6 +138,17 @@ function displayAllUsersInfo() {
         tbody.innerHTML += userRowHtml;
     });
 }
+
+  // Logout functionality
+  const logoutButton = document.getElementById('logout-btn');
+                logoutButton.addEventListener('click', function() {
+                    const confirmation = confirm('Are you sure you want to log out?');
+                    if (confirmation) {
+                        window.location.href = 'adminlogin.html'; 
+                    } else {
+                        console.log('Logout cancelled');
+                    }
+                });
 
 // Ensure displayAllUsersInfo is called when the page loads
 window.onload = function() {
